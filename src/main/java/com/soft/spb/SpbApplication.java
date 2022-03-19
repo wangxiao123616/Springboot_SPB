@@ -6,8 +6,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-@MapperScan(value = "com.soft.spb.mapper")
-@SpringBootApplication(scanBasePackages = {"com.soft.spb"})
+@SpringBootApplication
+@MapperScan("com.soft.spb.mapper")
 public class SpbApplication {
 
     public static void main(String[] args) {

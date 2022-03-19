@@ -15,8 +15,8 @@
         id, versionCode, versionName, detailed
     </sql>
 
-    <select id="getAppVersion" resultType="java.lang.String">
-        select versionCode from app_version
+    <select id="getAppVersion" resultType="com.soft.spb.pojo.entity.AppVersion">
+        select * from app_version
     </select>
 
 </mapper>

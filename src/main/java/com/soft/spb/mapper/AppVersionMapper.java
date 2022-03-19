@@ -1,9 +1,7 @@
 package com.soft.spb.mapper;
 
-import com.soft.spb.pojo.entity.AppVersion;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
+import com.soft.spb.pojo.entity.AppVersion;
 
 /**
  * <p>
@@ -15,6 +13,6 @@ import org.springframework.stereotype.Repository;
  */
 public interface AppVersionMapper extends BaseMapper<AppVersion> {
 
-    String getAppVersion();
+    AppVersion getAppVersion();
 
 }
