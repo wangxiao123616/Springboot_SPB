@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soft.spb.mapper.StudentsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.soft.spb.pojo.entity.Students">
+        <id column="id" property="id" />
+        <result column="stu_name" property="stuName" />
+        <result column="stu_sex" property="stuSex" />
+        <result column="stu_year" property="stuYear" />
+        <result column="stu_department" property="stuDepartment" />
+        <result column="stu_major" property="stuMajor" />
+        <result column="stu_class" property="stuClass" />
+        <result column="stu_num" property="stuNum" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, stu_name, stu_sex, stu_year, stu_department, stu_major, stu_class, stu_num
+    </sql>
+
+</mapper>

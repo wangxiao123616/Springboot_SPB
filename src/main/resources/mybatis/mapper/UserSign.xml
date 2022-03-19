@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soft.spb.mapper.UserSignMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.soft.spb.pojo.entity.UserSign">
+        <id column="id" property="id" />
+        <result column="user_account" property="userAccount" />
+        <result column="sign_coin" property="signCoin" />
+        <result column="sign_right" property="signRight" />
+        <result column="sign_day" property="signDay" />
+        <result column="sign_star_badge" property="signStarBadge" />
+        <result column="sign_task_badge" property="signTaskBadge" />
+        <result column="sign_like_badge" property="signLikeBadge" />
+        <result column="sign_ct_badge" property="signCtBadge" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_account, sign_coin, sign_right, sign_day, sign_star_badge, sign_task_badge, sign_like_badge, sign_ct_badge
+    </sql>
+
+</mapper>

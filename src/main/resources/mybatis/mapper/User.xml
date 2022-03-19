@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soft.spb.mapper.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.soft.spb.pojo.entity.User">
+        <id column="id" property="id" />
+        <result column="user_account" property="userAccount" />
+        <result column="user_name" property="userName" />
+        <result column="user_birth" property="userBirth" />
+        <result column="user_home" property="userHome" />
+        <result column="user_favorite" property="userFavorite" />
+        <result column="user_profile" property="userProfile" />
+        <result column="user_head_image" property="userHeadImage" />
+        <result column="user_bg_image" property="userBgImage" />
+        <result column="user_badge" property="userBadge" />
+        <result column="user_longday" property="userLongday" />
+        <result column="user_privacy" property="userPrivacy" />
+        <result column="user_ip" property="userIp" />
+        <result column="user_token" property="userToken" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_account, user_name, user_birth, user_home, user_favorite, user_profile, user_head_image, user_bg_image, user_badge, user_longday, user_privacy, user_ip, user_token
+    </sql>
+
+</mapper>

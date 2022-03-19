@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soft.spb.mapper.PostbarlistMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.soft.spb.pojo.entity.Postbarlist">
+        <id column="id" property="id" />
+        <result column="pb_one_id" property="pbOneId" />
+        <result column="user_account" property="userAccount" />
+        <result column="pb_date" property="pbDate" />
+        <result column="pb_article" property="pbArticle" />
+        <result column="pb_image_url" property="pbImageUrl" />
+        <result column="pb_voice" property="pbVoice" />
+        <result column="pb_video" property="pbVideo" />
+        <result column="pb_topic" property="pbTopic" />
+        <result column="pb_location" property="pbLocation" />
+        <result column="pb_thumb_num" property="pbThumbNum" />
+        <result column="pb_comment_num" property="pbCommentNum" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, pb_one_id, user_account, pb_date, pb_article, pb_image_url, pb_voice, pb_video, pb_topic, pb_location, pb_thumb_num, pb_comment_num
+    </sql>
+
+</mapper>
