@@ -14,5 +14,5 @@
     <sql id="Base_Column_List">
         id, versionCode, versionName, detailed
     </sql>
-
+        
 </mapper>
