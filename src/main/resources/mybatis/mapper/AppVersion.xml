@@ -15,4 +15,8 @@
         id, versionCode, versionName, detailed
     </sql>
 
+    <select id="getAppVersion" resultType="java.lang.String">
+        select versionCode from app_version
+    </select>
+
 </mapper>

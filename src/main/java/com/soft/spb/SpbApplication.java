@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @MapperScan(value = "com.soft.spb.mapper")
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.soft.spb"})
 public class SpbApplication {
 
     public static void main(String[] args) {
