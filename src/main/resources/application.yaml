@@ -7,6 +7,6 @@ spring:
 server:
   port: 8888
 
-mybatis:
+mybatis-puls:
    type-aliases-package: com.soft.spb.pojo.entity
-   mapper-locations: classpath:mybatis/mapper/*.xml
+   mapper-locations: classpath*:mybatis/mapper/*.xml

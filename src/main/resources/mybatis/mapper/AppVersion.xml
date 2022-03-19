@@ -14,5 +14,9 @@
     <sql id="Base_Column_List">
         id, versionCode, versionName, detailed
     </sql>
-        
+
+    <select id="queryList" resultType="AppVersion">
+       select * from
+    </select>
+
 </mapper>
