@@ -4,6 +4,8 @@ import com.soft.spb.pojo.entity.Attentiontopic;
 import com.soft.spb.mapper.AttentiontopicMapper;
 import com.soft.spb.service.AttentiontopicService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,6 +17,8 @@ import org.springframework.stereotype.Service;
  * @since 2022-03-19
  */
 @Service
+
 public class AttentiontopicServiceImpl extends ServiceImpl<AttentiontopicMapper, Attentiontopic> implements AttentiontopicService {
 
+  
 }

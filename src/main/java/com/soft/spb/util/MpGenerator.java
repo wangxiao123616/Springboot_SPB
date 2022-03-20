@@ -1,4 +1,4 @@
-package com.soft.spb;
+package com.soft.spb.util;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;

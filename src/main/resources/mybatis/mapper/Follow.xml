@@ -4,14 +4,26 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.soft.spb.pojo.entity.Follow">
-        <id column="id" property="id" />
-        <result column="follow_account" property="followAccount" />
-        <result column="followed_account" property="followedAccount" />
+        <id column="id" property="id"/>
+        <result column="follow_account" property="followAccount"/>
+        <result column="followed_account" property="followedAccount"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, follow_account, followed_account
     </sql>
+
+    <select id="getFollow" resultType="com.soft.spb.pojo.entity.Follow">
+        select * from spb.follow
+     </select>
+
+    <insert id="addFollow" parameterType="com.soft.spb.pojo.entity.Follow">
+        insert  into spb.follow(id,follow_account,followed_account) values (#{id},#{followAccount},#{followedAccount})
+    </insert>
+
+    <delete id="deleteFollow" >
+          delete from spb.follow where follow_account=#{followAccount} and followed_account =#{followedAccount}
+    </delete>
 
 </mapper>

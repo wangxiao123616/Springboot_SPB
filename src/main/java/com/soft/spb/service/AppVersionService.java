@@ -1,8 +1,7 @@
 package com.soft.spb.service;
 
-import com.soft.spb.pojo.entity.AppVersion;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.springframework.web.bind.annotation.RequestBody;
+import com.soft.spb.pojo.entity.AppVersion;
 
 import java.util.List;
 
@@ -16,8 +15,7 @@ import java.util.List;
  */
 
 public interface AppVersionService extends IService<AppVersion> {
-
-     public List<AppVersion> queryList();
+     AppVersion getAppVersion(Integer versionCode);
 
 
 }
