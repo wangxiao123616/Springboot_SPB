@@ -39,23 +39,37 @@ public class FollowServiceImpl extends ServiceImpl<FollowMapper, Follow> impleme
         if (!isFollowed) {
             followMapper.addFollow(follow);
         }
-        return  isFollowed;
+        return isFollowed;
     }
 
+    @Override
+    public boolean deleteFollow(Follow follow) {
+        List<Follow> followList = followMapper.getFollow();
+
+        boolean isFollowed = false;
+        for (int i = 0; i < followList.size(); i++) {
+            Follow f = followList.get(i);
+            if (f.getFollowAccount().equals(follow.getFollowAccount()) && f.getFollowedAccount().equals(follow.getFollowedAccount())) {
+                isFollowed = true;
+                followMapper.deleteFollow(follow.getFollowAccount(), follow.getFollowedAccount());
+                break;
+            }
+
+        }
+        return isFollowed;
+    }
+
+    @Override
+    public Integer queryFollowAccount(Follow follow) {
+
+        List<Follow> follows = followMapper.queryFollowAccount(follow.getFollowAccount());
+        int account = follows.size();
+        return account;
+
+    }
      @Override
-    public boolean  deleteFollow(Follow follow){
-         List<Follow> followList = followMapper.getFollow();
-
-         boolean isFollowed = false;
-         for (int i = 0; i < followList.size(); i++) {
-             Follow f = followList.get(i);
-             if (f.getFollowAccount().equals(follow.getFollowAccount()) && f.getFollowedAccount().equals(follow.getFollowedAccount())) {
-                 isFollowed = true;
-                 followMapper.deleteFollow(follow.getFollowAccount(),follow.getFollowedAccount());
-                 break;
-             }
-
-         }
-         return isFollowed;
+    public List<Follow> queryFollowList(Follow follow){
+         List<Follow> followList = followMapper.queryFollowList(follow.getFollowAccount());
+         return followList;
      }
 }

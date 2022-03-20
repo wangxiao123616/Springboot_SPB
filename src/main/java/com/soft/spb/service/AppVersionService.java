@@ -18,4 +18,5 @@ public interface AppVersionService extends IService<AppVersion> {
      AppVersion getAppVersion(Integer versionCode);
 
 
+
 }

@@ -22,8 +22,15 @@
         insert  into spb.follow(id,follow_account,followed_account) values (#{id},#{followAccount},#{followedAccount})
     </insert>
 
-    <delete id="deleteFollow" >
+    <delete id="deleteFollow">
           delete from spb.follow where follow_account=#{followAccount} and followed_account =#{followedAccount}
     </delete>
 
+    <select id="queryFollowAccount" resultType="com.soft.spb.pojo.entity.Follow">
+        select followed_account from spb.follow where follow_account=#{followAccount}
+    </select>
+
+    <select id="queryFollowList" resultType="com.soft.spb.pojo.entity.Follow">
+        select followed_account from spb.follow where follow_account=#{followAccount}
+    </select>
 </mapper>

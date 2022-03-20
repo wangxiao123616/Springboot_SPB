@@ -31,7 +31,7 @@ public class FollowController {
 
     @PostMapping("/addFollow")
     public ResponseBody getUserCount(@RequestBody Follow follow) {
-        
+
         boolean followed = followServiceImpl.isFollowed(follow);
 
         return ResponseBody.builder()
@@ -42,13 +42,38 @@ public class FollowController {
     }
 
     @PostMapping("/deleteFollow")
-    public ResponseBody deleteFollow(@RequestBody Follow follow){
-      boolean followed = followServiceImpl.deleteFollow(follow);
-      return ResponseBody.builder()
-                         .code(100)
-                         .msg(followed?"删除成功":"数据不存在")
-                         .data("")
-                         .build();
+    public ResponseBody deleteFollow(@RequestBody Follow follow) {
+        boolean followed = followServiceImpl.deleteFollow(follow);
+        return ResponseBody.builder()
+                .code(200)
+                .msg(followed ? "删除成功" : "数据不存在")
+                .data("")
+                .build();
     }
 
+    @PostMapping("/queryFollowCount")
+    public ResponseBody queryFollowAccount(@RequestBody Follow follow) {
+        Integer integer = followServiceImpl.queryFollowAccount(follow);
+
+        return ResponseBody.builder()
+                .code(200)
+                .msg("获取成功")
+                .data(integer)
+                .build();
+    }
+
+    @PostMapping("/queryFollowList")
+    public ResponseBody queryFollowList(@RequestBody Follow follow){
+        List<Follow> followList = followServiceImpl.queryFollowList(follow);
+        List<String> data = new ArrayList<>(followList.size());
+        for (int i = 0; i < followList.size(); i++) {
+            Follow item = followList.get(i);
+            data.add(item.getFollowedAccount());
+        }
+        return ResponseBody.builder()
+                .code(200)
+                .msg("获取成功")
+                .data(data)
+                .build();
+    }
 }

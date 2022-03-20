@@ -31,4 +31,15 @@ class FollowServiceTest {
 
         System.out.println( followServiceImpl.deleteFollow(follow)+"删除成功");
     }
+
+    @Test
+    void queryFollowAccount() {
+    }
+
+    @Test
+    void queryFollowList() {
+        Follow follow = new Follow();
+        follow.setFollowedAccount("G18190404");
+        System.out.println(followServiceImpl.queryFollowList(follow)+"查询成功");
+    }
 }

@@ -32,4 +32,22 @@ class FollowMapperTest {
     void deleteFollow(){
         followMapper.deleteFollow("567","123");
     }
+
+    @Test
+    void queryFollowAccount() {
+
+//        followMapper.queryFollowAccount().forEach(System.out::println);
+             for(Follow data : followMapper.queryFollowAccount("followedAccount")){
+                 System.out.println(data);
+             }
+    }
+
+    @Test
+    void queryFollowList() {
+        for (Follow data:  followMapper.queryFollowList("G18190403")
+             ) {
+            System.out.println(data);
+        }
+             
+    }
 }
