@@ -28,4 +28,8 @@ public interface FollowMapper extends BaseMapper<Follow> {
     List<Follow> queryFollowList(String followList);
 
 
+          //获取被关注数
+    List<Follow> queryFollowedCount(String followAccount);
+
+
 }

@@ -50,4 +50,12 @@ class FollowMapperTest {
         }
              
     }
+
+    @Test
+    void queryFollowedCount() {
+        for (Follow data :  followMapper.queryFollowAccount("G18190403")
+             ) {
+            System.out.println(data);
+        }
+    }
 }

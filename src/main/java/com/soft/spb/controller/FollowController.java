@@ -76,4 +76,14 @@ public class FollowController {
                 .data(data)
                 .build();
     }
+
+    @PostMapping("/queryFollowedCount")
+    public ResponseBody queryFollowedCount(@RequestBody Follow follow){
+        Integer count = followServiceImpl.queryFollowedCount(follow);
+        return ResponseBody.builder()
+                .code(200)
+                .msg("获取被关注数")
+                .data(count)
+                .build();
+    }
 }

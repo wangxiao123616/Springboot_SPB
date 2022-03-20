@@ -42,4 +42,11 @@ class FollowServiceTest {
         follow.setFollowedAccount("G18190404");
         System.out.println(followServiceImpl.queryFollowList(follow)+"查询成功");
     }
+
+    @Test
+    void queryFollowedCount() {
+        Follow follow = new Follow();
+        follow.setFollowedAccount("G18190403");
+        System.out.println(followServiceImpl.queryFollowedCount(follow));
+    }
 }
