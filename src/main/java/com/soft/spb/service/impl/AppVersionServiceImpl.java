@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.soft.spb.mapper.AppVersionMapper;
 import com.soft.spb.pojo.entity.AppVersion;
 import com.soft.spb.service.AppVersionService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +17,10 @@ import org.springframework.stereotype.Service;
  * @since 2022-03-19
  */
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AppVersionServiceImpl extends ServiceImpl<AppVersionMapper, AppVersion> implements AppVersionService {
 
-    @Autowired
-    AppVersionMapper appVersionMapper;
+    private final AppVersionMapper appVersionMapper;
 
     @Override
     public AppVersion getAppVersion(Integer versionCode) {

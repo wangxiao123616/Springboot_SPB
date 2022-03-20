@@ -3,7 +3,8 @@ package com.soft.spb.controller;
 
 import com.soft.spb.pojo.entity.AppVersion;
 import com.soft.spb.service.AppVersionService;
-import com.soft.spb.util.ResponseBody;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,15 +23,16 @@ import java.util.Objects;
  * @author wyw
  * @since 2022-03-19
  */
+@Slf4j
 @RestController
-@RequestMapping("/appVersion")
+@RequestMapping("appVersion")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AppVersionController {
 
-    @Autowired
-    AppVersionService appVersionService;
+    private final AppVersionService appVersionService;
 
-    @PostMapping("/isVersion")
-    public ResponseBody getVersionUpdate(@RequestBody AppVersion appVersion) {
+    @PostMapping("isVersion")
+    public List<Object> getVersionUpdate(@RequestBody AppVersion appVersion) {
         Integer userVersionCode = appVersion.getVersionCode();
         AppVersion currentAppVersion = appVersionService.getAppVersion(userVersionCode);
         Integer code = currentAppVersion.getVersionCode();
@@ -41,10 +43,6 @@ public class AppVersionController {
             data.add("有新版本，请前往更新");
         }
         data.add(currentAppVersion);
-        return ResponseBody.builder()
-                .code(200)
-                .msg("成功")
-                .data(data)
-                .build();
+        return data;
     }
 }
