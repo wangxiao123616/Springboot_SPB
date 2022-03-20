@@ -1,9 +1,9 @@
-package com.soft.spb.core.exception;
+package com.soft.spb.core.handler;
 
 import com.alibaba.fastjson.JSON;
 import com.soft.spb.core.annotation.ResponseResult;
 import com.soft.spb.core.component.ResponseResultInterceptor;
-import com.soft.spb.util.Response;
+import com.soft.spb.util.SPBResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -52,13 +52,13 @@ public class GlobalResponseHandler implements ResponseBodyAdvice<Object> {
             Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest,
             ServerHttpResponse serverHttpResponse) {
 
-        if (body instanceof Response) {
+        if (body instanceof SPBResponse) {
             return body;
         }
 
-        Response response = new Response();
-        response.setErrno(200);
-        response.setErrmsg("成功");
+        SPBResponse response = new SPBResponse();
+        response.setCode(200);
+        response.setMsg("成功");
         response.setData(body);
 
         if (body instanceof String) {

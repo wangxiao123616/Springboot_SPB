@@ -1,6 +1,7 @@
 package com.soft.spb.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.soft.spb.core.exception.ServiceException;
 import com.soft.spb.pojo.entity.AppVersion;
 
 /**

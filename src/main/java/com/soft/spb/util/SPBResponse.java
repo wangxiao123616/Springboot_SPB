@@ -4,11 +4,11 @@ import lombok.Data;
 
 
 @Data
-public class Response {
+public class SPBResponse {
 
-    private int errno;
+    private int code;
 
-    private String errmsg;
+    private String msg;
 
     private Object data;
 }
