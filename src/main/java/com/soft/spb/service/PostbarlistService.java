@@ -1,11 +1,13 @@
 package com.soft.spb.service;
 
-import com.soft.spb.pojo.entity.Postbarlist;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.soft.spb.pojo.entity.Postbarlist;
+
+import java.util.List;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author wyw
@@ -13,4 +15,14 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface PostbarlistService extends IService<Postbarlist> {
 
+    Boolean addBar(Postbarlist postbarlist);
+
+    //删除帖子
+    Boolean deleteBar(String pbId);
+
+    //获取帖子详细信息
+    List<Postbarlist> queryBarDetatilForPbid(Postbarlist postbarlist);
+
+    //根据时间获取帖子列表(无Video)
+    List<Postbarlist> queryNoVideoBarListForDate(String date);
 }

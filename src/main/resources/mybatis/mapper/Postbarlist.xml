@@ -4,23 +4,53 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.soft.spb.pojo.entity.Postbarlist">
-        <id column="id" property="id" />
-        <result column="pb_one_id" property="pbOneId" />
-        <result column="user_account" property="userAccount" />
-        <result column="pb_date" property="pbDate" />
-        <result column="pb_article" property="pbArticle" />
-        <result column="pb_image_url" property="pbImageUrl" />
-        <result column="pb_voice" property="pbVoice" />
-        <result column="pb_video" property="pbVideo" />
-        <result column="pb_topic" property="pbTopic" />
-        <result column="pb_location" property="pbLocation" />
-        <result column="pb_thumb_num" property="pbThumbNum" />
-        <result column="pb_comment_num" property="pbCommentNum" />
+        <id column="id" property="id"/>
+        <result column="pb_one_id" property="pbOneId"/>
+        <result column="user_account" property="userAccount"/>
+        <result column="pb_date" property="pbDate"/>
+        <result column="pb_article" property="pbArticle"/>
+        <result column="pb_image_url" property="pbImageUrl"/>
+        <result column="pb_voice" property="pbVoice"/>
+        <result column="pb_video" property="pbVideo"/>
+        <result column="pb_topic" property="pbTopic"/>
+        <result column="pb_location" property="pbLocation"/>
+        <result column="pb_thumb_num" property="pbThumbNum"/>
+        <result column="pb_comment_num" property="pbCommentNum"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, pb_one_id, user_account, pb_date, pb_article, pb_image_url, pb_voice, pb_video, pb_topic, pb_location, pb_thumb_num, pb_comment_num
+        id
+        , pb_one_id, user_account, pb_date, pb_article, pb_image_url, pb_voice, pb_video, pb_topic, pb_location, pb_thumb_num, pb_comment_num
     </sql>
+
+    <select id="queryAll" resultType="com.soft.spb.pojo.entity.Postbarlist">
+        select *
+        from spb.postbarlist
+    </select>
+    <insert id="addBar" parameterType="com.soft.spb.pojo.entity.Postbarlist">
+        insert into spb.postbarlist(pb_article, pb_comment_num, pb_date, pb_location, pb_one_id, pb_thumb_num, pb_topic,
+                                    pb_video, pb_voice, user_account)
+        values (#{pbArticle}, #{pbCommentNum}, #{pbDate}, #{pbLocation}, #{pbOneId}, #{pbThumbNum}, #{pbTopic},
+                #{pbVideo}, #{pbVoice}, #{userAccount})
+    </insert>
+
+    <delete id="deleteBar" parameterType="java.lang.String">
+        delete
+        from spb.postbarlist
+        where pb_one_id = #{pdOneId}
+    </delete>
+
+    <select id="queryBarDetatilForPbid" resultType="com.soft.spb.pojo.entity.Postbarlist">
+        select *
+        from spb.postbarlist
+        where pb_one_id = #{pdOneId}
+    </select>
+
+    <select id="queryNoVideoBarListForDate" resultType="com.soft.spb.pojo.entity.Postbarlist">
+        select *
+        from spb.postbarlist
+        where pb_date &lt;= #{date} ORDER BY pb_date DESC limit 15
+    </select>
 
 </mapper>

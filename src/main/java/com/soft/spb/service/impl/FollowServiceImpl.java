@@ -79,4 +79,10 @@ public class FollowServiceImpl extends ServiceImpl<FollowMapper, Follow> impleme
         int size = follows.size();
         return size;
     }
+
+    @Override
+    public List<Follow> queryFollowedList(Follow follow) {
+        List<Follow> followedList = followMapper.queryFollowedList(follow.getFollowedAccount());
+           return followedList;
+    }
 }

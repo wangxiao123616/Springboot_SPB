@@ -6,11 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 class FollowServiceTest {
-
 
     @Autowired
     private FollowServiceImpl followServiceImpl;
@@ -48,5 +45,12 @@ class FollowServiceTest {
         Follow follow = new Follow();
         follow.setFollowedAccount("G18190403");
         System.out.println(followServiceImpl.queryFollowedCount(follow));
+    }
+
+    @Test
+    void queryFollowedList() {
+        Follow follow   = new Follow();
+        follow.setFollowedAccount("G18190403");
+        System.out.println(followServiceImpl.queryFollowedList(follow));
     }
 }

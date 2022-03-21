@@ -23,13 +23,13 @@ import java.util.List;
  * @since 2022-03-19
  */
 @RestController
-@RequestMapping("/follow")
+@RequestMapping({"follow", "followed"})
 public class FollowController {
 
     @Autowired
     FollowServiceImpl followServiceImpl;
 
-    @PostMapping("/addFollow")
+    @PostMapping("addFollow")
     public ResponseBody getUserCount(@RequestBody Follow follow) {
 
         boolean followed = followServiceImpl.isFollowed(follow);
@@ -63,7 +63,7 @@ public class FollowController {
     }
 
     @PostMapping("/queryFollowList")
-    public ResponseBody queryFollowList(@RequestBody Follow follow){
+    public ResponseBody queryFollowList(@RequestBody Follow follow) {
         List<Follow> followList = followServiceImpl.queryFollowList(follow);
         List<String> data = new ArrayList<>(followList.size());
         for (int i = 0; i < followList.size(); i++) {
@@ -78,7 +78,7 @@ public class FollowController {
     }
 
     @PostMapping("/queryFollowedCount")
-    public ResponseBody queryFollowedCount(@RequestBody Follow follow){
+    public ResponseBody queryFollowedCount(@RequestBody Follow follow) {
         Integer count = followServiceImpl.queryFollowedCount(follow);
         return ResponseBody.builder()
                 .code(200)
@@ -86,4 +86,22 @@ public class FollowController {
                 .data(count)
                 .build();
     }
+
+    @PostMapping("queryFollowedList")
+    public ResponseBody queryFollowedList(@RequestBody Follow follow) {
+        List<Follow> followedList = followServiceImpl.queryFollowedList(follow);
+        List<String> data = new ArrayList<>(followedList.size());
+        for (int i = 0; i < followedList.size(); i++) {
+            Follow item = followedList.get(i);
+            data.add(item.getFollowAccount());
+        }
+        return ResponseBody.builder()
+                .code(200)
+                .msg("获取被关注列表")
+                .data(data)
+                .build();
+
+    }
+
+
 }

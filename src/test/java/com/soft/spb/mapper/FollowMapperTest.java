@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 class FollowMapperTest {
 
@@ -54,6 +52,14 @@ class FollowMapperTest {
     @Test
     void queryFollowedCount() {
         for (Follow data :  followMapper.queryFollowAccount("G18190403")
+             ) {
+            System.out.println(data);
+        }
+    }
+
+    @Test
+    void queryFollowedList() {
+        for (Follow data : followMapper.queryFollowedList("G18190404")
              ) {
             System.out.println(data);
         }

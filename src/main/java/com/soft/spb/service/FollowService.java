@@ -24,4 +24,5 @@ public interface FollowService extends IService<Follow> {
 
      Integer queryFollowedCount(Follow follow);
 
+    List<Follow> queryFollowedList (Follow follow);
 }

@@ -35,6 +35,10 @@
     </select>
 
     <select id="queryFollowedCount" resultType="com.soft.spb.pojo.entity.Follow">
-         select follow_account from spb.follow where followed_account = #{followAccount}
+         select follow_account from spb.follow where followed_account = #{followedAccount}
+    </select>
+
+    <select id="queryFollowedList" resultType="com.soft.spb.pojo.entity.Follow">
+        select follow_account from  spb.follow where followed_account = #{followedAccount}
     </select>
 </mapper>
