@@ -29,12 +29,15 @@ public interface FollowMapper extends BaseMapper<Follow> {
 
     //获取关注用户列表
     List<Follow> queryFollowList(String followList);
-
+   //获取关注用户信息列表
+   List<Follow> queryFollowUserList(String userAccount);
 
     //获取被关注数
     List<Follow> queryFollowedCount(String followedAccount);
 
     //获取被关注用户列表
     List<Follow> queryFollowedList(String followedAccount);
+     //获取用户被关注信息列表
+    List<Follow>queryFollowedUserList(String followedUserAccount);
 
 }

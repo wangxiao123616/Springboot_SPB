@@ -1,14 +1,15 @@
 package com.soft.spb.controller;
 
 
+import com.soft.spb.pojo.dto.UserDto;
 import com.soft.spb.pojo.entity.Follow;
+import com.soft.spb.pojo.entity.User;
 import com.soft.spb.service.impl.FollowServiceImpl;
 import com.soft.spb.util.ResponseBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -77,6 +78,17 @@ public class FollowController {
                 .build();
     }
 
+    @PostMapping("/queryFollowUserList")
+    public ResponseBody queryFollowUserList(@RequestBody User user) {
+
+        List<Follow> userList = followServiceImpl.queryFollowUserList(user.getUserAccount());
+        return ResponseBody.builder()
+                .code(200)
+                .msg("")
+                .data(userList)
+                .build();
+    }
+
     @PostMapping("/queryFollowedCount")
     public ResponseBody queryFollowedCount(@RequestBody Follow follow) {
         Integer count = followServiceImpl.queryFollowedCount(follow);
@@ -101,6 +113,17 @@ public class FollowController {
                 .data(data)
                 .build();
 
+    }
+
+    @PostMapping("/queryFollowedUserList")
+    public ResponseBody queryFollowedUserList(@RequestBody UserDto user) {
+
+        List<Follow> followedUserList = followServiceImpl.queryFollowedUserList(user.getFollowedAccount());
+        return ResponseBody.builder()
+                .code(200)
+                .msg("")
+                .data(followedUserList)
+                .build();
     }
 
 

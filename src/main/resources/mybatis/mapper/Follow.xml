@@ -23,22 +23,51 @@
     </insert>
 
     <delete id="deleteFollow">
-          delete from spb.follow where follow_account=#{followAccount} and followed_account =#{followedAccount}
+        delete
+        from spb.follow
+        where follow_account = #{followAccount}
+          and followed_account = #{followedAccount}
     </delete>
 
     <select id="queryFollowAccount" resultType="com.soft.spb.pojo.entity.Follow">
-        select followed_account from spb.follow where follow_account=#{followAccount}
+        select followed_account
+        from spb.follow
+        where follow_account = #{followAccount}
     </select>
 
+    <select id="queryFollowUserList"  resultType="com.soft.spb.pojo.vo.UserVo" >
+        SELECT follow.id, user.user_account, user.user_name, user.user_badge, students.stu_sex
+        FROM (spb.follow left join spb.user on follow.followed_account = user.user_account)
+                 left join spb.students
+                           on follow.follow_account = students.stu_num
+        where follow.follow_account = #{userAccount}
+        ORDER BY follow.id DESC
+
+    </select>
     <select id="queryFollowList" resultType="com.soft.spb.pojo.entity.Follow">
-        select followed_account from spb.follow where follow_account=#{followAccount}
+        select followed_account
+        from spb.follow
+        where follow_account = #{followAccount}
     </select>
 
     <select id="queryFollowedCount" resultType="com.soft.spb.pojo.entity.Follow">
-         select follow_account from spb.follow where followed_account = #{followedAccount}
+        select follow_account
+        from spb.follow
+        where followed_account = #{followedAccount}
     </select>
 
     <select id="queryFollowedList" resultType="com.soft.spb.pojo.entity.Follow">
-        select follow_account from  spb.follow where followed_account = #{followedAccount}
+        select follow_account
+        from spb.follow
+        where followed_account = #{followedAccount}
+    </select>
+
+    <select id="queryFollowedUserList" resultType="com.soft.spb.pojo.vo.UserVo">
+        SELECT follow.id, user.user_account, user.user_name, user.user_badge, students.stu_sex
+        FROM (spb.follow left join spb.user on follow.follow_account = user.user_account)
+                 left join spb.students
+                           on follow.follow_account = students.stu_num
+        where follow.followed_account = #{followedUserAccount}
+        ORDER BY follow.id DESC
     </select>
 </mapper>

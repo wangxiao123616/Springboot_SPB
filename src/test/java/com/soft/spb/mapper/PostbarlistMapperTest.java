@@ -16,21 +16,20 @@ class PostbarlistMapperTest {
     void addBar() {
         Postbarlist postbarlist = new Postbarlist();
         postbarlist.setId(180);
-
         postbarlist.setPbArticle("好嗨呦");
-        postbarlist.setPbCommentNum(22333);
-
+        postbarlist.setPbCommentNum(22222333);
         LocalDateTime localDateTime = LocalDateTime.now();
         postbarlist.setPbDate(localDateTime);
+        postbarlist.setPbImageUrl("123");
         postbarlist.setPbLocation("南京");
-        postbarlist.setPbOneId("wang");
+        postbarlist.setPbOneId("wan");
         postbarlist.setPbThumbNum(23);
         postbarlist.setPbTopic("新问鼎");
-        postbarlist.setPbVideo("雪中");
+        postbarlist.setPbVideo("好好学");
         postbarlist.setPbVoice("美信");
         postbarlist.setUserAccount("小王");
-        postbarlistMapper.addBar(postbarlist);
-        System.out.println();
+        int a = postbarlistMapper.addBar(postbarlist);
+        System.out.println(a);
 
     }
 
@@ -49,10 +48,28 @@ class PostbarlistMapperTest {
 
     @Test
     void queryBarDetatilForPbid() {
-        for(Postbarlist data :postbarlistMapper.queryBarDetatilForPbid("20cce1b200b046f20eb517408f3a6477G18190405")){
+        for (Postbarlist data : postbarlistMapper.queryBarDetatilForPbid("20cce1b200b046f20eb517408f3a6477G18190405")) {
             System.out.println(data);
         }
-        
-      
+
+
+    }
+
+    @Test
+    void queryNoVideoFollowBarListForDate() {
+        System.out.println(postbarlistMapper.queryNoVideoFollowBarListForDate("2022-1-3 12:00:00"));
+
+
+    }
+
+    @Test
+    void queryNoVideoSearchBarListForDate() {
+        System.out.println(postbarlistMapper.queryNoVideoSearchBarListForDate("2022-3-3 12:00:00"));
+    }
+
+    @Test
+    void queryNoVideoTopicBarListForDate() {
+        System.out.println( postbarlistMapper.queryNoVideoTopicBarListForDate("2021-8-5 12:00:00","哈哈"));
+
     }
 }

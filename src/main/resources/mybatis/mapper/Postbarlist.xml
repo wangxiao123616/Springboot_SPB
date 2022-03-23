@@ -20,20 +20,22 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id
-        , pb_one_id, user_account, pb_date, pb_article, pb_image_url, pb_voice, pb_video, pb_topic, pb_location, pb_thumb_num, pb_comment_num
+        id, pb_one_id, user_account, pb_date, pb_article, pb_image_url, pb_voice, pb_video, pb_topic, pb_location, pb_thumb_num, pb_comment_num
     </sql>
 
-    <select id="queryAll" resultType="com.soft.spb.pojo.entity.Postbarlist">
+    <select id="queryAll" resultType="java.lang.String">
         select *
         from spb.postbarlist
     </select>
+
     <insert id="addBar" parameterType="com.soft.spb.pojo.entity.Postbarlist">
         insert into spb.postbarlist(pb_article, pb_comment_num, pb_date, pb_location, pb_one_id, pb_thumb_num, pb_topic,
-                                    pb_video, pb_voice, user_account)
+                                    pb_video, pb_voice, user_account, pb_image_url)
         values (#{pbArticle}, #{pbCommentNum}, #{pbDate}, #{pbLocation}, #{pbOneId}, #{pbThumbNum}, #{pbTopic},
-                #{pbVideo}, #{pbVoice}, #{userAccount})
+                #{pbVideo}, #{pbVoice}, #{userAccount}, #{pbImageUrl});
+
     </insert>
+
 
     <delete id="deleteBar" parameterType="java.lang.String">
         delete
@@ -50,7 +52,78 @@
     <select id="queryNoVideoBarListForDate" resultType="com.soft.spb.pojo.entity.Postbarlist">
         select *
         from spb.postbarlist
-        where pb_date &lt;= #{date} ORDER BY pb_date DESC limit 15
+        where pb_date &lt;= #{date}
+        ORDER BY pb_date DESC
+        limit 15
+    </select>
+    <select id="queryNoVideoFollowBarListForDate" resultType="com.soft.spb.pojo.entity.Postbarlist">
+        select u.user_account,
+               u.user_name,
+               u.user_badge,
+               p.pb_one_id,
+               p.pb_date,
+               p.pb_article,
+               p.pb_image_url,
+               p.pb_voice,
+               p.pb_topic,
+               p.pb_location,
+               p.pb_thumb_num,
+               p.pb_comment_num
+        from spb.follow f
+                 left join spb.postbarlist p
+                           on f.followed_account = p.user_account
+                 left join spb.user u
+                           on f.followed_account = u.user_account
+        where f.follow_account = #{userAccount}
+          and p.pb_video is null
+          and p.pb_date &lt;= #{pbDate}
+        ORDER BY p.pb_date DESC
+        limit 15
+    </select>
+
+    <select id="queryNoVideoSearchBarListForDate" resultType="com.soft.spb.pojo.entity.Postbarlist">
+        select u.user_account,
+               u.user_name,
+               u.user_badge,
+               p.pb_one_id,
+               p.pb_date,
+               p.pb_article,
+               p.pb_image_url,
+               p.pb_voice,
+               p.pb_topic,
+               p.pb_location,
+               p.pb_thumb_num,
+               p.pb_comment_num
+        from spb.postbarlist p
+                 left join spb.user u
+                           on p.user_account = u.user_account
+        where p.pb_video is null
+            and p.pb_topic like concat('%', #{searChArt}, '%')
+           or p.pb_article like concat('%', #{searChArt}, '%')
+        order by p.pb_date desc
+        limit 30
+    </select>
+    <select id="queryNoVideoTopicBarListForDate" resultType="com.soft.spb.pojo.entity.Postbarlist">
+        select u.user_account,
+               u.user_name,
+               u.user_badge,
+               p.pb_one_id,
+               p.pb_date,
+               p.pb_article,
+               p.pb_image_url,
+               p.pb_voice,
+               p.pb_topic,
+               p.pb_location,
+               p.pb_thumb_num,
+               p.pb_comment_num
+        from spb.postbarlist p
+                 left join spb.user u
+                           on p.user_account = u.user_account
+        where p.pb_video is null
+          and p.pb_date &lt;= #{pbDate}
+          and p.pb_topic like concat('%', #{topicName}, '%')
+        ORDER BY p.pb_date DESC
+        limit 5
     </select>
 
 </mapper>

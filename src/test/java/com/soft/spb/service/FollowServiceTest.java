@@ -53,4 +53,16 @@ class FollowServiceTest {
         follow.setFollowedAccount("G18190403");
         System.out.println(followServiceImpl.queryFollowedList(follow));
     }
+
+    @Test
+    void queryFollowUserList() {
+        System.out.println( followServiceImpl.queryFollowUserList("G18190403"));
+
+    }
+
+    @Test
+    void queryFollowedUserList() {
+        System.out.println(followServiceImpl.queryFollowedUserList("G18190404"));
+
+    }
 }
