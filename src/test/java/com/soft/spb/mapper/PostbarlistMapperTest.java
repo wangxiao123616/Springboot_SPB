@@ -57,19 +57,37 @@ class PostbarlistMapperTest {
 
     @Test
     void queryNoVideoFollowBarListForDate() {
-        System.out.println(postbarlistMapper.queryNoVideoFollowBarListForDate("2022-1-3 12:00:00"));
+       // System.out.println(postbarlistMapper.queryNoVideoFollowBarListForDate("2021-12-3 12:00:00"));
 
 
     }
 
     @Test
     void queryNoVideoSearchBarListForDate() {
-        System.out.println(postbarlistMapper.queryNoVideoSearchBarListForDate("2022-3-3 12:00:00"));
+        System.out.println(postbarlistMapper.queryNoVideoSearchBarListForDate("王者","哈哈哈"));
     }
 
     @Test
     void queryNoVideoTopicBarListForDate() {
-        System.out.println( postbarlistMapper.queryNoVideoTopicBarListForDate("2021-8-5 12:00:00","哈哈"));
+        //System.out.println( postbarlistMapper.queryNoVideoTopicBarListForDate("2021-8-5 12:00:00","哈哈"));
+
+    }
+
+    @Test
+    void testQueryNoVideoFollowBarListForDate() {
+      //  System.out.println(postbarlistMapper.queryNoVideoFollowBarListForDate("2022-3-3 12:00:00"));
+    }
+
+
+    @Test
+    void queryUserBarCount() {
+
+      for (Postbarlist data: postbarlistMapper.queryUserBarCount("G18190405")
+             ) {
+            System.out.println(data);
+
+        }
+
 
     }
 }

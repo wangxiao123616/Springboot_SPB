@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -89,36 +90,64 @@ public class PostbarlistServiceImpl extends ServiceImpl<PostbarlistMapper, Postb
     }
 
     @Override
-    public List<Postbarlist> queryNoVideoFollowBarListForDate(String date) {
+    public List<Postbarlist> queryNoVideoFollowBarListForDate(String pbDate, String userAccount) {
         String dS = null;
-        System.out.println(date);
-        if (date.length() < 2) {
+        System.out.println(pbDate);
+        if (pbDate.length() < 2) {
             LocalDateTime now = LocalDateTime.now();
             DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             dS = now.format(dateFormat);
         } else {
-            dS = date;
+            dS = pbDate;
         }
         System.out.println(dS);
-        List<Postbarlist> items = postbarlistMapper.queryNoVideoBarListForDate(dS);
+        List<Postbarlist> items = postbarlistMapper.queryNoVideoFollowBarListForDate(dS, userAccount);
         return items;
     }
 
-    @Override
-    public List<Postbarlist> queryNoVideoSearchBarListForDate(String searChArt) {
 
-        List<Postbarlist> barlists = postbarlistMapper.queryNoVideoSearchBarListForDate(searChArt);
+    @Override
+    public List<Postbarlist> queryNoVideoSearchBarListForDate(String searChArt, String pbArticle) {
+
+        List<Postbarlist> barlists = postbarlistMapper.queryNoVideoSearchBarListForDate(searChArt, pbArticle);
         return barlists;
 
     }
 
-  @Override
-    public List<Postbarlist> queryNoVideoTopicBarListForDate(String pbDate, String topicName) {
+    @Override
+    public List<Postbarlist> queryNoVideoTopicBarListForDate(String pbDate, String pbTopic) {
 
-       List<Postbarlist> topiclists = postbarlistMapper.queryNoVideoTopicBarListForDate(pbDate,topicName);
+        List<Postbarlist> topiclists = postbarlistMapper.queryNoVideoTopicBarListForDate(pbDate, pbTopic);
         return topiclists;
 
-   }
+    }
+
+    @Override
+    public List<Postbarlist> queryNoVideoTopicBarListForThumbNum(Integer pbThumbNum, String pbTopic) {
+        List<Postbarlist> barListForThumbNum = postbarlistMapper.queryNoVideoTopicBarListForThumbNum(pbThumbNum, pbTopic);
+        return barListForThumbNum;
+    }
+
+    @Override
+    public List<Postbarlist> queryNoVideoUserBarListForDate(String pbDate, String userAccount) {
+        List<Postbarlist> userBarListForDate = postbarlistMapper.queryNoVideoUserBarListForDate(pbDate, userAccount);
+
+        return userBarListForDate;
+    }
+
+    @Override
+    public List<Integer> queryUserBarCount(String userAccount) {
+
+        List<Postbarlist> userBarCountList = postbarlistMapper.queryUserBarCount(userAccount);
+        List<Integer> postbarlists = new ArrayList<>();
+
+        for (int i = 0; i <userBarCountList.size() ; i++) {
+            postbarlists.add(userBarCountList.get(i).getId());
+
+        }
+
+        return postbarlists;
+    }
 
 
 }

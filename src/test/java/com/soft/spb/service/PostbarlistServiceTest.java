@@ -63,13 +63,13 @@ class PostbarlistServiceTest {
 
     @Test
     void queryNoVideoSearchBarListForDate() {
-        System.out.println(postbarlistServiceImpl.queryNoVideoSearchBarListForDate("哈哈"));
+        System.out.println(postbarlistServiceImpl.queryNoVideoSearchBarListForDate("哈哈","王者五"));
     }
 
 
     @Test
     void queryNoVideoTopicBarListForDate() {
-        System.out.println(postbarlistServiceImpl.queryNoVideoTopicBarListForDate("2022-3-7 12:00:00","王者")
-   );
+        //System.out.println(postbarlistServiceImpl.queryNoVideoTopicBarListForDate("2022-3-7 12:00:00","王者")
+   //);
     }
 }

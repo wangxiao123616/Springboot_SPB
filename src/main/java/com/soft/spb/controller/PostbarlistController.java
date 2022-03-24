@@ -1,6 +1,8 @@
 package com.soft.spb.controller;
 
 
+import com.soft.spb.pojo.dto.PostbarListDto;
+import com.soft.spb.pojo.dto.UserDto;
 import com.soft.spb.pojo.entity.Postbarlist;
 import com.soft.spb.service.impl.PostbarlistServiceImpl;
 import com.soft.spb.util.ResponseBody;
@@ -76,19 +78,23 @@ public class PostbarlistController {
                 .build();
     }
 
-    @PostMapping("/queryNoVideoFollowBarListForDate/{dateForBar}")
-    public ResponseBody queryNoVideoFollowBarListForDate(@PathVariable String dateForBar) {
-        List<Postbarlist> FollowBarListForDate = postbarlistServiceImpl.queryNoVideoFollowBarListForDate(dateForBar);
+
+    @PostMapping("/queryNoVideoFollowBarListForDate")
+    public ResponseBody queryNoVideoFollowBarListForDate(@RequestBody PostbarListDto postbarListDto) {
+        List<Postbarlist> postbarlists = postbarlistServiceImpl.queryNoVideoFollowBarListForDate(postbarListDto.getPbDate(), postbarListDto.getUserAccount());
         return ResponseBody.builder()
                 .code(200)
                 .msg("")
-                .data(FollowBarListForDate)
+                .data(postbarlists)
                 .build();
     }
 
-    @PostMapping("/queryNoVideoSearchBarListForDate/{searChArt}")
-    public ResponseBody queryNoVideoSearchBarListForDate(@PathVariable String searChArt) {
-        List<Postbarlist> SearchBarList = postbarlistServiceImpl.queryNoVideoSearchBarListForDate(searChArt);
+
+    @PostMapping("/queryNoVideoSearchBarListForDate")
+
+    public ResponseBody queryNoVideoSearchBarListForDate(@RequestBody PostbarListDto postbarListDto) {
+
+        List<Postbarlist> SearchBarList = postbarlistServiceImpl.queryNoVideoSearchBarListForDate(postbarListDto.getPbTopic(), postbarListDto.getPbArticle());
         return ResponseBody.builder()
                 .code(200)
                 .msg("")
@@ -96,16 +102,51 @@ public class PostbarlistController {
                 .build();
 
     }
-    @PostMapping("/queryNoVideoTopicBarListForDate/{pbDate}/{topicName}")
-    public ResponseBody queryNoVideoTopicBarListForDate(@PathVariable String pbDate, @PathVariable String topicName){
-        System.out.println(pbDate);
-        System.out.println(topicName);
-        List<Postbarlist> topiclist = postbarlistServiceImpl.queryNoVideoTopicBarListForDate(pbDate, topicName);
-     return ResponseBody.builder()
-             .code(200)
-             .msg("")
-             .data(topiclist)
-             .build();
+
+    @PostMapping("/queryNoVideoTopicBarListForDate")
+    public ResponseBody queryNoVideoTopicBarListForDate(@RequestBody PostbarListDto postbarListDto) {
+
+        List<Postbarlist> topiclist = postbarlistServiceImpl.queryNoVideoTopicBarListForDate(postbarListDto.getPbDate(), postbarListDto.getPbTopic());
+        return ResponseBody.builder()
+                .code(200)
+                .msg("")
+                .data(topiclist)
+                .build();
+    }
+
+    @PostMapping("/queryNoVideoTopicBarListForThumbNum")
+    public ResponseBody queryNoVideoTopicBarListForThumbNum(@RequestBody PostbarListDto postbarListDto) {
+        List<Postbarlist> postbarlists = postbarlistServiceImpl.queryNoVideoTopicBarListForThumbNum(postbarListDto.getPbThumbNum(), postbarListDto.getPbTopic());
+        return ResponseBody.builder()
+                .code(200)
+                .msg("")
+                .data(postbarlists)
+                .build();
+    }
+    @PostMapping("/queryNoVideoUserBarListForDate")
+    public ResponseBody queryNoVideoUserBarListForDate(@RequestBody PostbarListDto postbarListDto){
+
+        List<Postbarlist> topicBarListForDate = postbarlistServiceImpl.queryNoVideoUserBarListForDate(postbarListDto.getPbDate(), postbarListDto.getUserAccount());
+        return ResponseBody
+                .builder()
+                .code(200)
+                .msg("")
+                .data(topicBarListForDate)
+                .build();
+
+    }
+    @PostMapping("/queryUserBarCount")
+    public ResponseBody queryUserBarCount(@RequestBody UserDto userDto){
+        List<Integer> userBarCount = postbarlistServiceImpl.queryUserBarCount(userDto.getUserAccount());
+
+        int size = userBarCount.size();
+        return ResponseBody
+                .builder()
+                .code(200)
+                .msg("")
+                .data(size)
+                .build();
+
     }
 
 
