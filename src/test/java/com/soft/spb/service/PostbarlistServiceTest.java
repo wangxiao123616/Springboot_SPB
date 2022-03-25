@@ -72,4 +72,12 @@ class PostbarlistServiceTest {
         //System.out.println(postbarlistServiceImpl.queryNoVideoTopicBarListForDate("2022-3-7 12:00:00","王者")
    //);
     }
+
+    @Test
+    void postbarlist() {
+        System.out.println(postbarlistServiceImpl.postbarlist("G18190405"));
+
+      }
+
+
 }

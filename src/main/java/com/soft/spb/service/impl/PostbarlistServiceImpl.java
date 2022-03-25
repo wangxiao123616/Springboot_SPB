@@ -149,5 +149,19 @@ public class PostbarlistServiceImpl extends ServiceImpl<PostbarlistMapper, Postb
         return postbarlists;
     }
 
+   @Override
+    public Integer postbarlist(String userAccount) {
+       Integer thumbNum = postbarlistMapper.postbarlist(userAccount);
+       return  thumbNum;
+    }
+
+    @Override
+    public List<Postbarlist>queryVideoBarListForDate(String searChArt, String pbArticle) {
+
+        List<Postbarlist> barlists = postbarlistMapper.queryVideoBarListForDate(searChArt, pbArticle);
+        return barlists;
+
+    }
+
 
 }

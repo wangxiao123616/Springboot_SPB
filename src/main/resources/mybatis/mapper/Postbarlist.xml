@@ -177,4 +177,33 @@
         where user_account = #{userAccount}
     </select>
 
+    <select id="postbarlist" parameterType="java.lang.String" resultType="java.lang.Integer">
+
+        select sum(pb_thumb_num)
+        from spb.postbarlist
+        where user_account = #{userAccount}
+    </select>
+    <select id="queryVideoBarListForDate" resultType="com.soft.spb.pojo.vo.PostbarlistVo">
+        select u.user_account,
+               u.user_name,
+               u.user_badge,
+               p.pb_one_id,
+               p.pb_date,
+               p.pb_article,
+               p.pb_image_url,
+               p.pb_voice,
+               p.pb_topic,
+               p.pb_location,
+               p.pb_thumb_num,
+               p.pb_comment_num
+        from spb.postbarlist p
+                 left join spb.user u
+                           on p.user_account = u.user_account
+        where p.pb_video is not null
+            and p.pb_topic like concat('%', #{searChArt}, '%')
+           or p.pb_article like concat('%', #{searChArt}, '%')
+        order by p.pb_date desc
+        limit 30
+    </select>
+
 </mapper>

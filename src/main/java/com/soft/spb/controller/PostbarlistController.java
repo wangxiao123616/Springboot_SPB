@@ -149,7 +149,28 @@ public class PostbarlistController {
 
     }
 
+    @PostMapping("/queryUserBarLikeCount")
+    public ResponseBody queryUserBarLikeCount(@RequestBody Postbarlist postbarlist) {
+        Integer thumbNum = postbarlistServiceImpl.postbarlist(postbarlist.getUserAccount());
 
+        return ResponseBody
+                .builder()
+                .code(200)
+                .msg("")
+                .data(thumbNum)
+                .build();
+    }
+
+    @PostMapping("/queryVideoBarListForDate")
+    public ResponseBody queryVideoBarListForDate(@RequestBody PostbarListDto postbarListDto) {
+        List<Postbarlist> postbarlists = postbarlistServiceImpl.queryVideoBarListForDate(postbarListDto.getPbTopic(), postbarListDto.getPbArticle());
+        return ResponseBody
+                .builder()
+                .code(200)
+                .msg("")
+                .data(postbarlists)
+                .build();
+    }
 }
 
 

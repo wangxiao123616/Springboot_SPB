@@ -81,13 +81,9 @@ class PostbarlistMapperTest {
 
     @Test
     void queryUserBarCount() {
-
-      for (Postbarlist data: postbarlistMapper.queryUserBarCount("G18190405")
-             ) {
-            System.out.println(data);
-
-        }
-
+        System.out.println(postbarlistMapper.postbarlist("G18190405"));
 
     }
+
+
 }
