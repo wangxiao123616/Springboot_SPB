@@ -3,8 +3,6 @@ package com.soft.spb.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.soft.spb.pojo.entity.AppVersion;
 
-import java.util.List;
-
 /**
  * <p>
  *  服务类

@@ -206,4 +206,50 @@
         limit 30
     </select>
 
+    <select id="queryVideoTopicBarListForDate" resultType="com.soft.spb.pojo.vo.PostbarlistVo">
+        select u.user_account,
+               u.user_name,
+               u.user_badge,
+               p.pb_one_id,
+               p.pb_date,
+               p.pb_article,
+               p.pb_image_url,
+               p.pb_voice,
+               p.pb_topic,
+               p.pb_location,
+               p.pb_thumb_num,
+               p.pb_comment_num
+        from spb.postbarlist p
+                 left join spb.user u
+                           on p.user_account = u.user_account
+        where p.pb_video is not  null
+          and p.pb_date &lt;= #{pbDate}
+          and p.pb_topic like concat('%', #{pbTopic}, '%')
+        ORDER BY p.pb_date DESC
+        limit 5
+    </select>
+
+    <select id="queryVideoUserBarListForDate" resultType="com.soft.spb.pojo.vo.PostbarlistVo">
+        select u.user_account,
+               u.user_name,
+               u.user_badge,
+               p.pb_one_id,
+               p.pb_date,
+               p.pb_article,
+               p.pb_image_url,
+               p.pb_voice,
+               p.pb_topic,
+               p.pb_location,
+               p.pb_thumb_num,
+               p.pb_comment_num
+        from spb.postbarlist p
+                 left join spb.user u
+                           on p.user_account = u.user_account
+        where p.pb_video is not  null
+          and p.pb_date &lt;= #{pbDate}
+          and p.user_account =#{userAccount}
+        ORDER BY p.pb_date DESC
+        limit 2
+    </select>
+
 </mapper>

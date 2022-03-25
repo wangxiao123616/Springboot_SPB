@@ -1,6 +1,7 @@
 package com.soft.spb.controller;
 
 
+import com.soft.spb.core.annotation.ResponseResult;
 import com.soft.spb.pojo.dto.UserDto;
 import com.soft.spb.pojo.entity.Follow;
 import com.soft.spb.pojo.entity.User;
@@ -23,6 +24,7 @@ import java.util.List;
  * @author wyw
  * @since 2022-03-19
  */
+@ResponseResult
 @RestController
 @RequestMapping({"follow", "followed"})
 public class FollowController {
@@ -53,77 +55,53 @@ public class FollowController {
     }
 
     @PostMapping("/queryFollowCount")
-    public ResponseBody queryFollowAccount(@RequestBody Follow follow) {
+    public Integer queryFollowAccount(@RequestBody Follow follow) {
         Integer integer = followServiceImpl.queryFollowAccount(follow);
 
-        return ResponseBody.builder()
-                .code(200)
-                .msg("获取成功")
-                .data(integer)
-                .build();
+        return integer;
     }
 
     @PostMapping("/queryFollowList")
-    public ResponseBody queryFollowList(@RequestBody Follow follow) {
+    public List<String> queryFollowList(@RequestBody Follow follow) {
         List<Follow> followList = followServiceImpl.queryFollowList(follow);
         List<String> data = new ArrayList<>(followList.size());
         for (int i = 0; i < followList.size(); i++) {
             Follow item = followList.get(i);
             data.add(item.getFollowedAccount());
         }
-        return ResponseBody.builder()
-                .code(200)
-                .msg("获取成功")
-                .data(data)
-                .build();
+        return data;
     }
 
     @PostMapping("/queryFollowUserList")
-    public ResponseBody queryFollowUserList(@RequestBody User user) {
+    public List<Follow> queryFollowUserList(@RequestBody User user) {
 
         List<Follow> userList = followServiceImpl.queryFollowUserList(user.getUserAccount());
-        return ResponseBody.builder()
-                .code(200)
-                .msg("")
-                .data(userList)
-                .build();
+        return userList;
     }
 
     @PostMapping("/queryFollowedCount")
-    public ResponseBody queryFollowedCount(@RequestBody Follow follow) {
+    public Integer queryFollowedCount(@RequestBody Follow follow) {
         Integer count = followServiceImpl.queryFollowedCount(follow);
-        return ResponseBody.builder()
-                .code(200)
-                .msg("获取被关注数")
-                .data(count)
-                .build();
+        return count;
     }
 
     @PostMapping("queryFollowedList")
-    public ResponseBody queryFollowedList(@RequestBody Follow follow) {
+    public List<String> queryFollowedList(@RequestBody Follow follow) {
         List<Follow> followedList = followServiceImpl.queryFollowedList(follow);
         List<String> data = new ArrayList<>(followedList.size());
         for (int i = 0; i < followedList.size(); i++) {
             Follow item = followedList.get(i);
             data.add(item.getFollowAccount());
         }
-        return ResponseBody.builder()
-                .code(200)
-                .msg("获取被关注列表")
-                .data(data)
-                .build();
+        return data;
 
     }
 
     @PostMapping("/queryFollowedUserList")
-    public ResponseBody queryFollowedUserList(@RequestBody UserDto user) {
+    public List<Follow> queryFollowedUserList(@RequestBody UserDto user) {
 
         List<Follow> followedUserList = followServiceImpl.queryFollowedUserList(user.getFollowedAccount());
-        return ResponseBody.builder()
-                .code(200)
-                .msg("")
-                .data(followedUserList)
-                .build();
+        return followedUserList;
     }
 
 

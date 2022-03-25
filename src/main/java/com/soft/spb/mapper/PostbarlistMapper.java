@@ -52,5 +52,10 @@ public interface PostbarlistMapper extends BaseMapper<Postbarlist> {
     //2.4.13. 根据时间获取帖子列表(有Video)
     List<Postbarlist> queryVideoBarListForDate(String searChArt, String pbArticle);
 
+    //2.4.14 根据时间获取话题帖子列表(有Video)
+    List<Postbarlist> queryVideoTopicBarListForDate(String pbDate,String pbTopic);
+
+    //2.4.15. 根据时间获取用户帖子列表(有Video)
+    List<Postbarlist>queryVideoUserBarListForDate(String pbDate, String userAccount);
 
 }

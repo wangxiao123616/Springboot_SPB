@@ -4,14 +4,29 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.soft.spb.pojo.entity.Likepb">
-        <id column="id" property="id" />
-        <result column="user_account" property="userAccount" />
-        <result column="pb_one_id" property="pbOneId" />
+        <id column="id" property="id"/>
+        <result column="user_account" property="userAccount"/>
+        <result column="pb_one_id" property="pbOneId"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, user_account, pb_one_id
     </sql>
+    <insert id="addLike" parameterType="com.soft.spb.pojo.entity.Likepb">
+        insert into spb.likepb (user_account, pb_one_id)
+        values (#{userAccount}, #{pbOneId});
+    </insert>
+
+    <delete id="deleteLike" parameterType="com.soft.spb.pojo.entity.Likepb">
+        delete
+        from spb.likepb
+        where user_account = #{userAccount}
+          and pb_one_id = #{pbOneId}
+    </delete>
+
+    <select id="queryLike" resultType="com.soft.spb.pojo.entity.Likepb">
+        select pb_one_id from spb.likepb where user_account = #{userAccount}
+    </select>
 
 </mapper>

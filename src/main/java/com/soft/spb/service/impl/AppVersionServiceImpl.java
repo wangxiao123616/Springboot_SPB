@@ -1,6 +1,8 @@
 package com.soft.spb.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.soft.spb.core.constant.ResultCode;
+import com.soft.spb.core.exception.ServiceException;
 import com.soft.spb.mapper.AppVersionMapper;
 import com.soft.spb.pojo.entity.AppVersion;
 import com.soft.spb.service.AppVersionService;
@@ -19,11 +21,11 @@ import java.util.List;
  * @author wyw
  * @since 2022-03-19
  */
-  @Service
-  @RequiredArgsConstructor(onConstructor = @_(@Autowired))
+@Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AppVersionServiceImpl extends ServiceImpl<AppVersionMapper, AppVersion> implements AppVersionService {
 
-   private final AppVersionMapper appVersionMapper;
+    private final AppVersionMapper appVersionMapper;
 
     @Override
     public AppVersion getAppVersion(Integer versionCode) {

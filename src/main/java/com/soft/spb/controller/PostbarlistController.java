@@ -27,14 +27,10 @@ public class PostbarlistController {
     PostbarlistServiceImpl postbarlistServiceImpl;
 
     @PostMapping("/addBar")
-    public ResponseBody addBar(@RequestBody Postbarlist postbarlist) {
+    public Integer addBar(@RequestBody Postbarlist postbarlist) {
         int i = postbarlistServiceImpl.addBar(postbarlist);
 
-        return ResponseBody.builder()
-                .code(200)
-                .msg("受影响的数据位为")
-                .data(i)
-                .build();
+        return i;
     }
 
 
@@ -62,115 +58,91 @@ public class PostbarlistController {
         } else {
             return ResponseBody.builder()
                     .code(200)
-                    .msg("查询detailForPbid")
+                    .msg("成功")
                     .data(detatilForPbid.get(0))
                     .build();
         }
     }
 
     @PostMapping("/queryNoVideoBarListForDate/{date}")
-    public ResponseBody queryNoVideoBarListForDate(@PathVariable String date) {
+    public List<Postbarlist> queryNoVideoBarListForDate(@PathVariable String date) {
         List<Postbarlist> BarListForDate = postbarlistServiceImpl.queryNoVideoBarListForDate(date);
-        return ResponseBody.builder()
-                .code(200)
-                .msg("")
-                .data(BarListForDate)
-                .build();
+        return BarListForDate;
     }
 
 
     @PostMapping("/queryNoVideoFollowBarListForDate")
-    public ResponseBody queryNoVideoFollowBarListForDate(@RequestBody PostbarListDto postbarListDto) {
+    public List<Postbarlist> queryNoVideoFollowBarListForDate(@RequestBody PostbarListDto postbarListDto) {
         List<Postbarlist> postbarlists = postbarlistServiceImpl.queryNoVideoFollowBarListForDate(postbarListDto.getPbDate(), postbarListDto.getUserAccount());
-        return ResponseBody.builder()
-                .code(200)
-                .msg("")
-                .data(postbarlists)
-                .build();
+        return postbarlists;
     }
 
 
     @PostMapping("/queryNoVideoSearchBarListForDate")
 
-    public ResponseBody queryNoVideoSearchBarListForDate(@RequestBody PostbarListDto postbarListDto) {
+    public List<Postbarlist> queryNoVideoSearchBarListForDate(@RequestBody PostbarListDto postbarListDto) {
 
         List<Postbarlist> SearchBarList = postbarlistServiceImpl.queryNoVideoSearchBarListForDate(postbarListDto.getPbTopic(), postbarListDto.getPbArticle());
-        return ResponseBody.builder()
-                .code(200)
-                .msg("")
-                .data(SearchBarList)
-                .build();
+        return SearchBarList;
 
     }
 
     @PostMapping("/queryNoVideoTopicBarListForDate")
-    public ResponseBody queryNoVideoTopicBarListForDate(@RequestBody PostbarListDto postbarListDto) {
+    public List<Postbarlist> queryNoVideoTopicBarListForDate(@RequestBody PostbarListDto postbarListDto) {
 
         List<Postbarlist> topiclist = postbarlistServiceImpl.queryNoVideoTopicBarListForDate(postbarListDto.getPbDate(), postbarListDto.getPbTopic());
-        return ResponseBody.builder()
-                .code(200)
-                .msg("")
-                .data(topiclist)
-                .build();
+        return topiclist;
     }
 
     @PostMapping("/queryNoVideoTopicBarListForThumbNum")
-    public ResponseBody queryNoVideoTopicBarListForThumbNum(@RequestBody PostbarListDto postbarListDto) {
+    public List<Postbarlist> queryNoVideoTopicBarListForThumbNum(@RequestBody PostbarListDto postbarListDto) {
         List<Postbarlist> postbarlists = postbarlistServiceImpl.queryNoVideoTopicBarListForThumbNum(postbarListDto.getPbThumbNum(), postbarListDto.getPbTopic());
-        return ResponseBody.builder()
-                .code(200)
-                .msg("")
-                .data(postbarlists)
-                .build();
+        return postbarlists;
     }
+
     @PostMapping("/queryNoVideoUserBarListForDate")
-    public ResponseBody queryNoVideoUserBarListForDate(@RequestBody PostbarListDto postbarListDto){
+    public List<Postbarlist> queryNoVideoUserBarListForDate(@RequestBody PostbarListDto postbarListDto) {
 
         List<Postbarlist> topicBarListForDate = postbarlistServiceImpl.queryNoVideoUserBarListForDate(postbarListDto.getPbDate(), postbarListDto.getUserAccount());
-        return ResponseBody
-                .builder()
-                .code(200)
-                .msg("")
-                .data(topicBarListForDate)
-                .build();
+        return topicBarListForDate;
 
     }
+
     @PostMapping("/queryUserBarCount")
-    public ResponseBody queryUserBarCount(@RequestBody UserDto userDto){
+    public Integer queryUserBarCount(@RequestBody UserDto userDto) {
         List<Integer> userBarCount = postbarlistServiceImpl.queryUserBarCount(userDto.getUserAccount());
 
         int size = userBarCount.size();
-        return ResponseBody
-                .builder()
-                .code(200)
-                .msg("")
-                .data(size)
-                .build();
+        return size;
 
     }
 
     @PostMapping("/queryUserBarLikeCount")
-    public ResponseBody queryUserBarLikeCount(@RequestBody Postbarlist postbarlist) {
+    public Integer queryUserBarLikeCount(@RequestBody Postbarlist postbarlist) {
         Integer thumbNum = postbarlistServiceImpl.postbarlist(postbarlist.getUserAccount());
 
-        return ResponseBody
-                .builder()
-                .code(200)
-                .msg("")
-                .data(thumbNum)
-                .build();
+        return thumbNum;
     }
 
     @PostMapping("/queryVideoBarListForDate")
-    public ResponseBody queryVideoBarListForDate(@RequestBody PostbarListDto postbarListDto) {
+    public List<Postbarlist> queryVideoBarListForDate(@RequestBody PostbarListDto postbarListDto) {
         List<Postbarlist> postbarlists = postbarlistServiceImpl.queryVideoBarListForDate(postbarListDto.getPbTopic(), postbarListDto.getPbArticle());
-        return ResponseBody
-                .builder()
-                .code(200)
-                .msg("")
-                .data(postbarlists)
-                .build();
+        return postbarlists;
     }
+
+    @PostMapping("/queryVideoTopicBarListForDate")
+    public List<Postbarlist> queryVideoTopicBarListForDate(@RequestBody PostbarListDto postbarListDto) {
+        List<Postbarlist> postbarlists = postbarlistServiceImpl.queryVideoTopicBarListForDate(postbarListDto.getPbDate(), postbarListDto.getPbTopic());
+        return postbarlists;
+
+    }
+    @PostMapping("/queryVideoUserBarListForDate")
+    public List<Postbarlist> queryVideoUserBarListForDate(@RequestBody PostbarListDto postbarListDto){
+        List<Postbarlist> postbarlists = postbarlistServiceImpl.queryVideoUserBarListForDate(postbarListDto.getPbDate(), postbarListDto.getUserAccount());
+        return postbarlists;
+
+    }
+
 }
 
 

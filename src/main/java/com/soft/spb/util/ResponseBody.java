@@ -11,10 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ResponseBody {
 
-    private Integer code;
+    private int code;
 
     private String msg;
 
     private Object data;
-
 }
