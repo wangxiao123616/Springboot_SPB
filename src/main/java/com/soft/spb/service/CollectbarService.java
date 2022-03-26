@@ -1,7 +1,9 @@
 package com.soft.spb.service;
 
-import com.soft.spb.pojo.entity.Collectbar;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.soft.spb.pojo.entity.Collectbar;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface CollectbarService extends IService<Collectbar> {
 
+    List<String> getCollectBarPresenter(String userAccount);
 }

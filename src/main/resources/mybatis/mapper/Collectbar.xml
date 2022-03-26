@@ -14,4 +14,8 @@
         id, user_account, pb_one_id
     </sql>
 
+    <select id="getCollectBarPresenter" resultType="java.lang.String">
+        SELECT pb_one_id FROM collectbar WHERE user_account = #{userAccount}
+    </select>
+
 </mapper>

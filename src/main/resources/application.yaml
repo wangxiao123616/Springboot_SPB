@@ -4,6 +4,7 @@ spring:
     password: Xiaowo_mysql
     url: jdbc:mysql://rm-bp1itj68te5655569ro.mysql.rds.aliyuncs.com/spb?useUnicode=true&characterEncoding=utf-8&useSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
+
 server:
   port: 8888
 

@@ -44,7 +44,7 @@
         ORDER BY follow.id DESC
 
     </select>
-    <select id="queryFollowList" resultType="com.soft.spb.pojo.entity.Follow">
+    <select id="queryFollowList" resultType="java.lang.String">
         select followed_account
         from spb.follow
         where follow_account = #{followAccount}
@@ -56,7 +56,7 @@
         where followed_account = #{followedAccount}
     </select>
 
-    <select id="queryFollowedList" resultType="com.soft.spb.pojo.entity.Follow">
+    <select id="queryFollowedList" resultType="java.lang.String">
         select follow_account
         from spb.follow
         where followed_account = #{followedAccount}

@@ -1,12 +1,14 @@
 package com.soft.spb.pojo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import java.time.LocalDate;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
  * <p>
@@ -17,6 +19,7 @@ import lombok.experimental.Accessors;
  * @since 2022-03-19
  */
 @Data
+@Builder
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 public class User implements Serializable {

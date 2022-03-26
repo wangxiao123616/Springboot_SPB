@@ -1,7 +1,9 @@
 package com.soft.spb.mapper;
 
-import com.soft.spb.pojo.entity.Collectbar;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.soft.spb.pojo.entity.Collectbar;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface CollectbarMapper extends BaseMapper<Collectbar> {
 
+    List<String>  getCollectBarPresenter(String userAccount);
 }

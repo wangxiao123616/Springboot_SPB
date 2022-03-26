@@ -4,17 +4,20 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.soft.spb.pojo.entity.Attentiontopic">
-        <id column="id" property="id" />
-        <result column="user_account" property="userAccount" />
-        <result column="topic_id" property="topicId" />
-        <result column="topic_name" property="topicName" />
-        <result column="topic_date" property="topicDate" />
+        <id column="id" property="id"/>
+        <result column="user_account" property="userAccount"/>
+        <result column="topic_id" property="topicId"/>
+        <result column="topic_name" property="topicName"/>
+        <result column="topic_date" property="topicDate"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, user_account, topic_id, topic_name, topic_date
+        `id`, user_account, topic_id, topic_name, topic_date
     </sql>
+    <select id="getAttentionTopPresenter" resultType="java.lang.Integer">
+        SELECT topic_id FROM attentiontopic WHERE user_account = #{userAccount}
+    </select>
 
 
 </mapper>

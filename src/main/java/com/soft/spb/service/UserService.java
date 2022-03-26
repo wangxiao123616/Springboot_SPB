@@ -1,7 +1,9 @@
 package com.soft.spb.service;
 
-import com.soft.spb.pojo.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.soft.spb.pojo.entity.User;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -12,5 +14,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-03-19
  */
 public interface UserService extends IService<User> {
+
+    Map<String, Object> getUserInfo(String userAccount);
 
 }

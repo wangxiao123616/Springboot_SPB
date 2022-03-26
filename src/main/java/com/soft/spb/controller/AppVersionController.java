@@ -1,7 +1,6 @@
 package com.soft.spb.controller;
 
 import com.soft.spb.core.annotation.ResponseResult;
-import com.soft.spb.core.exception.ServiceException;
 import com.soft.spb.pojo.entity.AppVersion;
 import com.soft.spb.service.AppVersionService;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +33,7 @@ public class AppVersionController {
     private final AppVersionService appVersionService;
 
     @PostMapping("isVersion")
-    public List<Object> getVersionUpdate(@RequestBody AppVersion appVersion) throws ServiceException {
+    public List<Object> getVersionUpdate(@RequestBody AppVersion appVersion) {
         Integer userVersionCode = appVersion.getVersionCode();
         AppVersion currentAppVersion = appVersionService.getAppVersion(userVersionCode);
         Integer code = currentAppVersion.getVersionCode();
