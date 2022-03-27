@@ -1,6 +1,5 @@
 package com.soft.spb.controller;
 
-import com.soft.spb.core.annotation.ResponseResult;
 import com.soft.spb.pojo.entity.AppVersion;
 import com.soft.spb.service.AppVersionService;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +24,6 @@ import java.util.Objects;
  */
 @Slf4j
 @RestController
-@ResponseResult
 @RequestMapping("appVersion")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AppVersionController {

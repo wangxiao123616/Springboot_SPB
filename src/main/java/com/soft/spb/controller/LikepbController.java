@@ -1,7 +1,6 @@
 package com.soft.spb.controller;
 
 
-import com.soft.spb.core.annotation.ResponseResult;
 import com.soft.spb.pojo.entity.Likepb;
 import com.soft.spb.service.impl.LikepbServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import java.util.List;
  * @author wyw
  * @since 2022-03-19
  */
-@ResponseResult
 @RestController
 @RequestMapping("/likepb")
 public class LikepbController {

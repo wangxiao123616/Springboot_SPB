@@ -1,8 +1,6 @@
 package com.soft.spb.core.handler;
 
 import com.alibaba.fastjson.JSON;
-import com.soft.spb.core.annotation.ResponseResult;
-import com.soft.spb.core.component.ResponseResultInterceptor;
 import com.soft.spb.util.SPBResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
@@ -10,13 +8,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 @Slf4j
-@RestControllerAdvice
+@RestControllerAdvice(annotations = RestController.class)
 public class GlobalResponseHandler implements ResponseBodyAdvice<Object> {
 
 
@@ -29,10 +26,7 @@ public class GlobalResponseHandler implements ResponseBodyAdvice<Object> {
      */
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
-        ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        ResponseResult responseResultAnn = (ResponseResult) sra.getRequest()
-                .getAttribute(ResponseResultInterceptor.RESPONSE_RESULT_ANN);
-        return responseResultAnn != null;
+        return true;
     }
 
 

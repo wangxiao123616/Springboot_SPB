@@ -1,7 +1,6 @@
 package com.soft.spb.controller;
 
 
-import com.soft.spb.core.annotation.ResponseResult;
 import com.soft.spb.pojo.dto.UserDto;
 import com.soft.spb.pojo.entity.Follow;
 import com.soft.spb.pojo.entity.User;
@@ -23,7 +22,6 @@ import java.util.List;
  * @author wyw
  * @since 2022-03-19
  */
-@ResponseResult
 @RestController
 @RequestMapping({"follow", "followed"})
 public class FollowController {
