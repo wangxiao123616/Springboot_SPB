@@ -1,10 +1,16 @@
 package com.soft.spb.controller;
 
 
+import com.soft.spb.core.annotation.ResponseResult;
+import com.soft.spb.pojo.entity.Diary;
+import com.soft.spb.service.impl.DiaryServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,8 +20,29 @@ import org.springframework.web.bind.annotation.RestController;
  * @author wyw
  * @since 2022-03-19
  */
+@ResponseResult
 @RestController
 @RequestMapping("/diary")
 public class DiaryController {
+
+    @Autowired
+    DiaryServiceImpl diaryServiceImpl;
+
+    @PostMapping("/deleteDiary")
+    public Integer deleteDiary(@RequestBody Diary diary){
+        int count = diaryServiceImpl.deleteDiary(diary);
+        return count;
+    }
+
+      @PostMapping("/queryDiary")
+    public List<Diary> queryDiary(@RequestBody Diary diary){
+
+
+        List<Diary> diaries = diaryServiceImpl.queryDiary(diary);
+        return diaries;
+    }
+
+
+
 
 }

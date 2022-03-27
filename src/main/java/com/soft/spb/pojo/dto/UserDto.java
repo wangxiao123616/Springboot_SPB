@@ -6,4 +6,5 @@ import lombok.Data;
 public class UserDto {
     private String userAccount;
     private String followedAccount;
+    private String userName;
 }

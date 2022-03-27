@@ -4,17 +4,34 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.soft.spb.pojo.entity.Diary">
-        <id column="id" property="id" />
-        <result column="user_account" property="userAccount" />
-        <result column="dia_date" property="diaDate" />
-        <result column="dia_weather" property="diaWeather" />
-        <result column="dia_message" property="diaMessage" />
-        <result column="dia_image" property="diaImage" />
+        <id column="id" property="id"/>
+        <result column="user_account" property="userAccount"/>
+        <result column="dia_date" property="diaDate"/>
+        <result column="dia_weather" property="diaWeather"/>
+        <result column="dia_message" property="diaMessage"/>
+        <result column="dia_image" property="diaImage"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, user_account, dia_date, dia_weather, dia_message, dia_image
     </sql>
+
+    <insert id="addDiary" parameterType="com.soft.spb.pojo.entity.Diary">
+        insert into spb.diary ( user_account, dia_date, dia_weather, dia_message, dia_image)
+        VALUES ( #{user_account}, #{dia_date}, #{dia_weather}, #{dia_message}, #{dia_image})
+    </insert>
+
+    <delete id="deleteDiary" parameterType="com.soft.spb.pojo.entity.Diary">
+        delete
+        from spb.diary
+        where id = #{id}
+          and user_account = #{userAccount}
+    </delete>
+
+    <select id="queryDiary" resultType="com.soft.spb.pojo.entity.Diary">
+        select id,dia_date,dia_weather,dia_message,dia_image  from spb.diary
+        where user_account = #{userAccount}
+    </select>
 
 </mapper>

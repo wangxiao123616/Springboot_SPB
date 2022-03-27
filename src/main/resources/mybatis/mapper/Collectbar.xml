@@ -4,14 +4,54 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.soft.spb.pojo.entity.Collectbar">
-        <id column="id" property="id" />
-        <result column="user_account" property="userAccount" />
-        <result column="pb_one_id" property="pbOneId" />
+        <id column="id" property="id"/>
+        <result column="user_account" property="userAccount"/>
+        <result column="pb_one_id" property="pbOneId"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, user_account, pb_one_id
     </sql>
+
+    <insert id="addCollectBar" parameterType="com.soft.spb.pojo.entity.Collectbar">
+        insert into spb.collectbar (user_account, pb_one_id)
+        values (#{userAccount}, #{pbOneId})
+    </insert>
+
+    <delete id="deleteCollectBar" parameterType="com.soft.spb.pojo.entity.Collectbar">
+        delete
+        from spb.collectbar
+        where user_account = #{userAccount}
+          and pb_one_id = #{pbOneId}
+    </delete>
+
+    <select id="queryCollectBarFullList" parameterType="java.lang.String"
+            resultType="com.soft.spb.pojo.vo.PostbarlistVo">
+        select u.user_account,
+               u.user_name,
+               u.user_badge,
+               p.pb_one_id,
+               p.pb_date,
+               p.pb_article,
+               p.pb_image_url,
+               p.pb_voice,
+               p.pb_topic,
+               p.pb_location,
+               p.pb_thumb_num,
+               p.pb_comment_num
+        from spb.collectbar c
+                 left join spb.postbarlist p
+                           on c.user_account = p.user_account
+                 left join spb.user u
+                           on p.user_account = u.user_account
+        where p.user_account = #{userAccount}
+
+    </select>
+
+    <select id="queryCollectBarList" parameterType="java.lang.String"  resultType="java.lang.String">
+       select pb_one_id from spb.collectbar
+       where  user_account = #{user_account}
+    </select>
 
 </mapper>

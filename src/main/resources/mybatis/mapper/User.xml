@@ -25,4 +25,31 @@
         id, user_account, user_name, user_birth, user_home, user_favorite, user_profile, user_head_image, user_bg_image, user_badge, user_longday, user_privacy, user_ip, user_token
     </sql>
 
+    <update id="deleteUserIp" parameterType="java.lang.String">
+        update spb.user set user_ip = ''
+        where user_account =#{user_account}
+    </update>
+
+    <select id="querySchoolTable" resultType="com.soft.spb.pojo.entity.Course">
+        select class_id,class_name,class_room,class_teacher,class_date,class_num,class_time_start,class_time_over
+       from spb.course
+    </select>
+    
+    <select id="querySearchUser" resultType="com.soft.spb.pojo.vo.UserVo">
+        select u.user_account, u.user_name, u.user_badge, s.stu_sex
+        from spb.user u
+                 left join spb.students s
+                           on user_account = s.stu_num
+        where u.user_name like concat('%', #{search}, '%')
+           or u.user_account like concat('%', #{search}, '%')
+    </select>
+
+    <update id="updateUserBadgeImage" parameterType="java.lang.String">
+        update spb.user set user_badge = #{userBadge}
+        where user_account = #{userAccount}
+
+    </update>
+
+    
+
 </mapper>

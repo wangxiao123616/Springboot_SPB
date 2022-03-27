@@ -1,7 +1,9 @@
 package com.soft.spb.service;
 
-import com.soft.spb.pojo.entity.Diary;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.soft.spb.pojo.entity.Diary;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +14,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-03-19
  */
 public interface DiaryService extends IService<Diary> {
+
+    int addDiary(Diary diary);
+    int deleteDiary(Diary diary);
+
+    List<Diary> queryDiary(Diary diary);
+
 
 }

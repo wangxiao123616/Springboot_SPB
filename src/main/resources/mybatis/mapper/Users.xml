@@ -14,5 +14,6 @@
     <sql id="Base_Column_List">
         id, user_account, user_password, user_secret_protection
     </sql>
+    
 
 </mapper>
