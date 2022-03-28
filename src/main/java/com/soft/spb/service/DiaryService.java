@@ -2,6 +2,7 @@ package com.soft.spb.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.soft.spb.pojo.entity.Diary;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
  */
 public interface DiaryService extends IService<Diary> {
 
-    int addDiary(Diary diary);
+    int addDiary(Diary diary, MultipartFile[] file);
     int deleteDiary(Diary diary);
 
     List<Diary> queryDiary(Diary diary);

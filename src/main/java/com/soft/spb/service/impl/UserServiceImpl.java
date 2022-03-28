@@ -88,4 +88,28 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         map.put("collectBar", collectbarService.getCollectBarPresenter(userAccount));
         return map;
     }
+
+    @Override
+    public int updateUserIp(User user) {
+        int count = userMapper.updateUserIp(user.getUserIp(), user.getUserAccount());
+        return count ;
+    }
+
+    @Override
+    public int updateUserPersonalInformation(User user) {
+        int count = userMapper.updateUserPersonalInformation(user);
+        return count;
+    }
+
+    @Override
+    public int updateUserPrivacy(User user) {
+        int count = userMapper.updateUserPrivacy(user);
+        return count;
+    }
+
+    @Override
+    public int updateUserToken(User user) {
+        int count = userMapper.updateUserToken(user);
+        return count;
+    }
 }

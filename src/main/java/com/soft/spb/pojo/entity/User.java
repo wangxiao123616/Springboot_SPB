@@ -2,9 +2,7 @@ package com.soft.spb.pojo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
@@ -19,6 +17,8 @@ import java.time.LocalDate;
  * @since 2022-03-19
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)

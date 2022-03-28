@@ -31,7 +31,7 @@ public class AliOssUtil {
         String accessKeyId = "LTAI5t5ZbD71qx5ENKSkFHjK";
         String accessKeySecret = "1KyrA2bNbW0bhuCV0r7pBcy7r3iSP6";
         String bucketName = "aliyunxiaowang";
-        String filePath = "UserImageServer/";
+        String filePath = "upload/UserImageServer/";
         String fileName = file.getName();
         String newFileName = UUID.randomUUID().toString() + fileName.substring(fileName.indexOf("."));
         // 创建OSSClient实例

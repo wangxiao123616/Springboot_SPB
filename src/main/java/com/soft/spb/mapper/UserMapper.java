@@ -43,4 +43,33 @@ public interface UserMapper extends BaseMapper<User> {
      * @return
      */
     int updateUserBadgeImage(String userBadge,String userAccount);
+
+    /**
+     * 2.9.7. 更新用户ip
+     * @param userAccount
+     * @return
+     */
+    int updateUserIp(String userIp,String userAccount);
+
+    /**
+     *
+     * @param user
+     * @return
+     */
+    int updateUserPersonalInformation(User user);
+
+    /**
+     * 2.9.9. 更新用户隐私设置
+     * @param user
+     * @return
+     */
+
+    int updateUserPrivacy(User user);
+
+    /**
+     * 2.9.10. 更新用户token
+     * @param user
+     * @return
+     */
+   int updateUserToken(User user);
 }

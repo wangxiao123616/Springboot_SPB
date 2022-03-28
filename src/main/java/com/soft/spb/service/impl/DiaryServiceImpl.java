@@ -1,26 +1,16 @@
 package com.soft.spb.service.impl;
 
-import com.aliyun.oss.OSS;
-import com.aliyun.oss.OSSClientBuilder;
-import com.aliyun.oss.OSSException;
-import com.aliyun.oss.model.PutObjectRequest;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.soft.spb.mapper.DiaryMapper;
 import com.soft.spb.pojo.entity.Diary;
 import com.soft.spb.service.DiaryService;
+import com.soft.spb.util.AliOssUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * <p>
@@ -37,7 +27,11 @@ public class DiaryServiceImpl extends ServiceImpl<DiaryMapper, Diary> implements
     private final DiaryMapper diaryMapper;
 
     @Override
-    public int addDiary(Diary diary) {
+    public int addDiary(Diary diary, MultipartFile[] sourceFiles) {
+        List<String> urlList = AliOssUtil.upload(sourceFiles);
+        String imgUrl = urlList.get(0);
+              imgUrl.substring(51);
+        diary.setDiaImage(imgUrl);
         int count = diaryMapper.addDiary(diary);
         return count;
     }

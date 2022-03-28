@@ -46,4 +46,29 @@ public class UserController {
           return count;
 
       }
+
+      @PostMapping("/updateUserIp")
+    public int updateUserIp(@RequestBody User user){
+          int count = userServiceImpl.updateUserIp(user);
+          return count;
+      }
+
+      @PostMapping("/updateUserPersonalInformation")
+    public Integer updateUserPersonalInformation(@RequestBody User user){
+        int count = userServiceImpl.updateUserPersonalInformation(user);
+        return count;
+      }
+
+      @PostMapping("/updateUserPrivacy")
+    public Integer updateUserPrivacy(@RequestBody User user){
+          int count = userServiceImpl.updateUserPrivacy(user);
+          return count;
+      }
+
+      @PostMapping("/updateUserToken")
+    public Integer updateUserToken(@RequestBody User user){
+          int count = userServiceImpl.updateUserToken(user);
+          return count;
+
+      }
 }

@@ -21,9 +21,18 @@ public interface UserService extends IService<User> {
 
     List<Course> querySchoolTable();
 
+
     List<User> querySearchUser(String search);
 
     int updateUserBadgeImage(String userBadge,String userAccount);
     Map<String, Object> getUserInfo(String userAccount);
+
+    int updateUserIp(User user);
+
+    int updateUserPersonalInformation(User user);
+
+    int updateUserPrivacy(User user);
+
+    int updateUserToken(User user);
 
 }
