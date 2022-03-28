@@ -1,7 +1,9 @@
 package com.soft.spb.mapper;
 
-import com.soft.spb.pojo.entity.Attentiontopic;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.soft.spb.pojo.entity.Attentiontopic;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,5 +15,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface AttentiontopicMapper extends BaseMapper<Attentiontopic> {
 
+    List<String> getAttentionTopPresenter(String userAccount);
 
 }

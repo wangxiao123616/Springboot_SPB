@@ -47,4 +47,6 @@ public interface CollectbarMapper extends BaseMapper<Collectbar> {
      */
 
     List<String> queryCollectBarList(String userAccount);
+
+    List<String>  getCollectBarPresenter(String userAccount);
 }

@@ -46,6 +46,12 @@ public class CollectbarServiceImpl extends ServiceImpl<CollectbarMapper, Collect
     @Override
     public List<String> queryCollectBarList(Collectbar collectbar) {
         List<String> collectbars = collectbarMapper.queryCollectBarList(collectbar.getUserAccount());
-       return collectbars;
+        return collectbars;
+    }
+
+    @Override
+    public List<String> getCollectBarPresenter(String userAccount) {
+        return collectbarMapper.getCollectBarPresenter(userAccount);
     }
 }
+

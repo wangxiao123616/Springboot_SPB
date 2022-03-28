@@ -1,7 +1,6 @@
 package com.soft.spb.controller;
 
 
-import com.soft.spb.core.annotation.ResponseResult;
 import com.soft.spb.pojo.dto.UserDto;
 import com.soft.spb.pojo.entity.Follow;
 import com.soft.spb.pojo.entity.User;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,7 +22,6 @@ import java.util.List;
  * @author wyw
  * @since 2022-03-19
  */
-@ResponseResult
 @RestController
 @RequestMapping({"follow", "followed"})
 public class FollowController {
@@ -63,13 +60,7 @@ public class FollowController {
 
     @PostMapping("/queryFollowList")
     public List<String> queryFollowList(@RequestBody Follow follow) {
-        List<Follow> followList = followServiceImpl.queryFollowList(follow);
-        List<String> data = new ArrayList<>(followList.size());
-        for (int i = 0; i < followList.size(); i++) {
-            Follow item = followList.get(i);
-            data.add(item.getFollowedAccount());
-        }
-        return data;
+        return followServiceImpl.queryFollowList(follow);
     }
 
     @PostMapping("/queryFollowUserList")
@@ -87,13 +78,7 @@ public class FollowController {
 
     @PostMapping("queryFollowedList")
     public List<String> queryFollowedList(@RequestBody Follow follow) {
-        List<Follow> followedList = followServiceImpl.queryFollowedList(follow);
-        List<String> data = new ArrayList<>(followedList.size());
-        for (int i = 0; i < followedList.size(); i++) {
-            Follow item = followedList.get(i);
-            data.add(item.getFollowAccount());
-        }
-        return data;
+        return followServiceImpl.queryFollowedList(follow);
 
     }
 

@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author wyw
@@ -13,4 +13,13 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface StudentsService extends IService<Students> {
 
+    Students getStudentsInfo(String userAccount);
+
+    /**
+     * 判断用户能否进行注册
+     *
+     * @param userAccount 学号
+     * @return
+     */
+    Boolean canRegister(String userAccount);
 }

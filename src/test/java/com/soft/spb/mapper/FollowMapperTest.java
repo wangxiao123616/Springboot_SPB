@@ -27,40 +27,40 @@ class FollowMapperTest {
     }
 
     @Test
-    void deleteFollow(){
-        followMapper.deleteFollow("567","123");
+    void deleteFollow() {
+        followMapper.deleteFollow("567", "123");
     }
 
     @Test
     void queryFollowAccount() {
 
 //        followMapper.queryFollowAccount().forEach(System.out::println);
-             for(Follow data : followMapper.queryFollowAccount("followedAccount")){
-                 System.out.println(data);
-             }
+        for (Follow data : followMapper.queryFollowAccount("followedAccount")) {
+            System.out.println(data);
+        }
     }
 
     @Test
     void queryFollowList() {
-        for (Follow data:  followMapper.queryFollowList("G18190403")
-             ) {
+        for (String data : followMapper.queryFollowList("G18190403")
+        ) {
             System.out.println(data);
         }
-             
+
     }
 
     @Test
     void queryFollowedCount() {
-        for (Follow data :  followMapper.queryFollowAccount("G18190403")
-             ) {
+        for (Follow data : followMapper.queryFollowAccount("G18190403")
+        ) {
             System.out.println(data);
         }
     }
 
     @Test
     void queryFollowedList() {
-        for (Follow data : followMapper.queryFollowedList("G18190404")
-             ) {
+        for (String data : followMapper.queryFollowedList("G18190404")
+        ) {
             System.out.println(data);
         }
     }

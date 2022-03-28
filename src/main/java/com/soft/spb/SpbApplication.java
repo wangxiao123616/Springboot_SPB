@@ -1,6 +1,6 @@
 package com.soft.spb;
 
-import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -18,8 +18,8 @@ public class SpbApplication {
     }
 
     @Bean
-    public PaginationInterceptor paginationInterceptor() {
-        return new PaginationInterceptor();
+    public PaginationInnerInterceptor  paginationInnerInterceptor() {
+        return new PaginationInnerInterceptor();
     }
 
 }

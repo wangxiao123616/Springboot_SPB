@@ -20,13 +20,13 @@ public interface FollowService extends IService<Follow> {
 
     Integer queryFollowAccount(Follow follow);
 
-      List<Follow> queryFollowList(Follow follow);
+    List<String> queryFollowList(Follow follow);
+
+    List<String> queryFollowedList(Follow follow);
 
     List<Follow> queryFollowUserList(String userAccount);
 
-     Integer queryFollowedCount(Follow follow);
+    Integer queryFollowedCount(Follow follow);
 
-    List<Follow> queryFollowedList (Follow follow);
-
-    List<Follow>queryFollowedUserList(String followedUserAccount);
+    List<Follow> queryFollowedUserList(String followedUserAccount);
 }

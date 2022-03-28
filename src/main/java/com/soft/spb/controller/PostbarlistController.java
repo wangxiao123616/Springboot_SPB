@@ -35,7 +35,7 @@ public class PostbarlistController {
 
 
     @PostMapping("/deleteBar/{pbId}")
-    public com.soft.spb.util.ResponseBody deleteBar(@PathVariable String pbId) {
+    public ResponseBody deleteBar(@PathVariable String pbId) {
         Boolean post = postbarlistServiceImpl.deleteBar(pbId);
         return ResponseBody.builder()
                 .code(200)

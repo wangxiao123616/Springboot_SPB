@@ -1,7 +1,6 @@
 package com.soft.spb.controller;
 
 
-import com.soft.spb.core.annotation.ResponseResult;
 import com.soft.spb.pojo.entity.Course;
 import com.soft.spb.pojo.entity.User;
 import com.soft.spb.service.impl.UserServiceImpl;
@@ -18,7 +17,6 @@ import java.util.List;
  * @author wyw
  * @since 2022-03-19
  */
-@ResponseResult
 @RestController
 @RequestMapping("/user")
 public class UserController {

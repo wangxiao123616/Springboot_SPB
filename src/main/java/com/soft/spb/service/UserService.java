@@ -1,10 +1,11 @@
 package com.soft.spb.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.soft.spb.pojo.entity.Course;
 import com.soft.spb.pojo.entity.User;
-import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -23,4 +24,6 @@ public interface UserService extends IService<User> {
     List<User> querySearchUser(String search);
 
     int updateUserBadgeImage(String userBadge,String userAccount);
+    Map<String, Object> getUserInfo(String userAccount);
+
 }
