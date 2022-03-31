@@ -16,4 +16,11 @@ import java.util.List;
 public interface AttentiontopicService extends IService<Attentiontopic> {
 
     List<String> getAttentionTopPresenter(String userAccount);
+
+    List<Attentiontopic> queryAttentionTopic(String userAccount, String topicDate);
+
+    Integer  addAttentionTopic(Attentiontopic attentiontopic);
+
+    Integer deleteAttentionTopicById(Attentiontopic attentiontopic);
+
 }

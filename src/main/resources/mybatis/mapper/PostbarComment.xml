@@ -4,13 +4,13 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.soft.spb.pojo.entity.PostbarComment">
-        <id column="id" property="id" />
-        <result column="pb_one_id" property="pbOneId" />
-        <result column="comment_art" property="commentArt" />
+        <id column="id" property="id"/>
+        <result column="pb_one_id" property="pbOneId"/>
+        <result column="comment_art" property="commentArt"/>
         <result column="comment_date" property="commentDate" />
-        <result column="comment_user" property="commentUser" />
-        <result column="comment_touser" property="commentTouser" />
-        <result column="comment_id" property="commentId" />
+        <result column="comment_user" property="commentUser"/>
+        <result column="comment_touser" property="commentTouser"/>
+        <result column="comment_id" property="commentId"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -18,4 +18,36 @@
         id, pb_one_id, comment_art, comment_date, comment_user, comment_touser, comment_id
     </sql>
 
+    <delete id="deleteComment">
+        delete
+        from postbar_comment
+        where comment_id = #{commentId}
+          and pb_one_id = #{pbOneId}
+    </delete>
+
+    <select id="queryCommentList" resultType="com.soft.spb.pojo.entity.PostbarComment">
+        select *
+        from postbar_comment
+        where pb_one_id = #{pbOneId}
+    </select>
+    <select id="queryCommentOne" resultType="com.soft.spb.pojo.vo.PostbarCommentVo">
+
+        select c.pb_one_id,
+               c.comment_art,
+               c.comment_date,
+               c.comment_user,
+               u1.user_name,
+               c.comment_touser,
+               u2.user_name as user_toname,
+               c.comment_id
+        from postbar_comment c
+                 LEFT JOIN `user` u1
+                           on c.comment_user = u1.user_account
+                 LEFT JOIN `user` u2
+                           on c.comment_touser = u2.user_account
+        where c.pb_one_id = #{pbOneId}
+          AND c.comment_id = #{commentId}
+
+
+    </select>
 </mapper>

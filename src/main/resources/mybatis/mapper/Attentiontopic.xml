@@ -19,5 +19,37 @@
         SELECT topic_id FROM attentiontopic WHERE user_account = #{userAccount}
     </select>
 
+    <select id="queryAttentionTopic" resultType="com.soft.spb.pojo.vo.AttentiontopicVo">
+        SELECT t.id,
+               a.topic_date,
+               t.topic_name,
+               t.topic_barnum,
+               t.topic_attentionnum,
+               t.topic_slogan,
+               t.topic_image
+        FROM attentiontopic a
+                 left join topic t
+                           on a.topic_id = t.id
+        WHERE a.user_account = #{userAccount} and a.topic_date &lt;= #{topicDate}
+        ORDER BY topic_date DESC
+    </select>
+
+
+    <insert id="addAttentionTopic">
+
+        insert into attentiontopic (user_account, topic_id, topic_name, topic_date)
+        select #{userAccount}, #{topicId}, #{topicName}, #{topicDate}
+        from DUAL
+        where not EXISTS(select id from attentiontopic where user_account = #{userAccount} and topic_id = #{topicId})
+
+    </insert>
+
+    <delete id="deleteAttentionTopicById">
+        delete
+        from attentiontopic
+        where topic_id = #{topicId}
+          and user_account = #{userAccount}
+    </delete>
+
 
 </mapper>

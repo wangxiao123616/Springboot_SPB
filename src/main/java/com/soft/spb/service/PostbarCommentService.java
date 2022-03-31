@@ -1,7 +1,9 @@
 package com.soft.spb.service;
 
-import com.soft.spb.pojo.entity.PostbarComment;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.soft.spb.pojo.entity.PostbarComment;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +14,12 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-03-19
  */
 public interface PostbarCommentService extends IService<PostbarComment> {
+
+    Integer deleteComment(PostbarComment postbarComment);
+
+    List<PostbarComment> queryCommentList(PostbarComment postbarComment);
+
+    List<PostbarComment> queryCommentOne(String pbOneId,Integer commentId);
+
 
 }

@@ -1,10 +1,16 @@
 package com.soft.spb.controller;
 
 
+import com.soft.spb.pojo.dto.PostbarCommentDto;
+import com.soft.spb.pojo.entity.PostbarComment;
+import com.soft.spb.service.impl.PostbarCommentServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p>
@@ -17,5 +23,29 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/postbarComment")
 public class PostbarCommentController {
+
+    @Autowired
+    PostbarCommentServiceImpl postbarCommentServiceImpl;
+
+    @PostMapping("/deleteComment")
+    public Integer deleteComment(@RequestBody PostbarComment postbarComment){
+
+        Integer count = postbarCommentServiceImpl.deleteComment(postbarComment);
+        return count;
+
+    }
+
+    @PostMapping("/queryCommentList")
+    public List<PostbarComment> queryCommentList(@RequestBody PostbarComment postbarComment){
+        List<PostbarComment> postbarComments = postbarCommentServiceImpl.queryCommentList(postbarComment);
+        return postbarComments;
+    }
+
+    @PostMapping("/queryCommentOne")
+    public  List<PostbarComment> queryCommentOne(@RequestBody PostbarCommentDto postbarCommentDto){
+        List<PostbarComment> postbarComments = postbarCommentServiceImpl.queryCommentOne(postbarCommentDto.getPbOneId(),postbarCommentDto.getCommentId());
+        return postbarComments;
+
+    }
 
 }

@@ -6,15 +6,43 @@
     <resultMap id="BaseResultMap" type="com.soft.spb.pojo.entity.Topic">
         <id column="id" property="id" />
         <result column="topic_name" property="topicName" />
-        <result column="topic_barnum" property="topicBarnum" />
-        <result column="topic_attentionnum" property="topicAttentionnum" />
-        <result column="topic_slogan" property="topicSlogan" />
-        <result column="topic_image" property="topicImage" />
+        <result column="topic_barnum" property="topicBarnum"/>
+        <result column="topic_attentionnum" property="topicAttentionnum"/>
+        <result column="topic_slogan" property="topicSlogan"/>
+        <result column="topic_image" property="topicImage"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, topic_name, topic_barnum, topic_attentionnum, topic_slogan, topic_image
     </sql>
+
+    <select id="queryRundomTopicFullList" resultType="com.soft.spb.pojo.entity.Topic">
+        SELECT id, topic_name, topic_barnum, topic_attentionnum, topic_slogan, topic_image
+        FROM topic
+        WHERE topic_barnum &gt;= #{min}
+          AND topic_barnum &lt;= #{max}
+        ORDER BY topic_barnum DESC
+        LIMIT 10
+    </select>
+
+    <select id="querySearchTopicFullList" resultType="com.soft.spb.pojo.entity.Topic" >
+        select  * from topic t
+       where t.topic_name like concat('%',(#{topicName}),'%')
+    </select>
+
+    <select id="querySearchTopicNameList" resultType="com.soft.spb.pojo.entity.Topic">
+        select id,topic_name,topic_barnum,topic_attentionnum,topic_slogan,topic_image  from topic t
+        where t.topic_name like concat('%',(#{topicName}),'%')
+    </select>
+    <select id="queryTopicFull" resultType="com.soft.spb.pojo.entity.Topic">
+        select id, topic_name, topic_barnum, topic_attentionnum, topic_slogan, topic_image from topic
+        where topic_name = #{topicName}
+    </select>
+
+    <select id="queryTopicNameList" resultType="java.lang.String">
+        select topic_name from topic
+        order by id desc
+    </select>
 
 </mapper>

@@ -84,7 +84,7 @@ public class PostbarlistServiceImpl extends ServiceImpl<PostbarlistMapper, Postb
         } else {
             dateStirng = date;
         }
-        System.out.println(dateStirng);
+
         List<Postbarlist> items = postbarlistMapper.queryNoVideoBarListForDate(dateStirng);
         return items;
     }
