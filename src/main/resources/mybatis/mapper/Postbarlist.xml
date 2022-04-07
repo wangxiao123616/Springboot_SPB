@@ -23,17 +23,23 @@
         id, pb_one_id, user_account, pb_date, pb_article, pb_image_url, pb_voice, pb_video, pb_topic, pb_location, pb_thumb_num, pb_comment_num
     </sql>
 
-    <select id="queryAll" resultType="java.lang.String">
+    <select id="queryAll" resultType="com.soft.spb.pojo.entity.Postbarlist">
         select *
         from spb.postbarlist
     </select>
 
     <insert id="addBar" parameterType="com.soft.spb.pojo.entity.Postbarlist">
-        insert into spb.postbarlist(pb_article, pb_comment_num, pb_date, pb_location, pb_one_id, pb_thumb_num, pb_topic,
-                                    pb_video, pb_voice, user_account, pb_image_url)
-        values (#{pbArticle}, #{pbCommentNum}, #{pbDate}, #{pbLocation}, #{pbOneId}, #{pbThumbNum}, #{pbTopic},
-                #{pbVideo}, #{pbVoice}, #{userAccount}, #{pbImageUrl});
+        insert into spb.postbarlist(pb_article, pb_date, pb_location, pb_one_id, pb_topic,
+                                    pb_video, pb_voice, user_account, pb_image_url, pb_thumb_num, pb_comment_num)
+        values (#{pbArticle}, #{pbDate}, #{pbLocation}, #{pbOneId}, #{pbTopic},
+                #{pbVideo}, #{pbVoice}, #{userAccount}, #{pbImageUrl}, 0, 0);
 
+    </insert>
+    <insert id="addBarVideo" parameterType="com.soft.spb.pojo.entity.Postbarlist">
+        insert into spb.postbarlist(pb_article, pb_date, pb_location, pb_one_id, pb_topic,
+                                    pb_video, pb_voice, user_account, pb_image_url, pb_thumb_num, pb_comment_num)
+        VALUES (#{pbArticle}, #{pbDate}, #{pbLocation}, #{pbOneId}, #{pbTopic},
+                #{pbVideo}, #{pbVoice}, #{userAccount}, #{pbImageUrl}, 0, 0);
     </insert>
 
 

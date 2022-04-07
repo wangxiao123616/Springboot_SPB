@@ -6,6 +6,7 @@ import com.soft.spb.pojo.entity.User;
 import com.soft.spb.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -46,6 +47,18 @@ public class UserController {
           return count;
 
       }
+
+      @PostMapping("/updateUserBgImage")
+      public Integer updateUserBgImage(@RequestParam("userBgImage") MultipartFile[] userBgImage,@RequestParam("userAccount") String userAccount){
+          Integer count = userServiceImpl.updateUserBgImage(userBgImage, userAccount);
+          return count;
+      }
+
+      @PostMapping("/updateUserHeadImage")
+      public Integer updateUserHeadImage(@RequestParam("userHeadImage")MultipartFile[] userHeadImage,@RequestParam("userAccount") String userAccount){
+          Integer count = userServiceImpl.updateUserHeadImage(userHeadImage, userAccount);
+          return count;
+    }
 
       @PostMapping("/updateUserIp")
     public int updateUserIp(@RequestBody User user){

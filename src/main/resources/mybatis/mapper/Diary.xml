@@ -18,7 +18,7 @@
     </sql>
 
     <insert id="addDiary" parameterType="com.soft.spb.pojo.entity.Diary">
-        insert into spb.diary ( user_account, dia_date, dia_weather, dia_message, dia_image)
+        insert into spb.diary (user_account, dia_date,dia_weather,dia_message,dia_image)
         VALUES ( #{userAccount}, #{diaDate}, #{diaWeather}, #{diaMessage}, #{diaImage})
     </insert>
 

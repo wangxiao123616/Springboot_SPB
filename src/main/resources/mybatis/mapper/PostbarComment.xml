@@ -7,7 +7,7 @@
         <id column="id" property="id"/>
         <result column="pb_one_id" property="pbOneId"/>
         <result column="comment_art" property="commentArt"/>
-        <result column="comment_date" property="commentDate" />
+        <result column="comment_date" property="commentDate"/>
         <result column="comment_user" property="commentUser"/>
         <result column="comment_touser" property="commentTouser"/>
         <result column="comment_id" property="commentId"/>
@@ -17,6 +17,11 @@
     <sql id="Base_Column_List">
         id, pb_one_id, comment_art, comment_date, comment_user, comment_touser, comment_id
     </sql>
+
+    <insert id="addComment" parameterType="com.soft.spb.pojo.entity.PostbarComment">
+        insert into postbar_comment (pb_one_id, comment_art, comment_date, comment_user, comment_touser, comment_id)
+        VALUES (#{pbOneId},#{commentArt},#{commentDate},#{commentUser},#{commentTouser},#{commentId})
+    </insert>
 
     <delete id="deleteComment">
         delete

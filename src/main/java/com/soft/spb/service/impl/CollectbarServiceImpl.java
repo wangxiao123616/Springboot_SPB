@@ -26,13 +26,13 @@ public class CollectbarServiceImpl extends ServiceImpl<CollectbarMapper, Collect
 
     @Override
 
-    public int addCollectBar(Collectbar collectbar) {
+    public Integer addCollectBar(Collectbar collectbar) {
         int count = collectbarMapper.addCollectBar(collectbar);
         return count;
     }
 
     @Override
-    public int deleteCollectBar(Collectbar collectbar) {
+    public Integer deleteCollectBar(Collectbar collectbar) {
         int count = collectbarMapper.deleteCollectBar(collectbar);
         return count;
     }

@@ -7,8 +7,11 @@ import com.soft.spb.pojo.entity.Postbarlist;
 import com.soft.spb.service.impl.PostbarlistServiceImpl;
 import com.soft.spb.util.ResponseBody;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -27,10 +30,22 @@ public class PostbarlistController {
     PostbarlistServiceImpl postbarlistServiceImpl;
 
     @PostMapping("/addBar")
-    public Integer addBar(@RequestBody Postbarlist postbarlist) {
-        int i = postbarlistServiceImpl.addBar(postbarlist);
+    public Integer addBar(Postbarlist postbarlist, @Nullable @RequestParam("image") MultipartFile[] image,@Nullable @RequestParam("voice")MultipartFile[] voice) {
+        int i = 0;
+        try {
+            i = postbarlistServiceImpl.addBar(postbarlist,image,voice);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return i;
+    }
+
+    @PostMapping("/addBarVideo")
+    public Integer addBarVideo(Postbarlist postbarlist,@Nullable @RequestParam("video")MultipartFile[] video){
+        Integer count = postbarlistServiceImpl.addBarVideo(postbarlist, video);
+        return count;
+
     }
 
 

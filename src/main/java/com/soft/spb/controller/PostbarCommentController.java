@@ -27,6 +27,12 @@ public class PostbarCommentController {
     @Autowired
     PostbarCommentServiceImpl postbarCommentServiceImpl;
 
+    @PostMapping("/addComment")
+    public Integer addComment(@RequestBody PostbarComment postbarComment){
+        Integer count = postbarCommentServiceImpl.addComment(postbarComment);
+        return count;
+    }
+
     @PostMapping("/deleteComment")
     public Integer deleteComment(@RequestBody PostbarComment postbarComment){
 

@@ -14,8 +14,11 @@
         id, user_account, pb_one_id
     </sql>
     <insert id="addLike" parameterType="com.soft.spb.pojo.entity.Likepb">
-        insert into spb.likepb (user_account, pb_one_id)
-        values (#{userAccount}, #{pbOneId});
+        insert into likepb (user_account , pb_one_id)
+        select #{userAccount},#{pbOneId}
+        from dual
+        WHERE NOT EXISTS
+            (SELECT user_account,pb_one_id FROM likepb WHERE user_account = #{userAccount} AND pb_one_id = #{pbOneId})
     </insert>
 
     <delete id="deleteLike" parameterType="com.soft.spb.pojo.entity.Likepb">

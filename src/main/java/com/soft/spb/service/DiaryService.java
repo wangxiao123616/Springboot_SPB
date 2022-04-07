@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface DiaryService extends IService<Diary> {
 
-    int addDiary(Diary diary, MultipartFile[] file);
+    int addDiary(Diary diary, MultipartFile[] sourceFiles);
     int deleteDiary(Diary diary);
 
     List<Diary> queryDiary(Diary diary);

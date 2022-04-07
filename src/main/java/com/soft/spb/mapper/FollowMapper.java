@@ -15,31 +15,74 @@ import java.util.List;
  * @since 2022-03-19
  */
 public interface FollowMapper extends BaseMapper<Follow> {
-    //查询所需数据
+
+    /**
+     * 查询所需数据
+     * @return
+     */
     List<Follow> getFollow();
 
-    //添加关注
+
+    /**
+     * 添加关注
+     * @param follow
+     * @return
+     */
     int addFollow(Follow follow);
 
-    //删除关注,多个字段用@Param
+    /**
+     * 删除关注,多个字段用@Param
+     * @param followAccount
+     * @param followedAccount
+     * @return
+     */
     int deleteFollow(@Param("followAccount") String followAccount, @Param("followedAccount") String followedAccount);
 
-    //获取关注数
+
+    /**
+     * 获取关注数
+     * @param followAccount
+     * @return
+     */
     List<Follow> queryFollowAccount(String followAccount);
 
-    //获取关注用户列表
+
+    /**
+     * 获取关注用户列表
+     * @param followList
+     * @return
+     */
     List<String> queryFollowList(String followList);
 
-    //获取关注用户信息列表
+
+    /**
+     * 获取关注用户信息列表
+     * @param userAccount
+     * @return
+     */
     List<Follow> queryFollowUserList(String userAccount);
 
-    //获取被关注数
+
+    /**
+     * 获取被关注数
+     * @param followedAccount
+     * @return
+     */
     List<Follow> queryFollowedCount(String followedAccount);
 
-    //获取被关注用户列表
+    /**
+     * 获取被关注用户列表
+     * @param followedAccount
+     * @return
+     */
     List<String> queryFollowedList(String followedAccount);
 
-    //获取用户被关注信息列表
+
+    /**
+     * 获取用户被关注信息列表
+     * @param followedUserAccount
+     * @return
+     */
     List<Follow> queryFollowedUserList(String followedUserAccount);
 
 }

@@ -4,10 +4,12 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.soft.spb.mapper.PostbarlistMapper;
 import com.soft.spb.pojo.entity.Postbarlist;
 import com.soft.spb.service.PostbarlistService;
+import com.soft.spb.util.AliOssUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -21,30 +23,67 @@ import java.util.List;
  * @author wyw
  * @since 2022-03-19
  */
+
 @Service
-@RequiredArgsConstructor(onConstructor = @_(@Autowired))
+@RequiredArgsConstructor
 public class PostbarlistServiceImpl extends ServiceImpl<PostbarlistMapper, Postbarlist> implements PostbarlistService {
     private final PostbarlistMapper postbarlistMapper;
 
 
     @Override
-    public int addBar(Postbarlist postbarlist) {
+    public Integer addBar(Postbarlist bar, MultipartFile[] image, MultipartFile[] voice) throws IOException {
 
-        postbarlist.setPbCommentNum(0);
-        postbarlist.setPbDate(LocalDateTime.now());
-        if (postbarlist.getPbVoice() != null && postbarlist.getPbImageUrl() != null && postbarlist.getPbVideo() == null) {
-            return postbarlistMapper.addBar(postbarlist);
-        } else {
-            return 0;
+        LocalDateTime now = LocalDateTime.now();
+        bar.setPbDate(now);
+
+        if (image != null && image.length > 0) {
+
+            List<String> postBarImageUrl = AliOssUtil.upload(image);
+            if (postBarImageUrl == null) {
+
+                return null;
+            }
+
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < postBarImageUrl.size(); i++) {
+                stringBuilder.append(postBarImageUrl.get(i)).append("|");
+            }
+            bar.setPbImageUrl(String.valueOf(stringBuilder));
         }
 
-
+        if (voice != null) {
+            List<String> postBarVoiceUrl = AliOssUtil.upload(voice);
+            if (postBarVoiceUrl == null) {
+                return null;
+            }
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < postBarVoiceUrl.size(); i++) {
+                stringBuilder.append(postBarVoiceUrl.get(i));
+            }
+            bar.setPbVoice(String.valueOf(postBarVoiceUrl));
+        }
+        return postbarlistMapper.addBar(bar);
     }
 
+
     @Override
-    public String addBarVideo(Postbarlist postbarlist) {
+    public Integer addBarVideo(Postbarlist postbarlist,MultipartFile[] video) {
+
+        LocalDateTime now = LocalDateTime.now();
+        postbarlist.setPbDate(now);
         // 对这三个进行判断:有Video,无Img和Voice
-        return null;
+        if(video != null){
+            List<String> postVideo = AliOssUtil.upload(video);
+            if (postVideo == null){
+                return null;
+            }
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < postVideo.size(); i++) {
+                stringBuilder.append(postVideo.get(i));
+            }
+            postbarlist.setPbVideo(String.valueOf(postVideo));
+        }
+        return postbarlistMapper.addBarVideo(postbarlist);
     }
 
     @Override

@@ -9,10 +9,12 @@ import com.soft.spb.pojo.entity.Students;
 import com.soft.spb.pojo.entity.User;
 import com.soft.spb.pojo.vo.UserVo;
 import com.soft.spb.service.*;
+import com.soft.spb.util.AliOssUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.List;
@@ -59,6 +61,28 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public int updateUserBadgeImage(String userBadge, String userAccount) {
         int count = userMapper.updateUserBadgeImage(userBadge, userAccount);
+        return count;
+    }
+
+    @Override
+    public Integer updateUserBgImage(MultipartFile[] userBgImage, String userAccount) {
+        List<String> stringList = AliOssUtil.upload(userBgImage);
+        String bgImage = stringList.get(0);
+        String substring = bgImage.substring(51);
+        User user = new User();
+        user.setUserBgImage(substring);
+        int count = userMapper.updateUserBgImage(substring, userAccount);
+        return count;
+    }
+
+    @Override
+    public Integer updateUserHeadImage(MultipartFile[] userHeadImage, String userAccount) {
+        List<String> headList = AliOssUtil.upload(userHeadImage);
+        String headString = headList.get(0);
+        String substring = headString.substring(51);
+        User user = new User();
+        user.setUserHeadImage(substring);
+        int count = userMapper.updateUserHeadImage(substring, userAccount);
         return count;
     }
 

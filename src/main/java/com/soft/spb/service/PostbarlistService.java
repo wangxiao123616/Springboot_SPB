@@ -2,7 +2,9 @@ package com.soft.spb.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.soft.spb.pojo.entity.Postbarlist;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -15,9 +17,11 @@ import java.util.List;
  */
 public interface PostbarlistService extends IService<Postbarlist> {
  //添加帖子,无Video,有Img或Voice
- int addBar(Postbarlist postbarlist);
+ Integer addBar(Postbarlist postbarlist, MultipartFile[] image, MultipartFile[] voice) throws IOException;
 
- String addBarVideo(Postbarlist postbarlist);
+
+
+    Integer addBarVideo(Postbarlist postbarlist,MultipartFile[] video);
 
  //删除帖子,有Video,无Img和Voice
  Boolean deleteBar(String pbId);

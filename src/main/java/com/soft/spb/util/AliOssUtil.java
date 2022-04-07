@@ -26,7 +26,7 @@ public class AliOssUtil {
      * @param file
      * @return
      */
-    public static String upload(File file) {
+    public static String upload(File  file) {
         String endpoint = "oss-cn-beijing.aliyuncs.com";
         String accessKeyId = "LTAI5t5ZbD71qx5ENKSkFHjK";
         String accessKeySecret = "1KyrA2bNbW0bhuCV0r7pBcy7r3iSP6";

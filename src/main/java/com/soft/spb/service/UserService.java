@@ -3,6 +3,7 @@ package com.soft.spb.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.soft.spb.pojo.entity.Course;
 import com.soft.spb.pojo.entity.User;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,12 @@ public interface UserService extends IService<User> {
     List<User> querySearchUser(String search);
 
     int updateUserBadgeImage(String userBadge,String userAccount);
+
+    Integer updateUserBgImage(MultipartFile[] userBgImage, String userAccount);
+
+    Integer updateUserHeadImage(MultipartFile[] userHeadImage,String userAccount);
+
+
     Map<String, Object> getUserInfo(String userAccount);
 
     int updateUserIp(User user);

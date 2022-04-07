@@ -15,6 +15,12 @@ import java.util.List;
  * @since 2022-03-19
  */
 public interface PostbarCommentMapper extends BaseMapper<PostbarComment> {
+    /**
+     * 2.12.1. 添加评论
+     * @param postbarComment
+     * @return
+     */
+    int addComment(PostbarComment postbarComment);
 
     /**
      * 2.12.2. 删除评论

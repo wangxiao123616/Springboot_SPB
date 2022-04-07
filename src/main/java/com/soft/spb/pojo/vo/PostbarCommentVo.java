@@ -18,8 +18,11 @@ public class PostbarCommentVo {
 
     private Integer commentId;
 
+
     private String userAccount;
 
     private String userName;
+
+
 
 }

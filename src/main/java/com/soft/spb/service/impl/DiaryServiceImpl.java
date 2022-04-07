@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -28,6 +29,8 @@ public class DiaryServiceImpl extends ServiceImpl<DiaryMapper, Diary> implements
 
     @Override
     public int addDiary(Diary diary, MultipartFile[] sourceFiles) {
+        LocalDateTime now = LocalDateTime.now();
+        diary.setDiaDate(now);
         List<String> urlList = AliOssUtil.upload(sourceFiles);
         String imgUrl = urlList.get(0);
               imgUrl.substring(51);

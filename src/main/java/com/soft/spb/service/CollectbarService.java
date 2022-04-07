@@ -5,8 +5,6 @@ import com.soft.spb.pojo.entity.Collectbar;
 
 import java.util.List;
 
-import java.util.List;
-
 /**
  * <p>
  * 服务类
@@ -17,10 +15,10 @@ import java.util.List;
  */
 public interface CollectbarService extends IService<Collectbar> {
     //2.6.1. 添加收藏帖子
-    int addCollectBar(Collectbar collectbar);
+    Integer addCollectBar(Collectbar collectbar);
 
     //2.6.2. 删除收藏帖子
-    int deleteCollectBar(Collectbar collectbar);
+    Integer deleteCollectBar(Collectbar collectbar);
 
     //2.6.3. 获取用户收藏帖子(Full)
     List<Collectbar> queryCollectBarFullList(String userAccount);

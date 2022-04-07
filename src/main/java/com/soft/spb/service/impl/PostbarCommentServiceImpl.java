@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -23,6 +24,15 @@ import java.util.List;
 public class PostbarCommentServiceImpl extends ServiceImpl<PostbarCommentMapper, PostbarComment> implements PostbarCommentService {
 
     private final PostbarCommentMapper postbarCommentMapper;
+
+    @Override
+    public Integer addComment(PostbarComment postbarComment) {
+        LocalDateTime now  = LocalDateTime.now();
+        postbarComment.setCommentDate(now);
+        int count= postbarCommentMapper.addComment(postbarComment);
+        return count;
+    }
+
     @Override
     public Integer deleteComment(PostbarComment postbarComment) {
       int count = postbarCommentMapper.deleteComment(postbarComment.getCommentId(),postbarComment.getPbOneId());

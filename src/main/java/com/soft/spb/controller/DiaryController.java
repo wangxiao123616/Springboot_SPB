@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -26,27 +25,10 @@ public class DiaryController {
     DiaryServiceImpl diaryServiceImpl;
 
     @PostMapping("/addDiary")
-    public Integer addDiary(@RequestParam("file") MultipartFile[] sourceFiles,
-                            @RequestParam("userAccount") String userAccount,
-                            @RequestParam("diaWeather") Integer diaWeather,
-                            @RequestParam("diaMessage") String diaMessage) {
+    public Integer addDiary(Diary diary,@RequestParam("sourceFiles") MultipartFile[] sourceFiles) {
 
-        //, @RequestParam("userAccount") String userAccount,
-        //                            @RequestParam("diaDate") LocalDateTime diaDate, @RequestParam("diaWeather") Integer diaWeather,
-        //                            @RequestParam("diaMessage") String diaMessage
-        // @RequestParam("diaImage")String diaImage
-
-        LocalDateTime now = LocalDateTime.now();
-
-
-
-        System.out.println(sourceFiles);
-        System.out.println(userAccount);
-       System.out.println(now);
-       System.out.println(diaWeather);
-       System.out.println(diaMessage);
-//        int count = diaryServiceImpl.addDiary( sourceFiles);
-         return null;
+        int count = diaryServiceImpl.addDiary(diary, sourceFiles);
+        return count;
 
     }
 

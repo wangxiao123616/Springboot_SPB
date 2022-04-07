@@ -14,13 +14,29 @@ import java.util.List;
  * @since 2022-03-19
  */
 public interface LikepbMapper extends BaseMapper<Likepb> {
-    // 2.5.1添加点赞(需补充，未完成)
+
+
+    /**
+     * 2.5.1添加点赞
+     * @param likepb
+     * @return
+     */
     int addLike(Likepb likepb);
 
-    // 2.5.2. 删除点赞
+
+    /**
+     *  2.5.2. 删除点赞
+     * @param likepb
+     * @return
+     */
     int deleteLike(Likepb likepb);
 
-    // 2.5.3. 获取点赞列表
+
+    /**
+     * 2.5.3. 获取点赞列表
+     * @param likepb
+     * @return
+     */
     List<Likepb> queryLike(Likepb likepb);
 
 
