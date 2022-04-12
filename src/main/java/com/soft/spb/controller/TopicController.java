@@ -46,8 +46,8 @@ public class TopicController {
 
     @PostMapping("/querySearchTopicNameList")
     public List<Topic> querySearchTopicNameList(@RequestBody Topic topic) {
-        List<Topic> nameList = topicService.querySearchTopicNameList(topic.getTopicName());
-        return nameList;
+        List<Topic> list = topicService.querySearchTopicNameList(topic.getTopicName());
+        return list;
     }
 
     @PostMapping("/queryTopicFull")
