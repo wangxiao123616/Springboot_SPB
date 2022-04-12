@@ -40,8 +40,8 @@ public class TopicController {
 
     @PostMapping("/getTopicFull")
     public Topic getTopicFull(@RequestBody TopicInfoDto topicinfo){
-        Topic topic = topicService.getTopicFull(topicinfo);
-        return topic;
+        Topic t = topicService.getTopicFull(topicinfo);
+        return t;
     }
 
     @PostMapping("/querySearchTopicNameList")
