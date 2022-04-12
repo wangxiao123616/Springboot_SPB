@@ -1,5 +1,6 @@
 package com.soft.spb.service.impl;
 
+import com.soft.spb.pojo.dto.TopicInfoDto;
 import com.soft.spb.pojo.entity.Topic;
 import com.soft.spb.mapper.TopicMapper;
 import com.soft.spb.service.TopicService;
@@ -12,7 +13,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author wyw
@@ -23,24 +24,36 @@ import java.util.List;
 public class TopicServiceImpl extends ServiceImpl<TopicMapper, Topic> implements TopicService {
 
     private final TopicMapper topicMapper;
+
     @Override
     public List<Topic> queryRundomTopicFullList() {
         int min = (int) (Math.random() * 200) + 100;
         int max = (int) (Math.random() * 500) + 500;
-        List<Topic> topicList = topicMapper.queryRundomTopicFullList(min,max);
+        List<Topic> topicList = topicMapper.queryRundomTopicFullList(min, max);
         return topicList;
     }
 
     @Override
     public List<Topic> querySearchTopicFullList(String topicName) {
+        if (topicName == null) {
+            topicName = "#";
+        }
         List<Topic> topicList = topicMapper.querySearchTopicFullList(topicName);
         return topicList;
     }
 
     @Override
+    public Topic getTopicFull(TopicInfoDto topic) {
+        if (topic.getTopicId() == -1){
+            return topicMapper.getTopicFullByName(topic.getTopicName());
+        }
+        return topicMapper.getTopicFullById(topic.getTopicId());
+    }
+
+    @Override
     public List<Topic> querySearchTopicNameList(String topicName) {
         List<Topic> topicNameList = topicMapper.querySearchTopicNameList(topicName);
-        return topicNameList ;
+        return topicNameList;
     }
 
     @Override
@@ -55,4 +68,8 @@ public class TopicServiceImpl extends ServiceImpl<TopicMapper, Topic> implements
         return topicNameList;
     }
 
+    @Override
+    public List<Topic> queryHotTopicList() {
+        return topicMapper.queryHotTopicList();
+    }
 }

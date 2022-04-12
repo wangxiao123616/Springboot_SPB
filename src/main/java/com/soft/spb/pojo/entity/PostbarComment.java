@@ -24,7 +24,7 @@ public class PostbarComment implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     private String pbOneId;
 
@@ -34,7 +34,11 @@ public class PostbarComment implements Serializable {
 
     private String commentUser;
 
+    private String userName;
+
     private String commentTouser;
+
+    private String userToname;
 
     private Integer commentId;
 

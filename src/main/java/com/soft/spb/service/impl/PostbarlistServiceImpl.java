@@ -3,6 +3,7 @@ package com.soft.spb.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.soft.spb.mapper.PostbarlistMapper;
 import com.soft.spb.pojo.entity.Postbarlist;
+import com.soft.spb.pojo.vo.PostbarlistVo;
 import com.soft.spb.service.PostbarlistService;
 import com.soft.spb.util.AliOssUtil;
 import lombok.RequiredArgsConstructor;
@@ -113,9 +114,8 @@ public class PostbarlistServiceImpl extends ServiceImpl<PostbarlistMapper, Postb
     }
 
     @Override
-    public List<Postbarlist> queryNoVideoBarListForDate(String date) {
+    public List<PostbarlistVo> queryNoVideoBarListForDate(String date) {
         String dateStirng = null;
-
         if (date.length() < 2) {
             LocalDateTime now = LocalDateTime.now();
             DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -124,14 +124,13 @@ public class PostbarlistServiceImpl extends ServiceImpl<PostbarlistMapper, Postb
             dateStirng = date;
         }
 
-        List<Postbarlist> items = postbarlistMapper.queryNoVideoBarListForDate(dateStirng);
+        List<PostbarlistVo> items = postbarlistMapper.queryNoVideoBarListForDate(dateStirng);
         return items;
     }
 
     @Override
-    public List<Postbarlist> queryNoVideoFollowBarListForDate(String pbDate, String userAccount) {
+    public List<PostbarlistVo> queryNoVideoFollowBarListForDate(String pbDate, String userAccount) {
         String dS = null;
-        System.out.println(pbDate);
         if (pbDate.length() < 2) {
             LocalDateTime now = LocalDateTime.now();
             DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -139,8 +138,7 @@ public class PostbarlistServiceImpl extends ServiceImpl<PostbarlistMapper, Postb
         } else {
             dS = pbDate;
         }
-        System.out.println(dS);
-        List<Postbarlist> items = postbarlistMapper.queryNoVideoFollowBarListForDate(dS, userAccount);
+        List<PostbarlistVo> items = postbarlistMapper.queryNoVideoFollowBarListForDate(dS, userAccount);
         return items;
     }
 
@@ -154,9 +152,16 @@ public class PostbarlistServiceImpl extends ServiceImpl<PostbarlistMapper, Postb
     }
 
     @Override
-    public List<Postbarlist> queryNoVideoTopicBarListForDate(String pbDate, String pbTopic) {
-
-        List<Postbarlist> topiclists = postbarlistMapper.queryNoVideoTopicBarListForDate(pbDate, pbTopic);
+    public List<PostbarlistVo> queryNoVideoTopicBarListForDate(String pbDate, String pbTopic) {
+        String dS = null;
+        if (pbDate.length() < 2) {
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            dS = now.format(dateFormat);
+        } else {
+            dS = pbDate;
+        }
+        List<PostbarlistVo> topiclists = postbarlistMapper.queryNoVideoTopicBarListForDate(dS, pbTopic);
         return topiclists;
 
     }

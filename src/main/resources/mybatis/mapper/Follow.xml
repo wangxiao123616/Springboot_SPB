@@ -11,15 +11,18 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, follow_account, followed_account
+        id
+        , follow_account, followed_account
     </sql>
 
     <select id="getFollow" resultType="com.soft.spb.pojo.entity.Follow">
-        select * from spb.follow
-     </select>
+        select *
+        from spb.follow
+    </select>
 
     <insert id="addFollow" parameterType="com.soft.spb.pojo.entity.Follow">
-        insert  into spb.follow(id,follow_account,followed_account) values (#{id},#{followAccount},#{followedAccount})
+        insert into spb.follow(id, follow_account, followed_account)
+        values (#{id}, #{followAccount}, #{followedAccount})
     </insert>
 
     <delete id="deleteFollow">
@@ -35,7 +38,7 @@
         where follow_account = #{followAccount}
     </select>
 
-    <select id="queryFollowUserList"  resultType="com.soft.spb.pojo.vo.UserVo" >
+    <select id="queryFollowUserList" resultType="com.soft.spb.pojo.vo.UserVo">
         SELECT follow.id, user.user_account, user.user_name, user.user_badge, students.stu_sex
         FROM (spb.follow left join spb.user on follow.followed_account = user.user_account)
                  left join spb.students
@@ -62,12 +65,24 @@
         where followed_account = #{followedAccount}
     </select>
 
-    <select id="queryFollowedUserList" resultType="com.soft.spb.pojo.vo.UserVo">
+    <select id="queryFollowedUserList" resultType="com.soft.spb.pojo.entity.Follow">
         SELECT follow.id, user.user_account, user.user_name, user.user_badge, students.stu_sex
         FROM (spb.follow left join spb.user on follow.follow_account = user.user_account)
                  left join spb.students
                            on follow.follow_account = students.stu_num
         where follow.followed_account = #{followedUserAccount}
         ORDER BY follow.id DESC
+    </select>
+    <select id="queryRundomUserList" resultType="com.soft.spb.pojo.vo.RandomUserVo">
+        SELECT u.id,
+               u.user_account,
+               u.user_name,
+               COUNT(f.follow_account)  followNum
+        from user u
+                 left join follow f
+                           on u.user_account = f.followed_account
+        where u.id <![CDATA[ > ]]> #{id}
+        group by u.user_account
+        order by u.id ASC limit 6
     </select>
 </mapper>

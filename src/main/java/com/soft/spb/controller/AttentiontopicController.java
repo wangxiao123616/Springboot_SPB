@@ -3,6 +3,8 @@ package com.soft.spb.controller;
 
 import com.soft.spb.pojo.dto.AttentiontopicDto;
 import com.soft.spb.pojo.entity.Attentiontopic;
+import com.soft.spb.pojo.vo.AttentiontopicVo;
+import com.soft.spb.service.AttentiontopicService;
 import com.soft.spb.service.impl.AttentiontopicServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +17,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author wyw
@@ -26,31 +28,27 @@ import java.util.List;
 public class AttentiontopicController {
 
     @Autowired
-    AttentiontopicServiceImpl attentiontopicServiceImpl;
+    AttentiontopicService attentiontopicService;
 
     @PostMapping("/addAttentionTopic")
-    public Integer addAttentionTopic(@RequestBody Attentiontopic attentiontopic){
+    public Integer addAttentionTopic(@RequestBody Attentiontopic attentiontopic) {
 
-        LocalDateTime localDateTime =  LocalDateTime.now();
+        LocalDateTime localDateTime = LocalDateTime.now();
         attentiontopic.setTopicDate(localDateTime);
 
-        Integer count = attentiontopicServiceImpl.addAttentionTopic(attentiontopic);
+        Integer count = attentiontopicService.addAttentionTopic(attentiontopic);
         return count;
     }
 
     @PostMapping("/deleteAttentionTopicById")
-    public Integer deleteAttentionTopicById(@RequestBody Attentiontopic attentiontopic){
-        Integer count = attentiontopicServiceImpl.deleteAttentionTopicById(attentiontopic);
-        return  count;
+    public Integer deleteAttentionTopicById(@RequestBody Attentiontopic attentiontopic) {
+        Integer count = attentiontopicService.deleteAttentionTopicById(attentiontopic);
+        return count;
     }
 
     @PostMapping("/queryAttentionTopic")
-    public List<Attentiontopic> queryAttentionTopic(@RequestBody AttentiontopicDto attentiontopicDto){
-
-        List<Attentiontopic> list = attentiontopicServiceImpl.queryAttentionTopic(attentiontopicDto.getUserAccount(),attentiontopicDto.getTopicDate());
-     return list;
+    public List<AttentiontopicVo> queryAttentionTopic(@RequestBody AttentiontopicDto attentiontopicDto) {
+        List<AttentiontopicVo> list = attentiontopicService.queryAttentionTopic(attentiontopicDto);
+        return list;
     }
-
-
-
 }

@@ -12,17 +12,17 @@ class LikepbMapperTest {
    private  LikepbMapper likepbMapper;
     @Test
     void addLike() {
-        Likepb likepb = new Likepb();
-        likepb.setPbOneId("c2022325");
-        likepb.setUserAccount("c2311");
-        System.out.println(likepbMapper.addLike(likepb));
+//        Likepb likepb = new Likepb();
+//        likepb.setPbOneId("c2022325");
+//        likepb.setUserAccount("c2311");
+//        System.out.println(likepbMapper.addLike(likepb));
 
     }
 
     @Test
     void queryLike() {
-        Likepb likepb = new Likepb();
-        likepb.setUserAccount("c2311");
-        System.out.println(likepbMapper.queryLike(likepb));
+//        Likepb likepb = new Likepb();
+//        likepb.setUserAccount("c2311");
+//        System.out.println(likepbMapper.queryLike(likepb));
     }
 }

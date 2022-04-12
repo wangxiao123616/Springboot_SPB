@@ -15,12 +15,13 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, pb_one_id, comment_art, comment_date, comment_user, comment_touser, comment_id
+        id
+        , pb_one_id, comment_art, comment_date, comment_user, comment_touser, comment_id
     </sql>
 
     <insert id="addComment" parameterType="com.soft.spb.pojo.entity.PostbarComment">
         insert into postbar_comment (pb_one_id, comment_art, comment_date, comment_user, comment_touser, comment_id)
-        VALUES (#{pbOneId},#{commentArt},#{commentDate},#{commentUser},#{commentTouser},#{commentId})
+        VALUES (#{pbOneId}, #{commentArt}, #{commentDate}, #{commentUser}, #{commentTouser}, #{commentId})
     </insert>
 
     <delete id="deleteComment">
@@ -31,9 +32,20 @@
     </delete>
 
     <select id="queryCommentList" resultType="com.soft.spb.pojo.entity.PostbarComment">
-        select *
-        from postbar_comment
-        where pb_one_id = #{pbOneId}
+        SELECT t.pb_one_id,
+               t.comment_art,
+               t.comment_date,
+               t.comment_user,
+               t1.user_name,
+               t.comment_touser,
+               t2.user_name as user_toname,
+               t.comment_id
+        FROM postbar_comment t
+                 left join user t1
+                           on t.comment_user = t1.user_account
+                 left join user t2 on t.comment_touser = t2.user_account
+        WHERE t.pb_one_id = #{pbOneId}
+        ORDER BY t.comment_date ASC
     </select>
     <select id="queryCommentOne" resultType="com.soft.spb.pojo.vo.PostbarCommentVo">
 

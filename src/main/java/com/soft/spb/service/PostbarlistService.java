@@ -2,6 +2,7 @@ package com.soft.spb.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.soft.spb.pojo.entity.Postbarlist;
+import com.soft.spb.pojo.vo.PostbarlistVo;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -30,16 +31,16 @@ public interface PostbarlistService extends IService<Postbarlist> {
  List<Postbarlist> queryBarDetatilForPbid(Postbarlist postbarlist);
 
  //根据时间获取帖子列表(无Video)
- List<Postbarlist> queryNoVideoBarListForDate(String date);
+ List<PostbarlistVo> queryNoVideoBarListForDate(String date);
 
  //根据时间获取用户关注帖子列表(无Video)
- List<Postbarlist> queryNoVideoFollowBarListForDate(String pbDate,String userAccount);
+ List<PostbarlistVo> queryNoVideoFollowBarListForDate(String pbDate,String userAccount);
 
  //根据时间获取用户搜索帖子列表(无Video)
  List<Postbarlist> queryNoVideoSearchBarListForDate(String searChArt, String pbArticle);
 
  //根据时间获取话题帖子列表(无Video)
- List<Postbarlist> queryNoVideoTopicBarListForDate(String pbDate, String pbTopic);
+ List<PostbarlistVo> queryNoVideoTopicBarListForDate(String pbDate, String pbTopic);
 
  //根据点赞获取话题帖子列表(无Video)
  List<Postbarlist> queryNoVideoTopicBarListForThumbNum(Integer pbThumbNum, String pbTopic);

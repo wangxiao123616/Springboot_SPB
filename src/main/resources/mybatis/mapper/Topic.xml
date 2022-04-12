@@ -45,4 +45,16 @@
         order by id desc
     </select>
 
+    <select id="queryHotTopicList" resultType="com.soft.spb.pojo.entity.Topic">
+        select id, topic_name, topic_attentionnum,topic_slogan,topic_barnum,topic_image from topic  order by topic_barnum DESC limit 15
+    </select>
+    <select id="getTopicFullById" resultType="com.soft.spb.pojo.entity.Topic">
+        select  * from topic t
+        where t.id  = #{id}
+    </select>
+    <select id="getTopicFullByName" resultType="com.soft.spb.pojo.entity.Topic">
+        select  * from topic t
+        where t.topic_name  = #{name}
+    </select>
+
 </mapper>

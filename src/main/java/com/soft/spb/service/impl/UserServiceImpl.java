@@ -3,10 +3,7 @@ package com.soft.spb.service.impl;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.soft.spb.mapper.UserMapper;
-import com.soft.spb.pojo.entity.Course;
-import com.soft.spb.pojo.entity.Follow;
-import com.soft.spb.pojo.entity.Students;
-import com.soft.spb.pojo.entity.User;
+import com.soft.spb.pojo.entity.*;
 import com.soft.spb.pojo.vo.UserVo;
 import com.soft.spb.service.*;
 import com.soft.spb.util.AliOssUtil;
@@ -39,6 +36,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private final FollowService followService;
     private final AttentiontopicService attentiontopicService;
     private final CollectbarService collectbarService;
+
+    private final LikepbService likepbService;
 
     @Override
     public int deleteUserIp(String userAccount) {
@@ -103,13 +102,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         map.put("followPresenter", followService.queryFollowList(Follow.builder().followAccount(userAccount).build()));
 
         // 3. 添加被关注列表信息
-        map.put("followedPresenter", followService.queryFollowedList(Follow.builder().followAccount(userAccount).build()));
+        map.put("followedPresenter", followService.queryFollowedList(Follow.builder().followedAccount(userAccount).build()));
 
         // 3. 添加用户所关注的话题列表
         map.put("attentionTopicPresenter", attentiontopicService.getAttentionTopPresenter(userAccount));
 
         // 4. 添加用户收藏的帖子信息
         map.put("collectBar", collectbarService.getCollectBarPresenter(userAccount));
+
+        // 5. 添加用户所点赞的帖子
+        Likepb likepb = new Likepb();
+        likepb.setUserAccount(userAccount);
+        map.put("likeBar", likepbService.queryLike(likepb));
         return map;
     }
 

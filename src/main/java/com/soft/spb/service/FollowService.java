@@ -2,6 +2,7 @@ package com.soft.spb.service;
 
 import com.soft.spb.pojo.entity.Follow;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.soft.spb.pojo.vo.RandomUserVo;
 
 import java.util.List;
 
@@ -29,4 +30,6 @@ public interface FollowService extends IService<Follow> {
     Integer queryFollowedCount(Follow follow);
 
     List<Follow> queryFollowedUserList(String followedUserAccount);
+
+    List<RandomUserVo> queryRundomUserList(int num);
 }

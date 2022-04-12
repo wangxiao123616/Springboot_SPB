@@ -2,12 +2,16 @@ package com.soft.spb.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.soft.spb.mapper.AttentiontopicMapper;
+import com.soft.spb.pojo.dto.AttentiontopicDto;
 import com.soft.spb.pojo.entity.Attentiontopic;
+import com.soft.spb.pojo.vo.AttentiontopicVo;
 import com.soft.spb.service.AttentiontopicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -30,9 +34,13 @@ public class AttentiontopicServiceImpl extends ServiceImpl<AttentiontopicMapper,
     }
 
     @Override
-    public List<Attentiontopic> queryAttentionTopic(String userAccount, String topicDate) {
-
-        List<Attentiontopic> list = attentiontopicMapper.queryAttentionTopic(userAccount,topicDate);
+    public List<AttentiontopicVo> queryAttentionTopic(AttentiontopicDto attentiontopicDto) {
+        if (attentiontopicDto.getTopicDate().length() <= 2){
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            attentiontopicDto.setTopicDate(now.format(dateFormat));
+        }
+        List<AttentiontopicVo> list = attentiontopicMapper.queryAttentionTopic(attentiontopicDto);
         return list;
     }
 

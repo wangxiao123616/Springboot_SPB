@@ -2,6 +2,7 @@ package com.soft.spb.service.impl;
 
 import com.soft.spb.pojo.entity.Follow;
 import com.soft.spb.mapper.FollowMapper;
+import com.soft.spb.pojo.vo.RandomUserVo;
 import com.soft.spb.service.FollowService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -97,5 +98,10 @@ public class FollowServiceImpl extends ServiceImpl<FollowMapper, Follow> impleme
     public List<Follow> queryFollowedUserList(String followedUserAccount) {
         List<Follow> followeduserList = followMapper.queryFollowedUserList(followedUserAccount);
         return followeduserList;
+    }
+
+    @Override
+    public List<RandomUserVo> queryRundomUserList(int num) {
+        return followMapper.queryRundomUserList(num);
     }
 }

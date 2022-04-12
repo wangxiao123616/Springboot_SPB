@@ -14,10 +14,10 @@ class LikepbServiceTest {
 
     @Test
     void addLike() {
-        Likepb likepb = new Likepb();
-        likepb.setUserAccount("wangyawei");
-        likepb.setPbOneId("jy122");
-        System.out.println(likepbServiceImpl.addLike(likepb));
+//        Likepb likepb = new Likepb();
+//        likepb.setUserAccount("wangyawei");
+//        likepb.setPbOneId("jy122");
+//        System.out.println(likepbServiceImpl.addLike(likepb));
 
 
 

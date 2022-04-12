@@ -1,7 +1,9 @@
 package com.soft.spb.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.soft.spb.pojo.dto.AttentiontopicDto;
 import com.soft.spb.pojo.entity.Attentiontopic;
+import com.soft.spb.pojo.vo.AttentiontopicVo;
 
 import java.util.List;
 
@@ -17,7 +19,7 @@ public interface AttentiontopicService extends IService<Attentiontopic> {
 
     List<String> getAttentionTopPresenter(String userAccount);
 
-    List<Attentiontopic> queryAttentionTopic(String userAccount, String topicDate);
+    List<AttentiontopicVo> queryAttentionTopic(AttentiontopicDto attentiontopicDto);
 
     Integer  addAttentionTopic(Attentiontopic attentiontopic);
 

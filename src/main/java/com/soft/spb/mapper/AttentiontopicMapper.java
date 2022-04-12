@@ -1,7 +1,10 @@
 package com.soft.spb.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.soft.spb.pojo.dto.AttentiontopicDto;
 import com.soft.spb.pojo.entity.Attentiontopic;
+import com.soft.spb.pojo.entity.Topic;
+import com.soft.spb.pojo.vo.AttentiontopicVo;
 
 import java.util.List;
 
@@ -20,11 +23,9 @@ public interface AttentiontopicMapper extends BaseMapper<Attentiontopic> {
 
     /**
      * 2.13.3. 获取用户关注话题
-     * @param userAccount
-     * @param topicDate
      * @return
      */
-    List<Attentiontopic> queryAttentionTopic(String userAccount,String topicDate);
+    List<AttentiontopicVo> queryAttentionTopic(AttentiontopicDto attentiontopicDto);
 
     /**
      * 2.13.1. 添加关注话题

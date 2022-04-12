@@ -2,6 +2,7 @@ package com.soft.spb.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.soft.spb.pojo.entity.Follow;
+import com.soft.spb.pojo.vo.RandomUserVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -85,4 +86,5 @@ public interface FollowMapper extends BaseMapper<Follow> {
      */
     List<Follow> queryFollowedUserList(String followedUserAccount);
 
+    List<RandomUserVo> queryRundomUserList(int num);
 }

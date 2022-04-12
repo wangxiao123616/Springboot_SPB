@@ -2,6 +2,7 @@ package com.soft.spb.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.soft.spb.pojo.entity.Postbarlist;
+import com.soft.spb.pojo.vo.PostbarlistVo;
 
 import java.util.List;
 
@@ -52,7 +53,7 @@ public interface PostbarlistMapper extends BaseMapper<Postbarlist> {
      * @param date
      * @return
      */
-    List<Postbarlist> queryNoVideoBarListForDate(String date);
+    List<PostbarlistVo> queryNoVideoBarListForDate(String date);
 
     /**
      * 2.4.6. 根据时间获取用户关注帖子列表(无Video)
@@ -60,7 +61,7 @@ public interface PostbarlistMapper extends BaseMapper<Postbarlist> {
      * @param userAccount
      * @return
      */
-    List<Postbarlist> queryNoVideoFollowBarListForDate( String pbDate,String userAccount);
+    List<PostbarlistVo> queryNoVideoFollowBarListForDate( String pbDate,String userAccount);
 
 
     /**
@@ -78,7 +79,7 @@ public interface PostbarlistMapper extends BaseMapper<Postbarlist> {
      * @param pbTopic
      * @return
      */
-    List<Postbarlist> queryNoVideoTopicBarListForDate(String pbDate,String pbTopic);
+    List<PostbarlistVo> queryNoVideoTopicBarListForDate(String pbDate,String pbTopic);
 
 
     /**

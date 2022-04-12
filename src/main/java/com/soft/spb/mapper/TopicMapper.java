@@ -29,6 +29,10 @@ public interface TopicMapper extends BaseMapper<Topic> {
      */
     List<Topic> querySearchTopicFullList(String topicName);
 
+    Topic getTopicFullById(int id);
+
+    Topic getTopicFullByName(String name);
+
     /**
      * 2.14.3. 搜索话题名列表
      * @return
@@ -48,6 +52,9 @@ public interface TopicMapper extends BaseMapper<Topic> {
      */
     List<String> queryTopicNameList();
 
-
-
+    /**
+     * 2.14.5. 获取热点话题
+     * @return
+     */
+    List<Topic> queryHotTopicList();
 }
