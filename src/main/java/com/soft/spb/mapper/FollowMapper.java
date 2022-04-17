@@ -1,7 +1,9 @@
 package com.soft.spb.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.soft.spb.pojo.dto.FollowDto;
 import com.soft.spb.pojo.entity.Follow;
+import com.soft.spb.pojo.vo.FollowListVo;
 import com.soft.spb.pojo.vo.RandomUserVo;
 import org.apache.ibatis.annotations.Param;
 
@@ -58,10 +60,10 @@ public interface FollowMapper extends BaseMapper<Follow> {
 
     /**
      * 获取关注用户信息列表
-     * @param userAccount
+     * @param followDto
      * @return
      */
-    List<Follow> queryFollowUserList(String userAccount);
+    List<FollowListVo> queryFollowUserList(FollowDto followDto);
 
 
     /**
@@ -81,10 +83,10 @@ public interface FollowMapper extends BaseMapper<Follow> {
 
     /**
      * 获取用户被关注信息列表
-     * @param followedUserAccount
+     * @param followDto
      * @return
      */
-    List<Follow> queryFollowedUserList(String followedUserAccount);
+    List<FollowListVo> queryFollowedUserList(FollowDto followDto);
 
     List<RandomUserVo> queryRundomUserList(int num);
 }

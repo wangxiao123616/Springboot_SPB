@@ -3,6 +3,7 @@ package com.soft.spb.service.impl;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.soft.spb.mapper.UserMapper;
+import com.soft.spb.mapper.UsersMapper;
 import com.soft.spb.pojo.entity.*;
 import com.soft.spb.pojo.vo.UserVo;
 import com.soft.spb.service.*;
@@ -93,6 +94,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 Wrappers.<User>lambdaQuery().eq(User::getUserAccount, userAccount)
         );
         Students studentsInfo = studentsService.getStudentsInfo(userAccount);
+
         UserVo userVo = new UserVo();
         BeanUtils.copyProperties(user, userVo);
         BeanUtils.copyProperties(studentsInfo, userVo);
@@ -120,7 +122,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public int updateUserIp(User user) {
         int count = userMapper.updateUserIp(user.getUserIp(), user.getUserAccount());
-        return count ;
+        return count;
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.soft.spb.controller;
 
 import com.soft.spb.core.exception.ServiceException;
 import com.soft.spb.pojo.dto.UserDto;
+import com.soft.spb.pojo.entity.Users;
 import com.soft.spb.service.UsersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

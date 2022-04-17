@@ -31,10 +31,10 @@ public interface PostbarlistService extends IService<Postbarlist> {
  List<Postbarlist> queryBarDetatilForPbid(Postbarlist postbarlist);
 
  //根据时间获取帖子列表(无Video)
- List<PostbarlistVo> queryNoVideoBarListForDate(String date);
+ List<PostbarlistVo> queryNoVideoBarListForDate(Long id);
 
  //根据时间获取用户关注帖子列表(无Video)
- List<PostbarlistVo> queryNoVideoFollowBarListForDate(String pbDate,String userAccount);
+ List<PostbarlistVo> queryNoVideoFollowBarListForDate(Long id,String userAccount);
 
  //根据时间获取用户搜索帖子列表(无Video)
  List<Postbarlist> queryNoVideoSearchBarListForDate(String searChArt, String pbArticle);
@@ -46,7 +46,7 @@ public interface PostbarlistService extends IService<Postbarlist> {
  List<Postbarlist> queryNoVideoTopicBarListForThumbNum(Integer pbThumbNum, String pbTopic);
 
  // 根据时间获取用户帖子列表(无Video)
- List<Postbarlist> queryNoVideoUserBarListForDate(String pbDate, String userAccount);
+ List<PostbarlistVo> queryNoVideoUserBarListForDate(Long id, String userAccount);
 
  //获取用户帖子数量
  List<Integer> queryUserBarCount(String userAccount);

@@ -35,11 +35,6 @@ public class AttentiontopicServiceImpl extends ServiceImpl<AttentiontopicMapper,
 
     @Override
     public List<AttentiontopicVo> queryAttentionTopic(AttentiontopicDto attentiontopicDto) {
-        if (attentiontopicDto.getTopicDate().length() <= 2){
-            LocalDateTime now = LocalDateTime.now();
-            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            attentiontopicDto.setTopicDate(now.format(dateFormat));
-        }
         List<AttentiontopicVo> list = attentiontopicMapper.queryAttentionTopic(attentiontopicDto);
         return list;
     }

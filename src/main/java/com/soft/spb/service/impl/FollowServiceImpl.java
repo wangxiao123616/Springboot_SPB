@@ -1,7 +1,9 @@
 package com.soft.spb.service.impl;
 
+import com.soft.spb.pojo.dto.FollowDto;
 import com.soft.spb.pojo.entity.Follow;
 import com.soft.spb.mapper.FollowMapper;
+import com.soft.spb.pojo.vo.FollowListVo;
 import com.soft.spb.pojo.vo.RandomUserVo;
 import com.soft.spb.service.FollowService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -76,9 +78,8 @@ public class FollowServiceImpl extends ServiceImpl<FollowMapper, Follow> impleme
     }
 
     @Override
-    public List<Follow> queryFollowUserList(String userAccount) {
-        List<Follow> userList = followMapper.queryFollowUserList(userAccount);
-        return userList;
+    public List<FollowListVo> queryFollowUserList(FollowDto followDto) {
+        return followMapper.queryFollowUserList(followDto);
     }
 
 
@@ -95,8 +96,8 @@ public class FollowServiceImpl extends ServiceImpl<FollowMapper, Follow> impleme
     }
 
     @Override
-    public List<Follow> queryFollowedUserList(String followedUserAccount) {
-        List<Follow> followeduserList = followMapper.queryFollowedUserList(followedUserAccount);
+    public List<FollowListVo> queryFollowedUserList(FollowDto followDto) {
+        List<FollowListVo> followeduserList = followMapper.queryFollowedUserList(followDto);
         return followeduserList;
     }
 

@@ -52,12 +52,12 @@ class PostbarlistServiceTest {
 
     @Test
     void queryNoVideoBarListForDate() {
-        System.out.println(postbarlistServiceImpl.queryNoVideoBarListForDate("2022-1-21 12:00:00"));
+       // System.out.println(postbarlistServiceImpl.queryNoVideoBarListForDate("2022-1-21 12:00:00"));
     }
 
     @Test
     void queryNoVideoFollowBarListForDate() {
-        System.out.println(postbarlistServiceImpl.queryNoVideoBarListForDate("2022-1-3 12:00:00"));
+        //System.out.println(postbarlistServiceImpl.queryNoVideoBarListForDate("2022-1-3 12:00:00"));
 
     }
 

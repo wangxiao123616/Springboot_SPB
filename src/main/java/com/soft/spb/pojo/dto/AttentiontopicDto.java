@@ -5,5 +5,5 @@ import lombok.Data;
 public class AttentiontopicDto {
     private String search;
     private String userAccount;
-    private String topicDate;
+    private Long id;
 }

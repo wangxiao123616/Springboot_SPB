@@ -2,6 +2,7 @@ package com.soft.spb.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.soft.spb.pojo.entity.Collectbar;
+import com.soft.spb.pojo.vo.PostbarlistVo;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public interface CollectbarService extends IService<Collectbar> {
     Integer deleteCollectBar(Collectbar collectbar);
 
     //2.6.3. 获取用户收藏帖子(Full)
-    List<Collectbar> queryCollectBarFullList(String userAccount);
+    List<PostbarlistVo> queryCollectBarFullList(Long id, String userAccount);
 
     List<String> queryCollectBarList(Collectbar collectbar);
 

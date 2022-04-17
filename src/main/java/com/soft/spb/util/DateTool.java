@@ -9,4 +9,13 @@ public class DateTool {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return dateTimeFormatter.format(dateTime);
     }
+
+    public static String queryInitDate(String date) {
+        if (date == null || date.length() < 2) {
+            LocalDateTime dateTime = LocalDateTime.now();
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            return dateTimeFormatter.format(dateTime);
+        }
+        return date;
+    }
 }

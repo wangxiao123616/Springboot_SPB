@@ -38,12 +38,12 @@
         where follow_account = #{followAccount}
     </select>
 
-    <select id="queryFollowUserList" resultType="com.soft.spb.pojo.vo.UserVo">
-        SELECT follow.id, user.user_account, user.user_name, user.user_badge, students.stu_sex
+    <select id="queryFollowUserList" resultType="com.soft.spb.pojo.vo.FollowListVo">
+        SELECT follow.id, user.user_account, user.user_name, user.user_badge, user.user_profile,students.stu_sex as sex
         FROM (spb.follow left join spb.user on follow.followed_account = user.user_account)
                  left join spb.students
-                           on follow.follow_account = students.stu_num
-        where follow.follow_account = #{userAccount}
+                           on follow.followed_account = students.stu_num
+        where follow.follow_account = #{userAccount} AND follow.id <![CDATA[ > ]]> #{id}
         ORDER BY follow.id DESC
 
     </select>
@@ -65,12 +65,12 @@
         where followed_account = #{followedAccount}
     </select>
 
-    <select id="queryFollowedUserList" resultType="com.soft.spb.pojo.entity.Follow">
-        SELECT follow.id, user.user_account, user.user_name, user.user_badge, students.stu_sex
+    <select id="queryFollowedUserList" resultType="com.soft.spb.pojo.vo.FollowListVo">
+        SELECT follow.id, user.user_account, user.user_name, user.user_badge, user.user_profile, students.stu_sex as sex
         FROM (spb.follow left join spb.user on follow.follow_account = user.user_account)
                  left join spb.students
                            on follow.follow_account = students.stu_num
-        where follow.followed_account = #{followedUserAccount}
+        where follow.followed_account = #{userAccount} AND follow.id <![CDATA[ > ]]> #{id}
         ORDER BY follow.id DESC
     </select>
     <select id="queryRundomUserList" resultType="com.soft.spb.pojo.vo.RandomUserVo">

@@ -6,6 +6,7 @@ import com.soft.spb.pojo.entity.Postbarlist;
 import com.soft.spb.pojo.vo.PostbarlistVo;
 import com.soft.spb.service.PostbarlistService;
 import com.soft.spb.util.AliOssUtil;
+import com.soft.spb.util.DateTool;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -114,31 +115,14 @@ public class PostbarlistServiceImpl extends ServiceImpl<PostbarlistMapper, Postb
     }
 
     @Override
-    public List<PostbarlistVo> queryNoVideoBarListForDate(String date) {
-        String dateStirng = null;
-        if (date.length() < 2) {
-            LocalDateTime now = LocalDateTime.now();
-            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            dateStirng = now.format(dateFormat);
-        } else {
-            dateStirng = date;
-        }
-
-        List<PostbarlistVo> items = postbarlistMapper.queryNoVideoBarListForDate(dateStirng);
+    public List<PostbarlistVo> queryNoVideoBarListForDate(Long id) {
+        List<PostbarlistVo> items = postbarlistMapper.queryNoVideoBarListForDate(id);
         return items;
     }
 
     @Override
-    public List<PostbarlistVo> queryNoVideoFollowBarListForDate(String pbDate, String userAccount) {
-        String dS = null;
-        if (pbDate.length() < 2) {
-            LocalDateTime now = LocalDateTime.now();
-            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            dS = now.format(dateFormat);
-        } else {
-            dS = pbDate;
-        }
-        List<PostbarlistVo> items = postbarlistMapper.queryNoVideoFollowBarListForDate(dS, userAccount);
+    public List<PostbarlistVo> queryNoVideoFollowBarListForDate(Long id, String userAccount) {
+        List<PostbarlistVo> items = postbarlistMapper.queryNoVideoFollowBarListForDate(id, userAccount);
         return items;
     }
 
@@ -153,15 +137,8 @@ public class PostbarlistServiceImpl extends ServiceImpl<PostbarlistMapper, Postb
 
     @Override
     public List<PostbarlistVo> queryNoVideoTopicBarListForDate(String pbDate, String pbTopic) {
-        String dS = null;
-        if (pbDate.length() < 2) {
-            LocalDateTime now = LocalDateTime.now();
-            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            dS = now.format(dateFormat);
-        } else {
-            dS = pbDate;
-        }
-        List<PostbarlistVo> topiclists = postbarlistMapper.queryNoVideoTopicBarListForDate(dS, pbTopic);
+        String dateStirng = DateTool.queryInitDate(pbDate);
+        List<PostbarlistVo> topiclists = postbarlistMapper.queryNoVideoTopicBarListForDate(dateStirng, pbTopic);
         return topiclists;
 
     }
@@ -173,10 +150,8 @@ public class PostbarlistServiceImpl extends ServiceImpl<PostbarlistMapper, Postb
     }
 
     @Override
-    public List<Postbarlist> queryNoVideoUserBarListForDate(String pbDate, String userAccount) {
-        List<Postbarlist> userBarListForDate = postbarlistMapper.queryNoVideoUserBarListForDate(pbDate, userAccount);
-
-        return userBarListForDate;
+    public List<PostbarlistVo> queryNoVideoUserBarListForDate(Long id, String userAccount) {
+        return postbarlistMapper.queryNoVideoUserBarListForDate(id, userAccount);
     }
 
     @Override
@@ -218,6 +193,4 @@ public class PostbarlistServiceImpl extends ServiceImpl<PostbarlistMapper, Postb
         List<Postbarlist> postbarlists = postbarlistMapper.queryVideoUserBarListForDate(pbDate, userAccount);
         return postbarlists;
     }
-
-
 }

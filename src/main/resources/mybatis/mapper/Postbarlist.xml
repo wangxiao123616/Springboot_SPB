@@ -57,7 +57,8 @@
     </select>
 
     <select id="queryNoVideoBarListForDate" resultType="com.soft.spb.pojo.vo.PostbarlistVo">
-        select u.user_account,
+        select p.id,
+               u.user_account,
                u.user_name,
                u.user_badge,
                p.pb_one_id,
@@ -73,11 +74,12 @@
                  left join user u
                            on p.user_account = u.user_account
         where p.pb_video is null
-          and p.pb_date &lt;= #{date}
+          and p.id <![CDATA[ > ]]> #{id}
         ORDER BY p.pb_date DESC limit 15
     </select>
     <select id="queryNoVideoFollowBarListForDate" resultType="com.soft.spb.pojo.vo.PostbarlistVo">
-        select u.user_account,
+        select p.id,
+               u.user_account,
                u.user_name,
                u.user_badge,
                p.pb_one_id,
@@ -96,7 +98,7 @@
                            on f.followed_account = u.user_account
         where f.follow_account = #{userAccount}
           and p.pb_video is null
-          and p.pb_date &lt;= #{pbDate}
+          and p.id <![CDATA[ > ]]> #{id}
         ORDER BY p.pb_date DESC limit 15
     </select>
 
@@ -166,7 +168,8 @@
     </select>
 
     <select id="queryNoVideoUserBarListForDate" resultType="com.soft.spb.pojo.vo.PostbarlistVo">
-        select u.user_account,
+        select p.id,
+               u.user_account,
                u.user_name,
                u.user_badge,
                p.pb_one_id,
@@ -182,7 +185,7 @@
                  left join spb.user u
                            on p.user_account = u.user_account
         where p.pb_video is null
-          and p.pb_date &lt;= #{pbDate}
+          and p.id <![CDATA[ > ]]> #{id}
           and p.user_account = #{userAccount}
         order by p.pb_date desc limit 15
     </select>

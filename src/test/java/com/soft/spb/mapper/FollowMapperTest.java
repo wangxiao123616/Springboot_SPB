@@ -67,17 +67,17 @@ class FollowMapperTest {
 
     @Test
     void queryFollowUserList() {
-        System.out.println(followMapper.queryFollowUserList("G18190404"));
+       // System.out.println(followMapper.queryFollowUserList("G18190404"));
 
     }
 
     @Test
     void queryFollowedUserList() {
-        System.out.println(followMapper.queryFollowedUserList("G18190403"));
+        //System.out.println(followMapper.queryFollowedUserList("G18190403"));
     }
 
     @Test
     void testQueryFollowedUserList() {
-        System.out.println(followMapper.queryFollowedUserList("G18190404"));
+        //System.out.println(followMapper.queryFollowedUserList("G18190404"));
     }
 }
