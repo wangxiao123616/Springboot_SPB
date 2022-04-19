@@ -14,6 +14,8 @@ public class RandomUserVo {
 
     private String userAccount;
 
+    private String userHeadImg;
+
     private String userName;
 
     private Integer followNum;

@@ -10,10 +10,11 @@ import lombok.Data;
 @Data
 public class FollowListVo {
 
-    Long id;
-    String userAccount;
-    String userName;
-    String sex;
-    String userProfile;
-    String userBadge;
+    private Long id;
+    private String userAccount;
+    private String userName;
+    private String sex;
+    private String userProfile;
+    private String userBadge;
+    private String userHeadImg;
 }

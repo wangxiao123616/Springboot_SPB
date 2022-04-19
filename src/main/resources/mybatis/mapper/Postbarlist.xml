@@ -61,6 +61,7 @@
                u.user_account,
                u.user_name,
                u.user_badge,
+               u.user_head_image as userHeadImg,
                p.pb_one_id,
                p.pb_date,
                p.pb_article,
@@ -82,6 +83,7 @@
                u.user_account,
                u.user_name,
                u.user_badge,
+               u.user_head_image as userHeadImg,
                p.pb_one_id,
                p.pb_date,
                p.pb_article,
@@ -106,6 +108,7 @@
         select u.user_account,
                u.user_name,
                u.user_badge,
+               u.user_head_image as userHeadImg,
                p.pb_one_id,
                p.pb_date,
                p.pb_article,
@@ -127,6 +130,7 @@
         select u.user_account,
                u.user_name,
                u.user_badge,
+               u.user_head_image as userHeadImg,
                p.pb_one_id,
                p.pb_date,
                p.pb_article,
@@ -147,24 +151,44 @@
 
     <select id="queryNoVideoTopicBarListForThumbNum" resultType="com.soft.spb.pojo.vo.PostbarlistVo">
         select u.user_account,
-        u.user_name,
-        u.user_badge,
-        p.pb_one_id,
-        p.pb_date,
-        p.pb_article,
-        p.pb_image_url,
-        p.pb_voice,
-        p.pb_topic,
-        p.pb_location,
-        p.pb_thumb_num,
-        p.pb_comment_num
+               u.user_name,
+               u.user_badge,
+               u.user_head_image as userHeadImg,
+               p.pb_one_id,
+               p.pb_date,
+               p.pb_article,
+               p.pb_image_url,
+               p.pb_voice,
+               p.pb_topic,
+               p.pb_location,
+               p.pb_thumb_num,
+               p.pb_comment_num
         from spb.postbarlist p
-        left join spb.user u
-        on p.user_account = u.user_account
+                 left join spb.user u
+                           on p.user_account = u.user_account
         where p.pb_video is null
-        and p.pb_thumb_num alt;= #{pbThumbNum}
-        and p.pb_topic like concat('%', #{pbTopic}, '%')
-        ORDER BY p.pb_thumb_num DESC limit 5
+          and p.pb_thumb_num alt;
+        =
+        #{pbThumbNum}
+        and
+        p
+        .
+        pb_topic
+        like
+        concat
+        (
+        '%',
+        #{pbTopic},
+        '%'
+        )
+        ORDER
+        BY
+        p
+        .
+        pb_thumb_num
+        DESC
+        limit
+        5
     </select>
 
     <select id="queryNoVideoUserBarListForDate" resultType="com.soft.spb.pojo.vo.PostbarlistVo">
@@ -172,6 +196,7 @@
                u.user_account,
                u.user_name,
                u.user_badge,
+               u.user_head_image as userHeadImg,
                p.pb_one_id,
                p.pb_date,
                p.pb_article,
@@ -205,6 +230,7 @@
         select u.user_account,
                u.user_name,
                u.user_badge,
+               u.user_head_image as userHeadImg,
                p.pb_one_id,
                p.pb_date,
                p.pb_article,
@@ -227,6 +253,7 @@
         select u.user_account,
                u.user_name,
                u.user_badge,
+               u.user_head_image as userHeadImg,
                p.pb_one_id,
                p.pb_date,
                p.pb_article,
@@ -249,6 +276,7 @@
         select u.user_account,
                u.user_name,
                u.user_badge,
+               u.user_head_image as userHeadImg,
                p.pb_one_id,
                p.pb_date,
                p.pb_article,

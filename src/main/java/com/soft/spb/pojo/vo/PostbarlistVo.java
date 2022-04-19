@@ -12,6 +12,7 @@ public class PostbarlistVo {
 
     private String userBadge;
 
+    private String userHeadImg;
 
     private String pbOneId;
 

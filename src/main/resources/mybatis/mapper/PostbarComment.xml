@@ -31,12 +31,13 @@
           and pb_one_id = #{pbOneId}
     </delete>
 
-    <select id="queryCommentList" resultType="com.soft.spb.pojo.entity.PostbarComment">
+    <select id="queryCommentList" resultType="com.soft.spb.pojo.vo.PostbarCommentVo">
         SELECT t.pb_one_id,
                t.comment_art,
                t.comment_date,
                t.comment_user,
                t1.user_name,
+               t1.user_head_image as commentHeadImg,
                t.comment_touser,
                t2.user_name as user_toname,
                t.comment_id
@@ -54,6 +55,7 @@
                c.comment_date,
                c.comment_user,
                u1.user_name,
+               u1.user_head_image as commentHeadImg,
                c.comment_touser,
                u2.user_name as user_toname,
                c.comment_id

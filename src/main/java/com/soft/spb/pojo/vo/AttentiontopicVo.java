@@ -3,9 +3,10 @@ package com.soft.spb.pojo.vo;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+
 @Data
 public class AttentiontopicVo {
-    private Integer id;
+    private Integer attid;
 
     private String topicName;
 
@@ -19,6 +20,6 @@ public class AttentiontopicVo {
 
     private LocalDateTime topicDate;
 
-    private Integer topicId;
+    private Integer id;
 
 }

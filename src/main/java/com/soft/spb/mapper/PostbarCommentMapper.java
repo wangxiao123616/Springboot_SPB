@@ -2,6 +2,7 @@ package com.soft.spb.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.soft.spb.pojo.entity.PostbarComment;
+import com.soft.spb.pojo.vo.PostbarCommentVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public interface PostbarCommentMapper extends BaseMapper<PostbarComment> {
      * @param pbOneId
      * @return
      */
-    List<PostbarComment> queryCommentList(String pbOneId);
+    List<PostbarCommentVo> queryCommentList(String pbOneId);
 
     /**
      * 2.12.4. 获取通知评论

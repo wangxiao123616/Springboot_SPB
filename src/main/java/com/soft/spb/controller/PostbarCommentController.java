@@ -3,6 +3,7 @@ package com.soft.spb.controller;
 
 import com.soft.spb.pojo.dto.PostbarCommentDto;
 import com.soft.spb.pojo.entity.PostbarComment;
+import com.soft.spb.pojo.vo.PostbarCommentVo;
 import com.soft.spb.service.PostbarCommentService;
 import com.soft.spb.service.impl.PostbarCommentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +41,8 @@ public class PostbarCommentController {
     }
 
     @PostMapping("/queryCommentList/{pbOneId}")
-    public List<PostbarComment> queryCommentList(@PathVariable String pbOneId){
-        List<PostbarComment> postbarComments = postbarCommentService.queryCommentList(pbOneId);
+    public List<PostbarCommentVo> queryCommentList(@PathVariable String pbOneId){
+        List<PostbarCommentVo> postbarComments = postbarCommentService.queryCommentList(pbOneId);
         return postbarComments;
     }
 

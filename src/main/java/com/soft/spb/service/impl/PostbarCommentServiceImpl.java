@@ -2,6 +2,7 @@ package com.soft.spb.service.impl;
 
 import com.soft.spb.pojo.entity.PostbarComment;
 import com.soft.spb.mapper.PostbarCommentMapper;
+import com.soft.spb.pojo.vo.PostbarCommentVo;
 import com.soft.spb.service.PostbarCommentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -41,8 +42,8 @@ public class PostbarCommentServiceImpl extends ServiceImpl<PostbarCommentMapper,
     }
 
     @Override
-    public List<PostbarComment> queryCommentList(String pbOneId) {
-        List<PostbarComment> postbarComments = postbarCommentMapper.queryCommentList(pbOneId);
+    public List<PostbarCommentVo> queryCommentList(String pbOneId) {
+        List<PostbarCommentVo> postbarComments = postbarCommentMapper.queryCommentList(pbOneId);
         return postbarComments;
     }
 
