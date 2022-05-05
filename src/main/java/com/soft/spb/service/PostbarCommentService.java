@@ -15,9 +15,9 @@ import java.util.List;
  * @since 2022-03-19
  */
 public interface PostbarCommentService extends IService<PostbarComment> {
-    Integer addComment(PostbarComment postbarComment);
+    PostbarCommentVo addComment(PostbarComment postbarComment);
 
-    Integer deleteComment(PostbarComment postbarComment);
+    Boolean deleteComment(PostbarComment postbarComment);
 
     List<PostbarCommentVo> queryCommentList(String pbOneId);
 

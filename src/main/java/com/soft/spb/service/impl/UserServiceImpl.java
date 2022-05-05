@@ -8,6 +8,7 @@ import com.soft.spb.pojo.entity.*;
 import com.soft.spb.pojo.vo.UserVo;
 import com.soft.spb.service.*;
 import com.soft.spb.util.AliOssUtil;
+import com.soft.spb.util.SqlProcess;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,9 +127,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public int updateUserPersonalInformation(User user) {
-        int count = userMapper.updateUserPersonalInformation(user);
-        return count;
+    public Boolean updateUserPersonalInformation(User user) {
+        return SqlProcess.transactionalProcess(userMapper.updateUserPersonalInformation(user));
     }
 
     @Override

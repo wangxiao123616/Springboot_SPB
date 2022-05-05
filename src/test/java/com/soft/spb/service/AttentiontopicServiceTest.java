@@ -27,8 +27,8 @@ class AttentiontopicServiceTest {
         attentiontopic.setUserAccount("张三");
         LocalDateTime localDateTime = LocalDateTime.of(2022,3,3,12,00,00);
         attentiontopic.setTopicDate(localDateTime);
-        Integer count = attentiontopicServiceImpl.addAttentionTopic(attentiontopic);
-        System.out.println(count);
+        //Integer count = attentiontopicServiceImpl.addAttentionTopic(attentiontopic);
+       // System.out.println(count);
 
         //  attentiontopicServiceImpl.addAttentionTopic("122", 12, "加油", "2022-3-3 12:00:00");
 

@@ -16,6 +16,16 @@ import java.util.List;
  * @since 2022-03-19
  */
 public interface PostbarCommentMapper extends BaseMapper<PostbarComment> {
+
+    /**
+     * @Description: 获取楼层
+     * @Param: [pbId]
+     * @return: int
+     * @Author: nmy
+     * @Date: 2022-05-03 21:20
+     */
+    int queryMaxCommentId(@Param("pb_one_id") String pbId);
+
     /**
      * 2.12.1. 添加评论
      * @param postbarComment

@@ -74,9 +74,8 @@ public class UserController {
       }
 
       @PostMapping("/updateUserPersonalInformation")
-    public Integer updateUserPersonalInformation(@RequestBody User user){
-        int count = userService.updateUserPersonalInformation(user);
-        return count;
+    public Boolean updateUserPersonalInformation(@RequestBody User user){
+          return userService.updateUserPersonalInformation(user);
       }
 
       @PostMapping("/updateUserPrivacy")

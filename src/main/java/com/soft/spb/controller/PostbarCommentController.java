@@ -27,17 +27,13 @@ public class PostbarCommentController {
     PostbarCommentService postbarCommentService;
 
     @PostMapping("/addComment")
-    public Integer addComment(@RequestBody PostbarComment postbarComment){
-        Integer count = postbarCommentService.addComment(postbarComment);
-        return count;
+    public PostbarCommentVo addComment(@RequestBody PostbarComment postbarComment){
+        return postbarCommentService.addComment(postbarComment);
     }
 
     @PostMapping("/deleteComment")
-    public Integer deleteComment(@RequestBody PostbarComment postbarComment){
-
-        Integer count = postbarCommentService.deleteComment(postbarComment);
-        return count;
-
+    public Boolean deleteComment(@RequestBody PostbarComment postbarComment){
+        return postbarCommentService.deleteComment(postbarComment);
     }
 
     @PostMapping("/queryCommentList/{pbOneId}")

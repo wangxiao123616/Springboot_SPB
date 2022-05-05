@@ -22,7 +22,7 @@ public class PostbarCommentVo {
 
     private String userName;
 
+    private String userToname;
+
     private String commentHeadImg;
-
-
 }

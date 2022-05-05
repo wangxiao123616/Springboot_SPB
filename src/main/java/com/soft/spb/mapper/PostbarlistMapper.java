@@ -3,6 +3,7 @@ package com.soft.spb.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.soft.spb.pojo.entity.Postbarlist;
 import com.soft.spb.pojo.vo.PostbarlistVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -156,4 +157,25 @@ public interface PostbarlistMapper extends BaseMapper<Postbarlist> {
      */
     List<Postbarlist> queryVideoUserBarListForDate(String pbDate, String userAccount);
 
+    /**
+     * @Description: 帖子点赞＋1
+     * @Param: [pbid]
+     * @return: int
+     * @Author: nmy
+     * @Date: 2022-04-19 17:39
+     */
+    int updateIncreaseLike(@Param("pb_one_id") String pbid);
+
+    /**
+     * @Description: 帖子点赞－1
+     * @Param: [pbid]
+     * @return: int
+     * @Author: nmy
+     * @Date: 2022-04-19 17:40
+     */
+    int updateReduceLike(@Param("pb_one_id") String pbid);
+
+    int updateIncreaseComment(@Param("pb_one_id") String pbid);
+
+    int updateReduceComment(@Param("pb_one_id") String pbid);
 }
