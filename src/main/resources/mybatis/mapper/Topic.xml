@@ -33,8 +33,8 @@
           AND t.id <![CDATA[ > ]]> #{id} limit 15
     </select>
 
-    <select id="querySearchTopicNameList" resultType="com.soft.spb.pojo.entity.Topic">
-        select id, topic_name, topic_barnum, topic_attentionnum, topic_slogan, topic_image
+    <select id="querySearchTopicNameList" resultType="java.lang.String">
+        select topic_name
         from topic t
         where t.topic_name like concat('%', (#{topicName}), '%')
     </select>

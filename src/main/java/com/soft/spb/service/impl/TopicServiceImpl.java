@@ -51,8 +51,8 @@ public class TopicServiceImpl extends ServiceImpl<TopicMapper, Topic> implements
     }
 
     @Override
-    public List<Topic> querySearchTopicNameList(String topicName) {
-        List<Topic> topicNameList = topicMapper.querySearchTopicNameList(topicName);
+    public List<String> querySearchTopicNameList(String topicName) {
+        List<String> topicNameList = topicMapper.querySearchTopicNameList(topicName);
         return topicNameList;
     }
 

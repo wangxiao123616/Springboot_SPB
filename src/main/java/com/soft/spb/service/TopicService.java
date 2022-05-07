@@ -26,7 +26,7 @@ public interface TopicService extends IService<Topic> {
 
     Topic getTopicFull(TopicInfoDto topic);
 
-    List<Topic> querySearchTopicNameList(String topicName);
+    List<String> querySearchTopicNameList(String topicName);
 
     List<Topic> queryTopicFull(String topicName);
 

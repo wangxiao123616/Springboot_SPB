@@ -40,7 +40,7 @@ public interface TopicMapper extends BaseMapper<Topic> {
      *
      * @return
      */
-    List<Topic> querySearchTopicNameList(String topicName);
+    List<String> querySearchTopicNameList(String topicName);
 
     /**
      * 2.14.4. 获取话题详细信息
