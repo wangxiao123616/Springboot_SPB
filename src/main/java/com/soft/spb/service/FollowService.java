@@ -1,7 +1,9 @@
 package com.soft.spb.service;
 
+import com.soft.spb.pojo.dto.FollowDto;
 import com.soft.spb.pojo.entity.Follow;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.soft.spb.pojo.vo.FollowListVo;
 import com.soft.spb.pojo.vo.RandomUserVo;
 
 import java.util.List;
@@ -25,11 +27,11 @@ public interface FollowService extends IService<Follow> {
 
     List<String> queryFollowedList(Follow follow);
 
-    List<Follow> queryFollowUserList(String userAccount);
+    List<FollowListVo> queryFollowUserList(FollowDto followDto);
 
     Integer queryFollowedCount(Follow follow);
 
-    List<Follow> queryFollowedUserList(String followedUserAccount);
+    List<FollowListVo> queryFollowedUserList(FollowDto followDto);
 
     List<RandomUserVo> queryRundomUserList(int num);
 }

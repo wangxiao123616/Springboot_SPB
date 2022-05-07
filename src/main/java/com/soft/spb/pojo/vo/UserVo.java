@@ -31,6 +31,8 @@ public class UserVo {
 
     private Integer userLongday;
 
+    private String userPrivacy;
+
     private String stuName;
 
     private Integer stuYear;

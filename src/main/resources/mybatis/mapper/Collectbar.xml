@@ -26,11 +26,13 @@
           and pb_one_id = #{pbOneId}
     </delete>
 
-    <select id="queryCollectBarFullList" parameterType="java.lang.String"
+    <select id="queryCollectBarFullList"
             resultType="com.soft.spb.pojo.vo.PostbarlistVo">
-        select u.user_account,
+        select c.id,
+               u.user_account,
                u.user_name,
                u.user_badge,
+               u.user_head_image as userHeadImg,
                p.pb_one_id,
                p.pb_date,
                p.pb_article,
@@ -42,11 +44,13 @@
                p.pb_comment_num
         from spb.collectbar c
                  left join spb.postbarlist p
-                           on c.user_account = p.user_account
+                           on c.pb_one_id = p.pb_one_id
                  left join spb.user u
                            on p.user_account = u.user_account
-        where p.user_account = #{userAccount}
-
+        where p.pb_video is null
+          and c.id <![CDATA[ > ]]> #{id}
+          and c.user_account = #{userAccount}
+        order by p.pb_date desc limit 15
     </select>
 
     <select id="queryCollectBarList" parameterType="java.lang.String"  resultType="java.lang.String">

@@ -31,24 +31,21 @@ public class AttentiontopicController {
     AttentiontopicService attentiontopicService;
 
     @PostMapping("/addAttentionTopic")
-    public Integer addAttentionTopic(@RequestBody Attentiontopic attentiontopic) {
+    public Boolean addAttentionTopic(@RequestBody Attentiontopic attentiontopic) {
 
         LocalDateTime localDateTime = LocalDateTime.now();
         attentiontopic.setTopicDate(localDateTime);
 
-        Integer count = attentiontopicService.addAttentionTopic(attentiontopic);
-        return count;
+        return attentiontopicService.addAttentionTopic(attentiontopic);
     }
 
     @PostMapping("/deleteAttentionTopicById")
-    public Integer deleteAttentionTopicById(@RequestBody Attentiontopic attentiontopic) {
-        Integer count = attentiontopicService.deleteAttentionTopicById(attentiontopic);
-        return count;
+    public Boolean deleteAttentionTopicById(@RequestBody Attentiontopic attentiontopic) {
+        return attentiontopicService.deleteAttentionTopicById(attentiontopic);
     }
 
     @PostMapping("/queryAttentionTopic")
     public List<AttentiontopicVo> queryAttentionTopic(@RequestBody AttentiontopicDto attentiontopicDto) {
-        List<AttentiontopicVo> list = attentiontopicService.queryAttentionTopic(attentiontopicDto);
-        return list;
+        return attentiontopicService.queryAttentionTopic(attentiontopicDto);
     }
 }

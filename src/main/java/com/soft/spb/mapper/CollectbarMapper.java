@@ -2,6 +2,7 @@ package com.soft.spb.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.soft.spb.pojo.entity.Collectbar;
+import com.soft.spb.pojo.vo.PostbarlistVo;
 
 import java.util.List;
 
@@ -37,7 +38,7 @@ public interface CollectbarMapper extends BaseMapper<Collectbar> {
      * @return
      */
 
-    List<Collectbar> queryCollectBarFullList(String userAccount);
+    List<PostbarlistVo> queryCollectBarFullList(Long id, String userAccount);
 
     /**
      * 2.6.4. 获取用户收藏帖子(Basic)
@@ -48,5 +49,5 @@ public interface CollectbarMapper extends BaseMapper<Collectbar> {
 
     List<String> queryCollectBarList(String userAccount);
 
-    List<String>  getCollectBarPresenter(String userAccount);
+    List<String> getCollectBarPresenter(String userAccount);
 }

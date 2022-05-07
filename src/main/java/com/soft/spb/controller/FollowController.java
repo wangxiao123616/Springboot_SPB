@@ -1,9 +1,11 @@
 package com.soft.spb.controller;
 
 
+import com.soft.spb.pojo.dto.FollowDto;
 import com.soft.spb.pojo.dto.UserDto;
 import com.soft.spb.pojo.entity.Follow;
 import com.soft.spb.pojo.entity.User;
+import com.soft.spb.pojo.vo.FollowListVo;
 import com.soft.spb.pojo.vo.RandomUserVo;
 import com.soft.spb.service.FollowService;
 import com.soft.spb.util.ResponseBody;
@@ -62,10 +64,8 @@ public class FollowController {
     }
 
     @PostMapping("/queryFollowUserList")
-    public List<Follow> queryFollowUserList(@RequestBody User user) {
-
-        List<Follow> userList = followService.queryFollowUserList(user.getUserAccount());
-        return userList;
+    public List<FollowListVo> queryFollowUserList(@RequestBody FollowDto followDto) {
+        return followService.queryFollowUserList(followDto);
     }
 
     @PostMapping("/queryFollowedCount")
@@ -81,9 +81,8 @@ public class FollowController {
     }
 
     @PostMapping("/queryFollowedUserList")
-    public List<Follow> queryFollowedUserList(@RequestBody UserDto user) {
-        List<Follow> followedUserList = followService.queryFollowedUserList(user.getFollowedAccount());
-        return followedUserList;
+    public List<FollowListVo> queryFollowedUserList(@RequestBody FollowDto followDto) {
+        return followService.queryFollowedUserList(followDto);
     }
 
     @RequestMapping(value = "/queryRandomUserList", method = RequestMethod.GET)

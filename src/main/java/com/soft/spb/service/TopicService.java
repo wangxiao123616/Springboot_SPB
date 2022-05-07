@@ -22,11 +22,11 @@ public interface TopicService extends IService<Topic> {
      */
     List<Topic> queryRundomTopicFullList();
 
-    List<Topic> querySearchTopicFullList(String topicName);
+    List<Topic> querySearchTopicFullList(Long id, String topicName);
 
     Topic getTopicFull(TopicInfoDto topic);
 
-    List<Topic> querySearchTopicNameList(String topicName);
+    List<String> querySearchTopicNameList(String topicName);
 
     List<Topic> queryTopicFull(String topicName);
 

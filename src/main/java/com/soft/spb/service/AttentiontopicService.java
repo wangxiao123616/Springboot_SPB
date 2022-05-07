@@ -21,8 +21,8 @@ public interface AttentiontopicService extends IService<Attentiontopic> {
 
     List<AttentiontopicVo> queryAttentionTopic(AttentiontopicDto attentiontopicDto);
 
-    Integer  addAttentionTopic(Attentiontopic attentiontopic);
+    Boolean  addAttentionTopic(Attentiontopic attentiontopic);
 
-    Integer deleteAttentionTopicById(Attentiontopic attentiontopic);
+    Boolean deleteAttentionTopicById(Attentiontopic attentiontopic);
 
 }

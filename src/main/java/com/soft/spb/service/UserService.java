@@ -36,7 +36,7 @@ public interface UserService extends IService<User> {
 
     int updateUserIp(User user);
 
-    int updateUserPersonalInformation(User user);
+    Boolean updateUserPersonalInformation(User user);
 
     int updateUserPrivacy(User user);
 

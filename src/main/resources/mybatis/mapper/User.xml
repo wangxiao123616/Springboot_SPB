@@ -76,7 +76,8 @@
             user_birth    = #{userBirth},
             user_favorite = #{userFavorite},
             user_home     = #{userHome},
-            user_profile  = #{userProfile}
+            user_profile  = #{userProfile},
+            user_privacy  = #{userPrivacy}
          where user_account = #{userAccount}
     </update>
 

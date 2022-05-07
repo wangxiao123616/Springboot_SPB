@@ -80,16 +80,16 @@ public class PostbarlistController {
         }
     }
 
-    @PostMapping("/queryNoVideoBarListForDate/{date}")
-    public List<PostbarlistVo> queryNoVideoBarListForDate(@PathVariable String date) {
-        List<PostbarlistVo> BarListForDate = postbarlistService.queryNoVideoBarListForDate(date);
+    @GetMapping("/queryNoVideoBarListForDate")
+    public List<PostbarlistVo> queryNoVideoBarListForDate(@RequestParam("id") Long id) {
+        List<PostbarlistVo> BarListForDate = postbarlistService.queryNoVideoBarListForDate(id);
         return BarListForDate;
     }
 
 
-    @PostMapping("/queryNoVideoFollowBarListForDate")
-    public List<PostbarlistVo> queryNoVideoFollowBarListForDate(@RequestBody PostbarListDto postbarListDto) {
-        List<PostbarlistVo> postbarlists = postbarlistService.queryNoVideoFollowBarListForDate(postbarListDto.getPbDate(), postbarListDto.getUserAccount());
+    @GetMapping("/queryNoVideoFollowBarListForDate")
+    public List<PostbarlistVo> queryNoVideoFollowBarListForDate(@RequestParam("id") Long id, @RequestParam("userAccount") String userAccount) {
+        List<PostbarlistVo> postbarlists = postbarlistService.queryNoVideoFollowBarListForDate(id, userAccount);
         return postbarlists;
     }
 
@@ -116,9 +116,9 @@ public class PostbarlistController {
     }
 
     @PostMapping("/queryNoVideoUserBarListForDate")
-    public List<Postbarlist> queryNoVideoUserBarListForDate(@RequestBody PostbarListDto postbarListDto) {
+    public List<PostbarlistVo> queryNoVideoUserBarListForDate(@RequestBody PostbarListDto postbarListDto) {
 
-        List<Postbarlist> topicBarListForDate = postbarlistService.queryNoVideoUserBarListForDate(postbarListDto.getPbDate(), postbarListDto.getUserAccount());
+        List<PostbarlistVo> topicBarListForDate = postbarlistService.queryNoVideoUserBarListForDate(postbarListDto.getId(), postbarListDto.getUserAccount());
         return topicBarListForDate;
 
     }

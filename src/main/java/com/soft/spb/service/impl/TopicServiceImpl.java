@@ -34,25 +34,25 @@ public class TopicServiceImpl extends ServiceImpl<TopicMapper, Topic> implements
     }
 
     @Override
-    public List<Topic> querySearchTopicFullList(String topicName) {
+    public List<Topic> querySearchTopicFullList(Long id, String topicName) {
         if (topicName == null) {
             topicName = "#";
         }
-        List<Topic> topicList = topicMapper.querySearchTopicFullList(topicName);
+        List<Topic> topicList = topicMapper.querySearchTopicFullList(id, topicName);
         return topicList;
     }
 
     @Override
     public Topic getTopicFull(TopicInfoDto topic) {
-        if (topic.getTopicId() == -1){
+        if (topic.getTopicId() == -1) {
             return topicMapper.getTopicFullByName(topic.getTopicName());
         }
         return topicMapper.getTopicFullById(topic.getTopicId());
     }
 
     @Override
-    public List<Topic> querySearchTopicNameList(String topicName) {
-        List<Topic> topicNameList = topicMapper.querySearchTopicNameList(topicName);
+    public List<String> querySearchTopicNameList(String topicName) {
+        List<String> topicNameList = topicMapper.querySearchTopicNameList(topicName);
         return topicNameList;
     }
 

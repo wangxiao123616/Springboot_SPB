@@ -6,6 +6,7 @@ import com.soft.spb.pojo.dto.AttentiontopicDto;
 import com.soft.spb.pojo.entity.Attentiontopic;
 import com.soft.spb.pojo.vo.AttentiontopicVo;
 import com.soft.spb.service.AttentiontopicService;
+import com.soft.spb.util.SqlProcess;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,25 +36,18 @@ public class AttentiontopicServiceImpl extends ServiceImpl<AttentiontopicMapper,
 
     @Override
     public List<AttentiontopicVo> queryAttentionTopic(AttentiontopicDto attentiontopicDto) {
-        if (attentiontopicDto.getTopicDate().length() <= 2){
-            LocalDateTime now = LocalDateTime.now();
-            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            attentiontopicDto.setTopicDate(now.format(dateFormat));
-        }
         List<AttentiontopicVo> list = attentiontopicMapper.queryAttentionTopic(attentiontopicDto);
         return list;
     }
 
     @Override
-    public Integer addAttentionTopic(Attentiontopic attentiontopic) {
-        Integer count = attentiontopicMapper.addAttentionTopic(attentiontopic);
-        return count;
-
+    public Boolean addAttentionTopic(Attentiontopic attentiontopic) {
+        return SqlProcess.transactionalProcess(attentiontopicMapper.addAttentionTopic(attentiontopic));
     }
 
     @Override
-    public Integer deleteAttentionTopicById(Attentiontopic attentiontopic) {
+    public Boolean deleteAttentionTopicById(Attentiontopic attentiontopic) {
         int count = attentiontopicMapper.deleteAttentionTopicById(attentiontopic.getTopicId(), attentiontopic.getUserAccount());
-        return count;
+        return SqlProcess.transactionalProcess(count);
     }
 }

@@ -23,6 +23,27 @@
         id
         , pb_one_id, user_account, pb_date, pb_article, pb_image_url, pb_voice, pb_video, pb_topic, pb_location, pb_thumb_num, pb_comment_num
     </sql>
+    <update id="updateIncreaseLike">
+        UPDATE postbarlist
+        set pb_thumb_num = pb_thumb_num + 1
+        where pb_one_id = #{pb_one_id}
+    </update>
+
+    <update id="updateReduceLike">
+        UPDATE postbarlist
+        set pb_thumb_num = pb_thumb_num - 1
+        where pb_one_id = #{pb_one_id}
+    </update>
+    <update id="updateIncreaseComment">
+        UPDATE postbarlist
+        set pb_comment_num = pb_comment_num + 1
+        where pb_one_id = #{pb_one_id}
+    </update>
+    <update id="updateReduceComment">
+        UPDATE postbarlist
+        set pb_comment_num = pb_comment_num - 1
+        where pb_one_id = #{pb_one_id}
+    </update>
 
     <select id="queryAll" resultType="com.soft.spb.pojo.entity.Postbarlist">
         select *
@@ -57,53 +78,66 @@
     </select>
 
     <select id="queryNoVideoBarListForDate" resultType="com.soft.spb.pojo.vo.PostbarlistVo">
-        select u.user_account,
-               u.user_name,
-               u.user_badge,
-               p.pb_one_id,
-               p.pb_date,
-               p.pb_article,
-               p.pb_image_url,
-               p.pb_voice,
-               p.pb_topic,
-               p.pb_location,
-               p.pb_thumb_num,
-               p.pb_comment_num
+        select p.id,
+        u.user_account,
+        u.user_name,
+        u.user_badge,
+        u.user_head_image as userHeadImg,
+        p.pb_one_id,
+        p.pb_date,
+        p.pb_article,
+        p.pb_image_url,
+        p.pb_voice,
+        p.pb_topic,
+        p.pb_location,
+        p.pb_thumb_num,
+        p.pb_comment_num
         from postbarlist p
-                 left join user u
-                           on p.user_account = u.user_account
-        where p.pb_video is null
-          and p.pb_date &lt;= #{date}
-        ORDER BY p.pb_date DESC limit 15
+        left join user u
+        on p.user_account = u.user_account
+        <where>
+            p.pb_video is null
+            <if test="id != 0">
+                and p.id <![CDATA[ < ]]> #{id}
+            </if>
+        </where>
+        ORDER BY p.pb_date DESC limit 5
     </select>
     <select id="queryNoVideoFollowBarListForDate" resultType="com.soft.spb.pojo.vo.PostbarlistVo">
-        select u.user_account,
-               u.user_name,
-               u.user_badge,
-               p.pb_one_id,
-               p.pb_date,
-               p.pb_article,
-               p.pb_image_url,
-               p.pb_voice,
-               p.pb_topic,
-               p.pb_location,
-               p.pb_thumb_num,
-               p.pb_comment_num
+        select p.id,
+        u.user_account,
+        u.user_name,
+        u.user_badge,
+        u.user_head_image as userHeadImg,
+        p.pb_one_id,
+        p.pb_date,
+        p.pb_article,
+        p.pb_image_url,
+        p.pb_voice,
+        p.pb_topic,
+        p.pb_location,
+        p.pb_thumb_num,
+        p.pb_comment_num
         from spb.follow f
-                 left join spb.postbarlist p
-                           on f.followed_account = p.user_account
-                 left join spb.user u
-                           on f.followed_account = u.user_account
-        where f.follow_account = #{userAccount}
-          and p.pb_video is null
-          and p.pb_date &lt;= #{pbDate}
-        ORDER BY p.pb_date DESC limit 15
+        left join spb.postbarlist p
+        on f.followed_account = p.user_account
+        left join spb.user u
+        on f.followed_account = u.user_account
+        <where>
+            p.pb_video is null
+            <if test="id != 0">
+                and p.id <![CDATA[ < ]]> #{id}
+            </if>
+            and f.follow_account = #{userAccount}
+        </where>
+        ORDER BY p.pb_date DESC limit 5
     </select>
 
     <select id="queryNoVideoSearchBarListForDate" resultType="com.soft.spb.pojo.vo.PostbarlistVo">
         select u.user_account,
                u.user_name,
                u.user_badge,
+               u.user_head_image as userHeadImg,
                p.pb_one_id,
                p.pb_date,
                p.pb_article,
@@ -125,6 +159,7 @@
         select u.user_account,
                u.user_name,
                u.user_badge,
+               u.user_head_image as userHeadImg,
                p.pb_one_id,
                p.pb_date,
                p.pb_article,
@@ -145,30 +180,9 @@
 
     <select id="queryNoVideoTopicBarListForThumbNum" resultType="com.soft.spb.pojo.vo.PostbarlistVo">
         select u.user_account,
-        u.user_name,
-        u.user_badge,
-        p.pb_one_id,
-        p.pb_date,
-        p.pb_article,
-        p.pb_image_url,
-        p.pb_voice,
-        p.pb_topic,
-        p.pb_location,
-        p.pb_thumb_num,
-        p.pb_comment_num
-        from spb.postbarlist p
-        left join spb.user u
-        on p.user_account = u.user_account
-        where p.pb_video is null
-        and p.pb_thumb_num alt;= #{pbThumbNum}
-        and p.pb_topic like concat('%', #{pbTopic}, '%')
-        ORDER BY p.pb_thumb_num DESC limit 5
-    </select>
-
-    <select id="queryNoVideoUserBarListForDate" resultType="com.soft.spb.pojo.vo.PostbarlistVo">
-        select u.user_account,
                u.user_name,
                u.user_badge,
+               u.user_head_image as userHeadImg,
                p.pb_one_id,
                p.pb_date,
                p.pb_article,
@@ -182,7 +196,50 @@
                  left join spb.user u
                            on p.user_account = u.user_account
         where p.pb_video is null
-          and p.pb_date &lt;= #{pbDate}
+          and p.pb_thumb_num alt;
+        =
+        #{pbThumbNum}
+        and
+        p
+        .
+        pb_topic
+        like
+        concat
+        (
+        '%',
+        #{pbTopic},
+        '%'
+        )
+        ORDER
+        BY
+        p
+        .
+        pb_thumb_num
+        DESC
+        limit
+        5
+    </select>
+
+    <select id="queryNoVideoUserBarListForDate" resultType="com.soft.spb.pojo.vo.PostbarlistVo">
+        select p.id,
+               u.user_account,
+               u.user_name,
+               u.user_badge,
+               u.user_head_image as userHeadImg,
+               p.pb_one_id,
+               p.pb_date,
+               p.pb_article,
+               p.pb_image_url,
+               p.pb_voice,
+               p.pb_topic,
+               p.pb_location,
+               p.pb_thumb_num,
+               p.pb_comment_num
+        from spb.postbarlist p
+                 left join spb.user u
+                           on p.user_account = u.user_account
+        where p.pb_video is null
+          and p.id <![CDATA[ > ]]> #{id}
           and p.user_account = #{userAccount}
         order by p.pb_date desc limit 15
     </select>
@@ -202,6 +259,7 @@
         select u.user_account,
                u.user_name,
                u.user_badge,
+               u.user_head_image as userHeadImg,
                p.pb_one_id,
                p.pb_date,
                p.pb_article,
@@ -224,6 +282,7 @@
         select u.user_account,
                u.user_name,
                u.user_badge,
+               u.user_head_image as userHeadImg,
                p.pb_one_id,
                p.pb_date,
                p.pb_article,
@@ -246,6 +305,7 @@
         select u.user_account,
                u.user_name,
                u.user_badge,
+               u.user_head_image as userHeadImg,
                p.pb_one_id,
                p.pb_date,
                p.pb_article,

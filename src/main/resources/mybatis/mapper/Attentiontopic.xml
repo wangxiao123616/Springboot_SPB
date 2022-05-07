@@ -20,18 +20,18 @@
     </select>
 
     <select id="queryAttentionTopic" resultType="com.soft.spb.pojo.vo.AttentiontopicVo">
-        SELECT a.id,
+        SELECT a.id as attid,
                a.topic_date,
                t.topic_name,
                t.topic_barnum,
                t.topic_attentionnum,
                t.topic_slogan,
                t.topic_image,
-               t.id as topicId
+               t.id
         FROM attentiontopic a
                  left join topic t
                            on a.topic_id = t.id
-        WHERE a.user_account = #{userAccount} and t.topic_name like concat('%',(#{search}),'%') and a.topic_date &lt;= #{topicDate}
+        WHERE a.user_account = #{userAccount} and t.topic_name like concat('%',(#{search}),'%') and a.id <![CDATA[ > ]]> #{id}
         ORDER BY topic_date DESC
     </select>
 

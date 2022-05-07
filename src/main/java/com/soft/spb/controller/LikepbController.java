@@ -2,6 +2,7 @@ package com.soft.spb.controller;
 
 
 import com.soft.spb.pojo.entity.Likepb;
+import com.soft.spb.service.LikepbService;
 import com.soft.spb.service.impl.LikepbServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +14,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author wyw
@@ -23,24 +24,22 @@ import java.util.List;
 @RequestMapping("/likepb")
 public class LikepbController {
     @Autowired
-    LikepbServiceImpl likepbServiceImpl;
+    LikepbService likepbService;
 
     @PostMapping("/addLike")
-    public Integer addLike(@RequestBody Likepb likepb){
-        int count = likepbServiceImpl.addLike(likepb);
-        return count;
+    public Boolean addLike(@RequestBody Likepb likepb) {
+        return likepbService.addLike(likepb);
 
     }
 
     @PostMapping("/deleteLike")
-    public Integer deleteLike(@RequestBody Likepb likepb){
-        int count = likepbServiceImpl.deleteLike(likepb);
-        return count;
+    public Boolean deleteLike(@RequestBody Likepb likepb) {
+        return likepbService.deleteLike(likepb);
     }
 
     @PostMapping("/queryLike")
-    public List<String> queryLike(@RequestBody Likepb likepb){
-        List<String> queryLike = likepbServiceImpl.queryLike(likepb);
+    public List<String> queryLike(@RequestBody Likepb likepb) {
+        List<String> queryLike = likepbService.queryLike(likepb);
         return queryLike;
     }
 

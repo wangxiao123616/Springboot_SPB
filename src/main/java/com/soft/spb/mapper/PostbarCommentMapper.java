@@ -2,6 +2,7 @@ package com.soft.spb.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.soft.spb.pojo.entity.PostbarComment;
+import com.soft.spb.pojo.vo.PostbarCommentVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -15,6 +16,16 @@ import java.util.List;
  * @since 2022-03-19
  */
 public interface PostbarCommentMapper extends BaseMapper<PostbarComment> {
+
+    /**
+     * @Description: 获取楼层
+     * @Param: [pbId]
+     * @return: int
+     * @Author: nmy
+     * @Date: 2022-05-03 21:20
+     */
+    int queryMaxCommentId(@Param("pb_one_id") String pbId);
+
     /**
      * 2.12.1. 添加评论
      * @param postbarComment
@@ -35,7 +46,7 @@ public interface PostbarCommentMapper extends BaseMapper<PostbarComment> {
      * @param pbOneId
      * @return
      */
-    List<PostbarComment> queryCommentList(String pbOneId);
+    List<PostbarCommentVo> queryCommentList(String pbOneId);
 
     /**
      * 2.12.4. 获取通知评论

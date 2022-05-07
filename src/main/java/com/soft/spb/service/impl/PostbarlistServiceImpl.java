@@ -6,11 +6,17 @@ import com.soft.spb.pojo.entity.Postbarlist;
 import com.soft.spb.pojo.vo.PostbarlistVo;
 import com.soft.spb.service.PostbarlistService;
 import com.soft.spb.util.AliOssUtil;
+import com.soft.spb.util.DateTool;
+import com.soft.spb.util.MD5Util;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Base64Utils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -36,22 +42,18 @@ public class PostbarlistServiceImpl extends ServiceImpl<PostbarlistMapper, Postb
 
         LocalDateTime now = LocalDateTime.now();
         bar.setPbDate(now);
-
+        bar.setPbOneId(MD5Util.md5(DateTool.obtainNowDateTime() + bar.getUserAccount()));
         if (image != null && image.length > 0) {
-
             List<String> postBarImageUrl = AliOssUtil.upload(image);
             if (postBarImageUrl == null) {
-
                 return null;
             }
-
             StringBuilder stringBuilder = new StringBuilder();
             for (int i = 0; i < postBarImageUrl.size(); i++) {
                 stringBuilder.append(postBarImageUrl.get(i)).append("|");
             }
             bar.setPbImageUrl(String.valueOf(stringBuilder));
         }
-
         if (voice != null) {
             List<String> postBarVoiceUrl = AliOssUtil.upload(voice);
             if (postBarVoiceUrl == null) {
@@ -68,14 +70,14 @@ public class PostbarlistServiceImpl extends ServiceImpl<PostbarlistMapper, Postb
 
 
     @Override
-    public Integer addBarVideo(Postbarlist postbarlist,MultipartFile[] video) {
+    public Integer addBarVideo(Postbarlist postbarlist, MultipartFile[] video) {
 
         LocalDateTime now = LocalDateTime.now();
         postbarlist.setPbDate(now);
         // 对这三个进行判断:有Video,无Img和Voice
-        if(video != null){
+        if (video != null) {
             List<String> postVideo = AliOssUtil.upload(video);
-            if (postVideo == null){
+            if (postVideo == null) {
                 return null;
             }
             StringBuilder stringBuilder = new StringBuilder();
@@ -114,31 +116,14 @@ public class PostbarlistServiceImpl extends ServiceImpl<PostbarlistMapper, Postb
     }
 
     @Override
-    public List<PostbarlistVo> queryNoVideoBarListForDate(String date) {
-        String dateStirng = null;
-        if (date.length() < 2) {
-            LocalDateTime now = LocalDateTime.now();
-            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            dateStirng = now.format(dateFormat);
-        } else {
-            dateStirng = date;
-        }
-
-        List<PostbarlistVo> items = postbarlistMapper.queryNoVideoBarListForDate(dateStirng);
+    public List<PostbarlistVo> queryNoVideoBarListForDate(Long id) {
+        List<PostbarlistVo> items = postbarlistMapper.queryNoVideoBarListForDate(id);
         return items;
     }
 
     @Override
-    public List<PostbarlistVo> queryNoVideoFollowBarListForDate(String pbDate, String userAccount) {
-        String dS = null;
-        if (pbDate.length() < 2) {
-            LocalDateTime now = LocalDateTime.now();
-            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            dS = now.format(dateFormat);
-        } else {
-            dS = pbDate;
-        }
-        List<PostbarlistVo> items = postbarlistMapper.queryNoVideoFollowBarListForDate(dS, userAccount);
+    public List<PostbarlistVo> queryNoVideoFollowBarListForDate(Long id, String userAccount) {
+        List<PostbarlistVo> items = postbarlistMapper.queryNoVideoFollowBarListForDate(id, userAccount);
         return items;
     }
 
@@ -153,15 +138,8 @@ public class PostbarlistServiceImpl extends ServiceImpl<PostbarlistMapper, Postb
 
     @Override
     public List<PostbarlistVo> queryNoVideoTopicBarListForDate(String pbDate, String pbTopic) {
-        String dS = null;
-        if (pbDate.length() < 2) {
-            LocalDateTime now = LocalDateTime.now();
-            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            dS = now.format(dateFormat);
-        } else {
-            dS = pbDate;
-        }
-        List<PostbarlistVo> topiclists = postbarlistMapper.queryNoVideoTopicBarListForDate(dS, pbTopic);
+        String dateStirng = DateTool.queryInitDate(pbDate);
+        List<PostbarlistVo> topiclists = postbarlistMapper.queryNoVideoTopicBarListForDate(dateStirng, pbTopic);
         return topiclists;
 
     }
@@ -173,10 +151,8 @@ public class PostbarlistServiceImpl extends ServiceImpl<PostbarlistMapper, Postb
     }
 
     @Override
-    public List<Postbarlist> queryNoVideoUserBarListForDate(String pbDate, String userAccount) {
-        List<Postbarlist> userBarListForDate = postbarlistMapper.queryNoVideoUserBarListForDate(pbDate, userAccount);
-
-        return userBarListForDate;
+    public List<PostbarlistVo> queryNoVideoUserBarListForDate(Long id, String userAccount) {
+        return postbarlistMapper.queryNoVideoUserBarListForDate(id, userAccount);
     }
 
     @Override
@@ -185,7 +161,7 @@ public class PostbarlistServiceImpl extends ServiceImpl<PostbarlistMapper, Postb
         List<Postbarlist> userBarCountList = postbarlistMapper.queryUserBarCount(userAccount);
         List<Integer> postbarlists = new ArrayList<>();
 
-        for (int i = 0; i <userBarCountList.size() ; i++) {
+        for (int i = 0; i < userBarCountList.size(); i++) {
             postbarlists.add(userBarCountList.get(i).getId());
 
         }
@@ -193,11 +169,11 @@ public class PostbarlistServiceImpl extends ServiceImpl<PostbarlistMapper, Postb
         return postbarlists;
     }
 
-   @Override
+    @Override
     public Integer postbarlist(String userAccount) {
-       Integer thumbNum = postbarlistMapper.postbarlist(userAccount);
-       return thumbNum;
-   }
+        Integer thumbNum = postbarlistMapper.postbarlist(userAccount);
+        return thumbNum;
+    }
 
     @Override
     public List<Postbarlist> queryVideoBarListForDate(String searChArt, String pbArticle) {
@@ -218,6 +194,4 @@ public class PostbarlistServiceImpl extends ServiceImpl<PostbarlistMapper, Postb
         List<Postbarlist> postbarlists = postbarlistMapper.queryVideoUserBarListForDate(pbDate, userAccount);
         return postbarlists;
     }
-
-
 }

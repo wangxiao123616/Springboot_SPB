@@ -15,10 +15,10 @@ import java.util.List;
  */
 public interface LikepbService extends IService<Likepb> {
     //2.5.1. 添加点赞
-    int addLike(Likepb likepb);
+    boolean addLike(Likepb likepb);
 
     //2.5.2. 删除点赞
-    int deleteLike(Likepb likepb);
+    boolean deleteLike(Likepb likepb);
 
     //2.5.3. 获取点赞列表
     List<String> queryLike(Likepb likepb);

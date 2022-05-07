@@ -3,7 +3,9 @@ package com.soft.spb.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.soft.spb.mapper.CollectbarMapper;
 import com.soft.spb.pojo.entity.Collectbar;
+import com.soft.spb.pojo.vo.PostbarlistVo;
 import com.soft.spb.service.CollectbarService;
+import com.soft.spb.util.DateTool;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +14,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author wyw
@@ -38,9 +40,8 @@ public class CollectbarServiceImpl extends ServiceImpl<CollectbarMapper, Collect
     }
 
     @Override
-    public List<Collectbar> queryCollectBarFullList(String userAccount) {
-        List<Collectbar> collectbars = collectbarMapper.queryCollectBarFullList(userAccount);
-        return collectbars;
+    public List<PostbarlistVo> queryCollectBarFullList(Long id, String userAccount) {
+        return collectbarMapper.queryCollectBarFullList(id, userAccount);
     }
 
     @Override

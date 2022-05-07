@@ -6,10 +6,13 @@ import java.time.LocalDateTime;
 @Data
 public class PostbarlistVo {
 
+    private Long id;
+
     private String userName;
 
     private String userBadge;
 
+    private String userHeadImg;
 
     private String pbOneId;
 
