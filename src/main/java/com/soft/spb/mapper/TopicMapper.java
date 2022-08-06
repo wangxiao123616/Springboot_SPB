@@ -63,4 +63,8 @@ public interface TopicMapper extends BaseMapper<Topic> {
      * @return
      */
     List<Topic> queryHotTopicList();
+
+    List<Topic> querySearchTopicList(String topicName);
+
+
 }

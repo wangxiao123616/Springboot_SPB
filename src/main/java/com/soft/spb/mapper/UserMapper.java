@@ -3,6 +3,7 @@ package com.soft.spb.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.soft.spb.pojo.entity.Course;
 import com.soft.spb.pojo.entity.User;
+import com.soft.spb.pojo.vo.UserVo;
 
 import java.util.List;
 
@@ -32,10 +33,10 @@ public interface UserMapper extends BaseMapper<User> {
 
     /**
      * 2.9.3. 搜索用户
-     * @param user
+     * @param search
      * @return
      */
-    List<User> querySearchUser(String search);
+    List<UserVo> querySearchUser(String search);
 
     /**
      * 2.9.4. 更新用户使用徽章
@@ -88,4 +89,6 @@ public interface UserMapper extends BaseMapper<User> {
      * @return
      */
    int updateUserToken(User user);
+
+   int updateUserLongDay(String userAccount);
 }

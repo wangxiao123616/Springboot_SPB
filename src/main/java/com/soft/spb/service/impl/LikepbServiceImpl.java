@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author wyw
@@ -34,27 +34,34 @@ public class LikepbServiceImpl extends ServiceImpl<LikepbMapper, Likepb> impleme
     @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean addLike(Likepb likepb) {
-       try {
-           int a = likepbMapper.addLike(likepb);
-           int b = postbarlistMapper.updateIncreaseLike(likepb.getPbOneId());
-           if (!SqlProcess.transactionalProcess(a, b)) {
-               TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-               return false;
-           }
-       }catch (Exception e) {
-           TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-           return false;
-       }
-       return true;
+        try {
+            int a = likepbMapper.addLike(likepb);
+            int b = 0;
+            if (a != 0) {
+                b = postbarlistMapper.updateIncreaseLike(likepb.getPbOneId());
+            }
+
+            if (!SqlProcess.transactionalProcess(a, b)) {
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+                return false;
+            }
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean deleteLike(Likepb likepb) {
         try {
             int a = likepbMapper.deleteLike(likepb);
-            int b = postbarlistMapper.updateReduceLike(likepb.getPbOneId());
+            int b = 0;
+            if (a != 0) {
+                b = postbarlistMapper.updateReduceLike(likepb.getPbOneId());
+            }
             return SqlProcess.transactionalProcess(a, b);
-        }catch (Exception e) {
+        } catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return false;
         }
@@ -65,7 +72,7 @@ public class LikepbServiceImpl extends ServiceImpl<LikepbMapper, Likepb> impleme
         List<Likepb> likepbs = likepbMapper.queryLike(likepb);
         List<String> arr = new ArrayList<>();
         for (int i = 0; i < likepbs.size(); i++) {
-         arr.add(likepbs.get(i).getPbOneId()) ;
+            arr.add(likepbs.get(i).getPbOneId());
         }
         return arr;
     }

@@ -75,20 +75,26 @@ public interface PostbarlistMapper extends BaseMapper<Postbarlist> {
      * 根据时间获取用户搜索帖子列表(无Video)
      *
      * @param searChArt
-     * @param pbArticle
      * @return
      */
-    List<Postbarlist> queryNoVideoSearchBarListForDate(String searChArt, String pbArticle);
+    List<PostbarlistVo> queryNoVideoSearchBarListForDate(String searChArt);
+    /**
+     * 根据时间获取用户搜索帖子列表(Video)
+     *
+     * @param searChArt
+     * @return
+     */
+    List<PostbarlistVo> queryVideoSearchBarListForDate(String searChArt);
 
 
     /**
      * 根据时间获取话题帖子列表(无Video)
      *
-     * @param pbDate
+     * @param id
      * @param pbTopic
      * @return
      */
-    List<PostbarlistVo> queryNoVideoTopicBarListForDate(String pbDate, String pbTopic);
+    List<PostbarlistVo> queryNoVideoTopicBarListForDate(Long id, String pbTopic);
 
 
     /**
@@ -98,7 +104,7 @@ public interface PostbarlistMapper extends BaseMapper<Postbarlist> {
      * @param pbTopic
      * @return
      */
-    List<Postbarlist> queryNoVideoTopicBarListForThumbNum(Integer pbThumbNum, String pbTopic);
+    List<PostbarlistVo> queryNoVideoTopicBarListForThumbNum(Integer pbThumbNum, String pbTopic);
 
 
     /**
@@ -132,30 +138,28 @@ public interface PostbarlistMapper extends BaseMapper<Postbarlist> {
     /**
      * 2.4.13. 根据时间获取帖子列表(有Video)
      *
-     * @param searChArt
-     * @param pbArticle
      * @return
      */
-    List<Postbarlist> queryVideoBarListForDate(String searChArt, String pbArticle);
+    List<PostbarlistVo> queryVideoBarListForDate(Long id);
 
     /**
      * 2.4.14 根据时间获取话题帖子列表(有Video)
      *
-     * @param pbDate
+     * @param id
      * @param pbTopic
      * @return
      */
-    List<Postbarlist> queryVideoTopicBarListForDate(String pbDate, String pbTopic);
+    List<PostbarlistVo> queryVideoTopicBarListForDate(Long id, String pbTopic);
 
 
     /**
      * 2.4.15. 根据时间获取用户帖子列表(有Video)
      *
-     * @param pbDate
+     * @param id
      * @param userAccount
      * @return
      */
-    List<Postbarlist> queryVideoUserBarListForDate(String pbDate, String userAccount);
+    List<PostbarlistVo> queryVideoUserBarListForDate(Long id, String userAccount);
 
     /**
      * @Description: 帖子点赞＋1

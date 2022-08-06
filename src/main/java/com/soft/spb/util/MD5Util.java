@@ -11,9 +11,9 @@ public class MD5Util {
 
     
     public static boolean verify(String text, String md5) {
-        
         String md5Text = md5(text);
-        if (md5Text.equalsIgnoreCase(md5)) {
+        String a = md5(md5);
+        if (md5Text.equalsIgnoreCase(a)) {
             return true;
         }
         return false;

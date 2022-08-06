@@ -2,12 +2,10 @@ package com.soft.spb.controller;
 
 
 import com.soft.spb.pojo.entity.UserSign;
+import com.soft.spb.service.UserSignService;
 import com.soft.spb.service.impl.UserSignServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,73 +21,67 @@ import java.util.List;
 @RequestMapping("/userSign")
 public class UserSignController {
     @Autowired
-    UserSignServiceImpl userSignServiceImpl;
+    UserSignService userSignService;
 
     @PostMapping("/queryUserBadge")
-    public List<UserSign> queryUserBadge(@RequestBody UserSign userSign) {
-        System.out.println(userSign);
-        List<UserSign> userSigns = userSignServiceImpl.queryUserBadge(userSign.getUserAccount());
+    public UserSign queryUserBadge(@RequestBody UserSign userSign) {
+        UserSign userSigns = userSignService.queryUserBadge(userSign.getUserAccount());
         return userSigns;
     }
 
     @PostMapping("/queryUserSign")
-    public List<UserSign> queryUserSign(@RequestBody UserSign userSign) {
-        List<UserSign> userSigns = userSignServiceImpl.queryUserSign(userSign.getUserAccount());
+    public UserSign queryUserSign(@RequestParam("userAccount") String userAccount) {
+        UserSign userSigns = userSignService.queryUserSign(userAccount);
         return userSigns;
     }
 
     @PostMapping("/updateSignCoin")
     public Integer updateSignCoin(@RequestBody UserSign userSign) {
-        int count = userSignServiceImpl.updateSignCoin(userSign);
+        int count = userSignService.updateSignCoin(userSign);
         return count;
 
     }
       @PostMapping("/updateSignDay")
     public Integer updateSignDay(@RequestBody UserSign userSign){
-          int count = userSignServiceImpl.updateSignDay(userSign);
+          int count = userSignService.updateSignDay(userSign);
           return count;
 
       }
 
       @PostMapping("/updateSignDayAndRight")
     public Integer updateSignDayAndRight(@RequestBody UserSign userSign){
-          Integer count = userSignServiceImpl.updateSignDayAndRight(userSign);
+          Integer count = userSignService.updateSignDayAndRight(userSign);
           return count;
 
       }
 
       @PostMapping("/updateSignDayAndRightAndCoin")
-    public Integer updateSignDayAndRightAndCoin(@RequestBody UserSign userSign){
-          Integer coin = userSignServiceImpl.updateSignDayAndRightAndCoin(userSign);
+    public Boolean updateSignDayAndRightAndCoin(@RequestBody UserSign userSign){
+          Boolean coin = userSignService.updateSignDayAndRightAndCoin(userSign);
           return coin;
       }
 
       @PostMapping("/updateSignLikeBadge")
-    public  Integer updateSignLikeBadge(@RequestBody UserSign userSign){
-          Integer count = userSignServiceImpl.updateSignLikeBadge(userSign);
-          return count;
+    public Boolean updateSignLikeBadge(@RequestBody UserSign userSign){
+          return userSignService.updateSignLikeBadge(userSign);
       }
 
       @PostMapping("/updateSignRight")
     public Integer updateSignRight(@RequestBody UserSign userSign){
 
-          Integer count = userSignServiceImpl.updateSignRight(userSign);
+          Integer count = userSignService.updateSignRight(userSign);
           return count;
 
       }
 
       @PostMapping("/updateSignStarBadge")
     public Integer updateSignStarBadge(@RequestBody UserSign userSign){
-          int count = userSignServiceImpl.updateSignStarBadge(userSign);
+          int count = userSignService.updateSignStarBadge(userSign);
           return count;
-
       }
 
       @PostMapping("/updateSignTaskBadge")
-    public Integer updateSignTaskBadge(@RequestBody UserSign userSign){
-          int count = userSignServiceImpl.updateSignTaskBadge(userSign);
-          return count;
-
-      }
-
+    public Boolean updateSignTaskBadge(@RequestBody UserSign userSign){
+          return userSignService.updateSignTaskBadge(userSign);
+    }
 }

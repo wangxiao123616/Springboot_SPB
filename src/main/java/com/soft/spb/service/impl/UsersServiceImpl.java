@@ -1,11 +1,13 @@
 package com.soft.spb.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.soft.spb.core.constant.ResultCode;
 import com.soft.spb.core.exception.ServiceException;
 import com.soft.spb.mapper.UserMapper;
 import com.soft.spb.mapper.UsersMapper;
+import com.soft.spb.pojo.dto.UpdatePwdDto;
 import com.soft.spb.pojo.dto.UserDto;
 import com.soft.spb.pojo.entity.User;
 import com.soft.spb.pojo.entity.Users;
@@ -68,16 +70,42 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
         Users users = Users.builder()
                 .userAccount(userDto.getUserAccount())
                 .userPassword(MD5Util.md5(userDto.getPassword()))
+                .userSecretProtection("111111111")
                 .build();
         int usersInsert = usersMapper.insert(users);
         int userInsert = userMapper.insert(User.builder()
                 .userAccount(userDto.getUserAccount())
+                .userName(userDto.getUserName())
                 .userHeadImage("http://tva1.sinaimg.cn/large/008cx1U7gy1h0nd9uybdcj305k05k0sr.jpg")
+                .userLongday(0)
                 .build());
+
         if (usersInsert != 1 && userInsert != 1) {
             throw new ServiceException(ResultCode.SYSTEM_ERROR);
         }
         return userService.getUserInfo(userDto.getUserAccount());
+    }
+
+    @Override
+    public Boolean updatePwd(UpdatePwdDto updatePwd) throws ServiceException {
+        Users users = getOne(
+                Wrappers.<Users>lambdaQuery().eq(Users::getUserAccount, updatePwd.getUserAccount()));
+        // 1. 先判断用户是否存在
+        if (users == null) {
+            throw new ServiceException(ResultCode.USER_NOT_FOUND);
+        }
+        // 2. 再判断密码是否正确
+        if (MD5Util.verify(updatePwd.getUserOldPwd(), users.getUserPassword())) {
+            int update = usersMapper.update(null, Wrappers.<Users>lambdaUpdate().eq(Users::getUserAccount, updatePwd.getUserAccount())
+                    .set(Users::getUserPassword, updatePwd.getUserPwd()));
+            if (update == 1){
+                return true;
+            }else {
+                throw new ServiceException(ResultCode.USER_XIU_USER_CODE);
+            }
+        } else {
+            throw new ServiceException(ResultCode.USER_PASSWORD_ERROR);
+        }
     }
 
 }

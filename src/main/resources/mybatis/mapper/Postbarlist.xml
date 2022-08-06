@@ -57,6 +57,7 @@
                 #{pbVideo}, #{pbVoice}, #{userAccount}, #{pbImageUrl}, 0, 0);
 
     </insert>
+
     <insert id="addBarVideo" parameterType="com.soft.spb.pojo.entity.Postbarlist">
         insert into spb.postbarlist(pb_article, pb_date, pb_location, pb_one_id, pb_topic,
                                     pb_video, pb_voice, user_account, pb_image_url, pb_thumb_num, pb_comment_num)
@@ -134,93 +135,82 @@
     </select>
 
     <select id="queryNoVideoSearchBarListForDate" resultType="com.soft.spb.pojo.vo.PostbarlistVo">
-        select u.user_account,
-               u.user_name,
-               u.user_badge,
-               u.user_head_image as userHeadImg,
-               p.pb_one_id,
-               p.pb_date,
-               p.pb_article,
-               p.pb_image_url,
-               p.pb_voice,
-               p.pb_topic,
-               p.pb_location,
-               p.pb_thumb_num,
-               p.pb_comment_num
+        select p.id,
+        u.user_account,
+        u.user_name,
+        u.user_badge,
+        u.user_head_image as userHeadImg,
+        p.pb_one_id,
+        p.pb_date,
+        p.pb_article,
+        p.pb_image_url,
+        p.pb_voice,
+        p.pb_topic,
+        p.pb_location,
+        p.pb_thumb_num,
+        p.pb_comment_num
         from spb.postbarlist p
-                 left join spb.user u
-                           on p.user_account = u.user_account
-        where p.pb_video is null
-            and p.pb_topic like concat('%', #{searChArt}, '%')
-           or p.pb_article like concat('%', #{searChArt}, '%')
+        left join spb.user u
+        on p.user_account = u.user_account
+        <where>
+            p.pb_video is null
+            and p.pb_article like concat('%', #{searChArt}, '%')
+        </where>
         order by p.pb_date desc limit 30
     </select>
-    <select id="queryNoVideoTopicBarListForDate" resultType="com.soft.spb.pojo.vo.PostbarlistVo">
-        select u.user_account,
-               u.user_name,
-               u.user_badge,
-               u.user_head_image as userHeadImg,
-               p.pb_one_id,
-               p.pb_date,
-               p.pb_article,
-               p.pb_image_url,
-               p.pb_voice,
-               p.pb_topic,
-               p.pb_location,
-               p.pb_thumb_num,
-               p.pb_comment_num
+    <select id="queryVideoSearchBarListForDate" resultType="com.soft.spb.pojo.vo.PostbarlistVo">
+        select p.id,
+        u.user_account,
+        u.user_name,
+        u.user_badge,
+        u.user_head_image as userHeadImg,
+        p.pb_one_id,
+        p.pb_date,
+        p.pb_article,
+        p.pb_video,
+        p.pb_topic,
+        p.pb_location,
+        p.pb_thumb_num,
+        p.pb_comment_num
         from spb.postbarlist p
-                 left join spb.user u
-                           on p.user_account = u.user_account
-        where p.pb_video is null
-          and p.pb_date &lt;= #{pbDate}
-          and p.pb_topic like concat('%', #{pbTopic}, '%')
+        left join spb.user u
+        on p.user_account = u.user_account
+        <where>
+            p.pb_video is not null
+            and p.pb_article like concat('%', #{searChArt}, '%')
+        </where>
+        order by p.pb_date desc limit 30
+    </select>
+
+    <select id="queryNoVideoTopicBarListForDate" resultType="com.soft.spb.pojo.vo.PostbarlistVo">
+        select p.id,
+        u.user_account,
+        u.user_name,
+        u.user_badge,
+        u.user_head_image as userHeadImg,
+        p.pb_one_id,
+        p.pb_date,
+        p.pb_article,
+        p.pb_image_url,
+        p.pb_voice,
+        p.pb_topic,
+        p.pb_location,
+        p.pb_thumb_num,
+        p.pb_comment_num
+        from spb.postbarlist p
+        left join spb.user u
+        on p.user_account = u.user_account
+        <where>
+            p.pb_video is null
+            <if test="id != 0">
+                and p.id <![CDATA[ < ]]> #{id}
+            </if>
+            and p.pb_topic like concat('%', #{pbTopic}, '%')
+        </where>
         ORDER BY p.pb_date DESC limit 15
     </select>
 
     <select id="queryNoVideoTopicBarListForThumbNum" resultType="com.soft.spb.pojo.vo.PostbarlistVo">
-        select u.user_account,
-               u.user_name,
-               u.user_badge,
-               u.user_head_image as userHeadImg,
-               p.pb_one_id,
-               p.pb_date,
-               p.pb_article,
-               p.pb_image_url,
-               p.pb_voice,
-               p.pb_topic,
-               p.pb_location,
-               p.pb_thumb_num,
-               p.pb_comment_num
-        from spb.postbarlist p
-                 left join spb.user u
-                           on p.user_account = u.user_account
-        where p.pb_video is null
-          and p.pb_thumb_num alt;
-        =
-        #{pbThumbNum}
-        and
-        p
-        .
-        pb_topic
-        like
-        concat
-        (
-        '%',
-        #{pbTopic},
-        '%'
-        )
-        ORDER
-        BY
-        p
-        .
-        pb_thumb_num
-        DESC
-        limit
-        5
-    </select>
-
-    <select id="queryNoVideoUserBarListForDate" resultType="com.soft.spb.pojo.vo.PostbarlistVo">
         select p.id,
                u.user_account,
                u.user_name,
@@ -239,8 +229,36 @@
                  left join spb.user u
                            on p.user_account = u.user_account
         where p.pb_video is null
-          and p.id <![CDATA[ > ]]> #{id}
-          and p.user_account = #{userAccount}
+          and p.pb_thumb_num <![CDATA[ < ]]> #{pbThumbNum}
+          and p.pb_topic like concat('%', #{pbTopic}, '%')
+        ORDER BY p.pb_thumb_num DESC limit 5
+    </select>
+
+    <select id="queryNoVideoUserBarListForDate" resultType="com.soft.spb.pojo.vo.PostbarlistVo">
+        select p.id,
+        u.user_account,
+        u.user_name,
+        u.user_badge,
+        u.user_head_image as userHeadImg,
+        p.pb_one_id,
+        p.pb_date,
+        p.pb_article,
+        p.pb_image_url,
+        p.pb_voice,
+        p.pb_topic,
+        p.pb_location,
+        p.pb_thumb_num,
+        p.pb_comment_num
+        from spb.postbarlist p
+        left join spb.user u
+        on p.user_account = u.user_account
+        <where>
+            p.pb_video is null
+            <if test="id != 0">
+                and p.id <![CDATA[ < ]]>#{id}
+            </if>
+            and p.user_account = #{userAccount}
+        </where>
         order by p.pb_date desc limit 15
     </select>
     <select id="queryUserBarCount" resultType="com.soft.spb.pojo.entity.Postbarlist">
@@ -250,78 +268,87 @@
     </select>
 
     <select id="postbarlist" parameterType="java.lang.String" resultType="java.lang.Integer">
-
         select sum(pb_thumb_num)
         from spb.postbarlist
         where user_account = #{userAccount}
     </select>
     <select id="queryVideoBarListForDate" resultType="com.soft.spb.pojo.vo.PostbarlistVo">
-        select u.user_account,
-               u.user_name,
-               u.user_badge,
-               u.user_head_image as userHeadImg,
-               p.pb_one_id,
-               p.pb_date,
-               p.pb_article,
-               p.pb_image_url,
-               p.pb_voice,
-               p.pb_topic,
-               p.pb_location,
-               p.pb_thumb_num,
-               p.pb_comment_num
+        select p.id,
+        u.user_account,
+        u.user_name,
+        u.user_badge,
+        u.user_head_image as userHeadImg,
+        p.pb_one_id,
+        p.pb_date,
+        p.pb_article,
+        p.pb_video,
+        p.pb_topic,
+        p.pb_location,
+        p.pb_thumb_num,
+        p.pb_comment_num
         from spb.postbarlist p
-                 left join spb.user u
-                           on p.user_account = u.user_account
-        where p.pb_video is not null
-            and p.pb_topic like concat('%', #{searChArt}, '%')
-           or p.pb_article like concat('%', #{searChArt}, '%')
-        order by p.pb_date desc limit 30
+        left join spb.user u
+        on p.user_account = u.user_account
+        <where>
+            p.pb_video is not null
+            <if test="id != 0">
+                and p.id <![CDATA[ < ]]>#{id}
+            </if>
+        </where>
+        order by p.pb_date desc limit 5
     </select>
 
     <select id="queryVideoTopicBarListForDate" resultType="com.soft.spb.pojo.vo.PostbarlistVo">
-        select u.user_account,
-               u.user_name,
-               u.user_badge,
-               u.user_head_image as userHeadImg,
-               p.pb_one_id,
-               p.pb_date,
-               p.pb_article,
-               p.pb_image_url,
-               p.pb_voice,
-               p.pb_topic,
-               p.pb_location,
-               p.pb_thumb_num,
-               p.pb_comment_num
+        select p.id,
+        u.user_account,
+        u.user_name,
+        u.user_badge,
+        u.user_head_image as userHeadImg,
+        p.pb_one_id,
+        p.pb_date,
+        p.pb_article,
+        p.pb_video,
+        p.pb_topic,
+        p.pb_location,
+        p.pb_thumb_num,
+        p.pb_comment_num
         from spb.postbarlist p
-                 left join spb.user u
-                           on p.user_account = u.user_account
-        where p.pb_video is not null
-          and p.pb_date &lt;= #{pbDate}
-          and p.pb_topic like concat('%', #{pbTopic}, '%')
+        left join spb.user u
+        on p.user_account = u.user_account
+        <where>
+            p.pb_video is not null
+            <if test="id != 0">
+                and p.id <![CDATA[ < ]]>#{id}
+            </if>
+            and p.pb_topic like concat('%', #{pbTopic}, '%')
+        </where>
         ORDER BY p.pb_date DESC limit 5
     </select>
 
     <select id="queryVideoUserBarListForDate" resultType="com.soft.spb.pojo.vo.PostbarlistVo">
-        select u.user_account,
-               u.user_name,
-               u.user_badge,
-               u.user_head_image as userHeadImg,
-               p.pb_one_id,
-               p.pb_date,
-               p.pb_article,
-               p.pb_image_url,
-               p.pb_voice,
-               p.pb_topic,
-               p.pb_location,
-               p.pb_thumb_num,
-               p.pb_comment_num
+        select p.id,
+        u.user_account,
+        u.user_name,
+        u.user_badge,
+        u.user_head_image as userHeadImg,
+        p.pb_one_id,
+        p.pb_date,
+        p.pb_article,
+        p.pb_video,
+        p.pb_topic,
+        p.pb_location,
+        p.pb_thumb_num,
+        p.pb_comment_num
         from spb.postbarlist p
-                 left join spb.user u
-                           on p.user_account = u.user_account
-        where p.pb_video is not null
-          and p.pb_date &lt;= #{pbDate}
-          and p.user_account = #{userAccount}
-        ORDER BY p.pb_date DESC limit 2
+        left join spb.user u
+        on p.user_account = u.user_account
+        <where>
+            p.pb_video is not null
+            <if test="id != 0">
+                and p.id <![CDATA[ < ]]>#{id}
+            </if>
+            and p.user_account = #{userAccount}
+        </where>
+        ORDER BY p.pb_date DESC limit 5
     </select>
-
 </mapper>

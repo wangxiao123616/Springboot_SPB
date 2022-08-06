@@ -15,9 +15,9 @@ import java.util.List;
  */
 public interface UserSignService extends IService<UserSign> {
 
-    List<UserSign> queryUserBadge(String userAccount);
+    UserSign queryUserBadge(String userAccount);
 
-    List<UserSign> queryUserSign(String userAccount);
+    UserSign queryUserSign(String userAccount);
 
     Integer updateSignCoin(UserSign userSign);
 
@@ -25,15 +25,16 @@ public interface UserSignService extends IService<UserSign> {
 
     Integer updateSignDayAndRight(UserSign userSign);
 
-    Integer updateSignDayAndRightAndCoin(UserSign userSign);
+    Boolean updateSignDayAndRightAndCoin(UserSign userSign);
 
-    Integer updateSignLikeBadge(UserSign userSign);
+    Boolean updateSignLikeBadge(UserSign userSign);
 
     Integer updateSignRight(UserSign userSign);
 
     int updateSignStarBadge(UserSign userSign);
 
-    int updateSignTaskBadge(UserSign userSign);
+    Boolean updateSignTaskBadge(UserSign userSign);
 
+    boolean initSignDay();
 
 }

@@ -1,9 +1,9 @@
 package com.soft.spb.service.impl;
 
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.soft.spb.mapper.UserMapper;
-import com.soft.spb.mapper.UsersMapper;
 import com.soft.spb.pojo.entity.*;
 import com.soft.spb.pojo.vo.UserVo;
 import com.soft.spb.service.*;
@@ -38,6 +38,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private final FollowService followService;
     private final AttentiontopicService attentiontopicService;
     private final CollectbarService collectbarService;
+    private final PostbarlistService postbarlistService;
+    private final UserSignService userSignService;
 
     private final LikepbService likepbService;
 
@@ -54,8 +56,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public List<User> querySearchUser(String search) {
-
+    public List<UserVo> querySearchUser(String search) {
         return userMapper.querySearchUser(search);
     }
 
@@ -113,12 +114,33 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         // 4. 添加用户收藏的帖子信息
         map.put("collectBar", collectbarService.getCollectBarPresenter(userAccount));
 
+        map.put("barCount", postbarlistService.queryUserBarCount(userAccount));
+
+        UserSign userSign = userSignService.queryUserBadge(userAccount);
+        int badgeC = 0;
+        if (StringUtils.isNotEmpty(userSign.getSignLikeBadge())) {
+            String[] split = userSign.getSignLikeBadge().split("\\|");
+            badgeC += split.length;
+        }
+        if (StringUtils.isNotEmpty(userSign.getSignStarBadge())) {
+            badgeC += 1;
+        }
+        if (StringUtils.isNotEmpty(userSign.getSignTaskBadge())) {
+            String[] split = userSign.getSignTaskBadge().split("\\|");
+            badgeC += split.length;
+        }
+        if (userSign.getSignCtBadge() != 1) {
+            badgeC += 1;
+        }
+        map.put("badgeCount", badgeC);
+
         // 5. 添加用户所点赞的帖子
         Likepb likepb = new Likepb();
         likepb.setUserAccount(userAccount);
         map.put("likeBar", likepbService.queryLike(likepb));
         return map;
     }
+
 
     @Override
     public int updateUserIp(User user) {

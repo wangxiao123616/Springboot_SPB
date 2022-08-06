@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -25,7 +26,7 @@ import java.util.List;
  * @since 2022-03-19
  */
 @RestController
-@RequestMapping("/postbarlist")
+    @RequestMapping("/postbarlist")
 public class PostbarlistController {
     @Autowired
     PostbarlistService postbarlistService;
@@ -44,6 +45,7 @@ public class PostbarlistController {
 
     @PostMapping("/addBarVideo")
     public Integer addBarVideo(Postbarlist postbarlist,@Nullable @RequestParam("video")MultipartFile[] video){
+        System.out.println(video);
         Integer count = postbarlistService.addBarVideo(postbarlist, video);
         return count;
 
@@ -94,70 +96,63 @@ public class PostbarlistController {
     }
 
 
-    @PostMapping("/queryNoVideoSearchBarListForDate")
+    @GetMapping("/queryNoVideoSearchBarListForDate")
+    public List<PostbarlistVo> queryNoVideoSearchBarListForDate(@RequestParam("search") String search) {
+        return postbarlistService.queryNoVideoSearchBarListForDate(search);
+    }
 
-    public List<Postbarlist> queryNoVideoSearchBarListForDate(@RequestBody PostbarListDto postbarListDto) {
-
-        List<Postbarlist> SearchBarList = postbarlistService.queryNoVideoSearchBarListForDate(postbarListDto.getPbTopic(), postbarListDto.getPbArticle());
-        return SearchBarList;
-
+    @GetMapping("/queryVideoSearchBarListForDate")
+    public List<PostbarlistVo> queryVideoSearchBarListForDate(@RequestParam("search") String search) {
+        return postbarlistService.queryVideoSearchBarListForDate(search);
     }
 
     @PostMapping("/queryNoVideoTopicBarListForDate")
     public List<PostbarlistVo> queryNoVideoTopicBarListForDate(@RequestBody PostbarListDto postbarListDto) {
-        List<PostbarlistVo> topiclist = postbarlistService.queryNoVideoTopicBarListForDate(postbarListDto.getPbDate(), postbarListDto.getPbTopic());
+        List<PostbarlistVo> topiclist = postbarlistService.queryNoVideoTopicBarListForDate(postbarListDto.getId(), postbarListDto.getPbTopic());
         return topiclist;
     }
 
     @PostMapping("/queryNoVideoTopicBarListForThumbNum")
-    public List<Postbarlist> queryNoVideoTopicBarListForThumbNum(@RequestBody PostbarListDto postbarListDto) {
-        List<Postbarlist> postbarlists = postbarlistService.queryNoVideoTopicBarListForThumbNum(postbarListDto.getPbThumbNum(), postbarListDto.getPbTopic());
+    public List<PostbarlistVo> queryNoVideoTopicBarListForThumbNum(@RequestBody PostbarListDto postbarListDto) {
+        List<PostbarlistVo> postbarlists = postbarlistService.queryNoVideoTopicBarListForThumbNum(postbarListDto.getPbThumbNum(), postbarListDto.getPbTopic());
         return postbarlists;
     }
 
     @PostMapping("/queryNoVideoUserBarListForDate")
     public List<PostbarlistVo> queryNoVideoUserBarListForDate(@RequestBody PostbarListDto postbarListDto) {
-
         List<PostbarlistVo> topicBarListForDate = postbarlistService.queryNoVideoUserBarListForDate(postbarListDto.getId(), postbarListDto.getUserAccount());
         return topicBarListForDate;
 
     }
 
-    @PostMapping("/queryUserBarCount")
-    public Integer queryUserBarCount(@RequestBody UserDto userDto) {
-        List<Integer> userBarCount = postbarlistService.queryUserBarCount(userDto.getUserAccount());
-
-        int size = userBarCount.size();
-        return size;
-
-    }
-
-    @PostMapping("/queryUserBarLikeCount")
-    public Integer queryUserBarLikeCount(@RequestBody Postbarlist postbarlist) {
-        Integer thumbNum = postbarlistService.postbarlist(postbarlist.getUserAccount());
-
+    @GetMapping("/queryUserBarLikeCount")
+    public Integer queryUserBarLikeCount(@RequestParam("userAccount") String userAccount) {
+        Integer thumbNum = postbarlistService.postbarlist(userAccount);
         return thumbNum;
     }
 
-    @PostMapping("/queryVideoBarListForDate")
-    public List<Postbarlist> queryVideoBarListForDate(@RequestBody PostbarListDto postbarListDto) {
-        List<Postbarlist> postbarlists = postbarlistService.queryVideoBarListForDate(postbarListDto.getPbTopic(), postbarListDto.getPbArticle());
+    @GetMapping("/queryVideoBarListForDate")
+    public List<PostbarlistVo> queryVideoBarListForDate(@RequestParam("id") Long id) {
+        List<PostbarlistVo> postbarlists = postbarlistService.queryVideoBarListForDate(id);
         return postbarlists;
     }
 
     @PostMapping("/queryVideoTopicBarListForDate")
-    public List<Postbarlist> queryVideoTopicBarListForDate(@RequestBody PostbarListDto postbarListDto) {
-        List<Postbarlist> postbarlists = postbarlistService.queryVideoTopicBarListForDate(postbarListDto.getPbDate(), postbarListDto.getPbTopic());
+    public List<PostbarlistVo> queryVideoTopicBarListForDate(@RequestBody PostbarListDto postbarListDto) {
+        List<PostbarlistVo> postbarlists = postbarlistService.queryVideoTopicBarListForDate(postbarListDto.getId(), postbarListDto.getPbTopic());
         return postbarlists;
 
     }
     @PostMapping("/queryVideoUserBarListForDate")
-    public List<Postbarlist> queryVideoUserBarListForDate(@RequestBody PostbarListDto postbarListDto){
-        List<Postbarlist> postbarlists = postbarlistService.queryVideoUserBarListForDate(postbarListDto.getPbDate(), postbarListDto.getUserAccount());
+    public List<PostbarlistVo> queryVideoUserBarListForDate(@RequestBody PostbarListDto postbarListDto){
+        List<PostbarlistVo> postbarlists = postbarlistService.queryVideoUserBarListForDate(postbarListDto.getId(), postbarListDto.getUserAccount());
         return postbarlists;
-
     }
 
+    @GetMapping("querySearch")
+    public Map<String,Object> querySearch(@RequestParam("search")String search){
+        return postbarlistService.querySearch(search);
+    }
 }
 
 

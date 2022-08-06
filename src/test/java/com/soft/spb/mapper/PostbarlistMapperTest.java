@@ -64,7 +64,7 @@ class PostbarlistMapperTest {
 
     @Test
     void queryNoVideoSearchBarListForDate() {
-        System.out.println(postbarlistMapper.queryNoVideoSearchBarListForDate("王者","哈哈哈"));
+
     }
 
     @Test

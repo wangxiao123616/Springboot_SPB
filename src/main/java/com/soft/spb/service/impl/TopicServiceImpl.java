@@ -72,4 +72,9 @@ public class TopicServiceImpl extends ServiceImpl<TopicMapper, Topic> implements
     public List<Topic> queryHotTopicList() {
         return topicMapper.queryHotTopicList();
     }
+
+    @Override
+    public List<Topic> querySearchTopicList(String search) {
+        return topicMapper.querySearchTopicList(search);
+    }
 }

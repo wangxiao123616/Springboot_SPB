@@ -34,4 +34,5 @@ public interface TopicService extends IService<Topic> {
 
     List<Topic> queryHotTopicList();
 
+    List<Topic> querySearchTopicList(String search);
 }

@@ -65,5 +65,10 @@
         from topic t
         where t.topic_name = #{name}
     </select>
+    <select id="querySearchTopicList" resultType="com.soft.spb.pojo.entity.Topic">
+        select id, topic_name, topic_barnum, topic_attentionnum, topic_slogan, topic_image
+        from topic
+        where topic_name like concat('%', (#{topicName}), '%')
+    </select>
 
 </mapper>

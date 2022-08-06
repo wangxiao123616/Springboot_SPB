@@ -30,7 +30,7 @@ public interface UserSignMapper extends BaseMapper<UserSign> {
      * @param userAccount
      * @return
      */
-    List<UserSign> queryUserSign(String userAccount);
+    UserSign queryUserSign(String userAccount);
 
     /**
      * 2.11.3. 更新金币

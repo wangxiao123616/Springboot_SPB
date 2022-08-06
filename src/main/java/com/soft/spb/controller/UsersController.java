@@ -2,6 +2,7 @@ package com.soft.spb.controller;
 
 
 import com.soft.spb.core.exception.ServiceException;
+import com.soft.spb.pojo.dto.UpdatePwdDto;
 import com.soft.spb.pojo.dto.UserDto;
 import com.soft.spb.pojo.entity.Users;
 import com.soft.spb.service.UsersService;
@@ -37,6 +38,11 @@ public class UsersController {
     @PostMapping("register")
     Map<String, Object> register(@RequestBody UserDto userDto) throws ServiceException {
         return usersService.register(userDto);
+    }
+
+    @PostMapping("updatePassword")
+    Boolean updatePassword(@RequestBody UpdatePwdDto updatePassword) throws ServiceException {
+        return usersService.updatePwd(updatePassword);
     }
 
 }

@@ -66,4 +66,9 @@ public class TopicController {
     public List<Topic> queryHotTopicList() {
         return topicService.queryHotTopicList();
     }
+
+        @GetMapping("/querySearchTopicList")
+    public List<Topic> querySearchTopicList(@RequestParam("search") String search) {
+        return topicService.querySearchTopicList(search);
+    }
 }

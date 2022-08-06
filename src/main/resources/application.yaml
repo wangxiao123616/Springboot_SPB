@@ -1,9 +1,12 @@
 spring:
   datasource:
-    username: xiaowo_root
-    password: Xiaowo_mysql
-    url: jdbc:mysql://rm-bp1itj68te5655569ro.mysql.rds.aliyuncs.com/spb?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 123123
+    url: jdbc:mysql://localhost:3306/spb?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      max-file-size: 10485760
 
 server:
   port: 8888
