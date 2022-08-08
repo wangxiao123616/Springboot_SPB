@@ -36,17 +36,17 @@ public class PostbarCommentController {
         return postbarCommentService.deleteComment(postbarComment);
     }
 
-    @PostMapping("/queryCommentList/{pbOneId}")
+    @GetMapping("/queryCommentList/{pbOneId}")
     public List<PostbarCommentVo> queryCommentList(@PathVariable String pbOneId){
         List<PostbarCommentVo> postbarComments = postbarCommentService.queryCommentList(pbOneId);
         return postbarComments;
     }
-
-    @PostMapping("/queryCommentOne")
-    public  List<PostbarComment> queryCommentOne(@RequestBody PostbarCommentDto postbarCommentDto){
-        List<PostbarComment> postbarComments = postbarCommentService.queryCommentOne(postbarCommentDto.getPbOneId(),postbarCommentDto.getCommentId());
-        return postbarComments;
-
-    }
+//
+//    @PostMapping("/queryCommentOne")
+//    public  List<PostbarComment> queryCommentOne(@RequestBody PostbarCommentDto postbarCommentDto){
+//        List<PostbarComment> postbarComments = postbarCommentService.queryCommentOne(postbarCommentDto.getPbOneId(),postbarCommentDto.getCommentId());
+//        return postbarComments;
+//
+//    }
 
 }

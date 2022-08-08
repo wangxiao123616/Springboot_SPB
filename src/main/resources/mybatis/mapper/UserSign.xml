@@ -15,10 +15,10 @@
         <result column="sign_ct_badge" property="signCtBadge"/>
     </resultMap>
 
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        id, user_account, sign_coin, sign_right, sign_day, sign_star_badge, sign_task_badge, sign_like_badge, sign_ct_badge
-    </sql>
+    <insert id="initSign">
+        insert into user_sign(user_account,sign_coin,sign_right,sign_ct_badge)
+             values(#{userAccount},0,1,1)
+    </insert>
 
     <select id="queryUserBadge" resultType="com.soft.spb.pojo.entity.UserSign">
         select sign_star_badge, sign_task_badge, sign_like_badge, sign_ct_badge

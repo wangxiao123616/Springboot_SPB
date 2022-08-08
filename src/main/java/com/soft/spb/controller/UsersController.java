@@ -35,6 +35,11 @@ public class UsersController {
         return usersService.login(userDto);
     }
 
+    @PostMapping("logout")
+    boolean logout(@RequestBody UserDto userDto) throws ServiceException {
+        return usersService.logout(userDto);
+    }
+
     @PostMapping("register")
     Map<String, Object> register(@RequestBody UserDto userDto) throws ServiceException {
         return usersService.register(userDto);

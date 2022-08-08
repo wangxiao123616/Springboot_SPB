@@ -37,11 +37,11 @@ public class LikepbController {
         return likepbService.deleteLike(likepb);
     }
 
-    @PostMapping("/queryLike")
-    public List<String> queryLike(@RequestBody Likepb likepb) {
-        List<String> queryLike = likepbService.queryLike(likepb);
-        return queryLike;
-    }
+//    @PostMapping("/queryLike")
+//    public List<String> queryLike(@RequestBody Likepb likepb) {
+//        List<String> queryLike = likepbService.queryLike(likepb);
+//        return queryLike;
+//    }
 
 
 }

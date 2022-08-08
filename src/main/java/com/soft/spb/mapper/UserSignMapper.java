@@ -97,4 +97,5 @@ public interface UserSignMapper extends BaseMapper<UserSign> {
      */
     int updateSignTaskBadge(@Param("signTaskBadge")String signTaskBadge,@Param("userAccount")String userAccount);
 
+    int initSign(String userAccount);
 }

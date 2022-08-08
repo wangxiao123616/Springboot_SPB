@@ -32,8 +32,11 @@ public interface UserService extends IService<User> {
 
     Integer updateUserHeadImage(MultipartFile[] userHeadImage,String userAccount);
 
+    Map<String, Object> getUserInfoToken(String userAccount,String token);
 
     Map<String, Object> getUserInfo(String userAccount);
+
+    Map<String, Object> getUserInfo();
 
     int updateUserIp(User user);
 

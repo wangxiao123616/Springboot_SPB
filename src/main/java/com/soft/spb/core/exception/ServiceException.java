@@ -5,7 +5,7 @@ import com.soft.spb.core.constant.ResultCode;
 import java.io.Serializable;
 
 
-public class ServiceException extends Exception implements Serializable {
+public class ServiceException extends RuntimeException implements Serializable {
 
     private int code;
 

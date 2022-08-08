@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.soft.spb.mapper.UserMapper;
+import com.soft.spb.pojo.dto.SUserDetails;
 import com.soft.spb.pojo.entity.*;
 import com.soft.spb.pojo.vo.UserVo;
 import com.soft.spb.service.*;
@@ -12,6 +13,8 @@ import com.soft.spb.util.SqlProcess;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -89,6 +92,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
+    public Map<String, Object> getUserInfoToken(String userAccount,String token) {
+        Map<String, Object> userInfo = getUserInfo(userAccount);
+        userInfo.put("token",token);
+        return userInfo;
+    }
+
+    @Override
     public Map<String, Object> getUserInfo(String userAccount) {
         Map<String, Object> map = new HashMap<>();
         // 1. 先获取用户的基本信息
@@ -139,6 +149,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         likepb.setUserAccount(userAccount);
         map.put("likeBar", likepbService.queryLike(likepb));
         return map;
+    }
+
+    @Override
+    public Map<String, Object> getUserInfo() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        SUserDetails s = (SUserDetails) authentication.getPrincipal();
+        return this.getUserInfo(s.getUsername());
     }
 
 

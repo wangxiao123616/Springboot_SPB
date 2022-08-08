@@ -23,5 +23,7 @@ public class WebConfigure implements WebMvcConfigurer {
         registry.addResourceHandler("/upload/**").addResourceLocations("file:D:/php/php/PHPTutorial/WWW/spb/");
     }
 
+
+
 }
 

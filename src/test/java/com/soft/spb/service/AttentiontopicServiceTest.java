@@ -5,6 +5,8 @@ import com.soft.spb.service.impl.AttentiontopicServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 
@@ -15,7 +17,8 @@ class AttentiontopicServiceTest {
 
     @Test
     void addAttentionTopic() {
-
+        PasswordEncoder pas = new BCryptPasswordEncoder();
+        System.out.println(pas.encode("G72IZGCCcBXl1gXtRCUiUQ"));
     }
 
 

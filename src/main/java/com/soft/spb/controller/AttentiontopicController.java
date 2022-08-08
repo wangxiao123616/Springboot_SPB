@@ -5,12 +5,8 @@ import com.soft.spb.pojo.dto.AttentiontopicDto;
 import com.soft.spb.pojo.entity.Attentiontopic;
 import com.soft.spb.pojo.vo.AttentiontopicVo;
 import com.soft.spb.service.AttentiontopicService;
-import com.soft.spb.service.impl.AttentiontopicServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -44,8 +40,8 @@ public class AttentiontopicController {
         return attentiontopicService.deleteAttentionTopicById(attentiontopic);
     }
 
-    @PostMapping("/queryAttentionTopic")
-    public List<AttentiontopicVo> queryAttentionTopic(@RequestBody AttentiontopicDto attentiontopicDto) {
+    @GetMapping("/queryAttentionTopic")
+    public List<AttentiontopicVo> queryAttentionTopic(AttentiontopicDto attentiontopicDto) {
         return attentiontopicService.queryAttentionTopic(attentiontopicDto);
     }
 }

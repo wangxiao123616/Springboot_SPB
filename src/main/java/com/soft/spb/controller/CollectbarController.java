@@ -27,30 +27,30 @@ public class CollectbarController {
 
     @Autowired
     CollectbarService collectbarService;
-
-    @PostMapping("/addCollectBar")
-    public Integer addCollectBar(@RequestBody Collectbar collectbar) {
-        int count = collectbarService.addCollectBar(collectbar);
-        return count;
-    }
-
-    @PostMapping("/deleteCollectBar")
-    public Integer deleteCollectBar(@RequestBody Collectbar collectbar) {
-        int count = collectbarService.deleteCollectBar(collectbar);
-        return count;
-
-    }
-
+//
+//    @PostMapping("/addCollectBar")
+//    public Integer addCollectBar(@RequestBody Collectbar collectbar) {
+//        int count = collectbarService.addCollectBar(collectbar);
+//        return count;
+//    }
+//
+//    @PostMapping("/deleteCollectBar")
+//    public Integer deleteCollectBar(@RequestBody Collectbar collectbar) {
+//        int count = collectbarService.deleteCollectBar(collectbar);
+//        return count;
+//
+//    }
+//
     @GetMapping("/queryCollectBarFullList")
     public List<PostbarlistVo> queryCollectBarFullList(@RequestParam("id") Long id, @RequestParam("userAccount") String userAccount) {
         return collectbarService.queryCollectBarFullList(id, userAccount);
     }
-
-    @PostMapping("/queryCollectBarList")
-    public List<String> queryCollectBarList(@RequestBody Collectbar collectbar) {
-
-        List<String> collectbars = collectbarService.queryCollectBarList(collectbar);
-
-        return collectbars;
-    }
+//
+//    @PostMapping("/queryCollectBarList")
+//    public List<String> queryCollectBarList(@RequestBody Collectbar collectbar) {
+//
+//        List<String> collectbars = collectbarService.queryCollectBarList(collectbar);
+//
+//        return collectbars;
+//    }
 }

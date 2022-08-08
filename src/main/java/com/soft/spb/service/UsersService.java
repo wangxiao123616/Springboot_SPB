@@ -20,6 +20,8 @@ public interface UsersService extends IService<Users> {
 
     Map<String, Object> login(UserDto userDto) throws ServiceException;
 
+    boolean logout(UserDto userDto) throws ServiceException;
+
     Map<String, Object> register(UserDto userDto) throws ServiceException;
 
     Boolean updatePwd(UpdatePwdDto updatePwd) throws ServiceException;

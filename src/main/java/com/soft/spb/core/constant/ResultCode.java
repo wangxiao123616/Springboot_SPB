@@ -39,12 +39,13 @@ public enum ResultCode {
     USER_NOT_FOUND(20009, "用户不存在"),
     USER_IS_EXIST(20010, "用户已经存在"),
     USER_NO_AUTH(20019, "用户权限不足"),
-    USER_TOKEN_EXPIRES(200010, "Token已过期"),
+    USER_TOKEN_EXPIRES(200010, "Token已过期,请重新登陆"),
     USER_ACCOUNT_PASSWORD_ERROR(200010, "用户名或密码错误"),
     USER_SEND_CODE(200011, "用户以限制短信验证"),
     USER_XIU_USER_CODE(200012, "修改失败"),
     USER_SHOU_CODE(200013, "验证码错误"),
     USER_ACCOUNT_NOT_PERMISSION_TO_REGISTER(200014, "您无权进行注册"),
+    USER_TOKEN_ERROR(200015, "Token无效"),
 
 
     /* 业务错误：30001-39999 */

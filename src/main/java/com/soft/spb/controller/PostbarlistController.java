@@ -52,35 +52,35 @@ public class PostbarlistController {
     }
 
 
-    @PostMapping("/deleteBar/{pbId}")
-    public ResponseBody deleteBar(@PathVariable String pbId) {
-        Boolean post = postbarlistService.deleteBar(pbId);
-        return ResponseBody.builder()
-                .code(200)
-                .msg("删除成功")
-                .data("")
-                .build();
-
-
-    }
-
-    @PostMapping("/queryBarDetatilForPbid")
-
-    public ResponseBody queryBarDetatilForPbid(@RequestBody Postbarlist postbarlist) {
-        List<Postbarlist> detatilForPbid = postbarlistService.queryBarDetatilForPbid(postbarlist);
-        if (detatilForPbid.size() == 0) {
-            return ResponseBody.builder()
-                    .code(200)
-                    .msg("")
-                    .build();
-        } else {
-            return ResponseBody.builder()
-                    .code(200)
-                    .msg("成功")
-                    .data(detatilForPbid.get(0))
-                    .build();
-        }
-    }
+//    @PostMapping("/deleteBar/{pbId}")
+//    public ResponseBody deleteBar(@PathVariable String pbId) {
+//        Boolean post = postbarlistService.deleteBar(pbId);
+//        return ResponseBody.builder()
+//                .code(200)
+//                .msg("删除成功")
+//                .data("")
+//                .build();
+//
+//
+//    }
+//
+//    @PostMapping("/queryBarDetatilForPbid")
+//
+//    public ResponseBody queryBarDetatilForPbid(@RequestBody Postbarlist postbarlist) {
+//        List<Postbarlist> detatilForPbid = postbarlistService.queryBarDetatilForPbid(postbarlist);
+//        if (detatilForPbid.size() == 0) {
+//            return ResponseBody.builder()
+//                    .code(200)
+//                    .msg("")
+//                    .build();
+//        } else {
+//            return ResponseBody.builder()
+//                    .code(200)
+//                    .msg("成功")
+//                    .data(detatilForPbid.get(0))
+//                    .build();
+//        }
+//    }
 
     @GetMapping("/queryNoVideoBarListForDate")
     public List<PostbarlistVo> queryNoVideoBarListForDate(@RequestParam("id") Long id) {
@@ -95,7 +95,6 @@ public class PostbarlistController {
         return postbarlists;
     }
 
-
     @GetMapping("/queryNoVideoSearchBarListForDate")
     public List<PostbarlistVo> queryNoVideoSearchBarListForDate(@RequestParam("search") String search) {
         return postbarlistService.queryNoVideoSearchBarListForDate(search);
@@ -106,23 +105,22 @@ public class PostbarlistController {
         return postbarlistService.queryVideoSearchBarListForDate(search);
     }
 
-    @PostMapping("/queryNoVideoTopicBarListForDate")
-    public List<PostbarlistVo> queryNoVideoTopicBarListForDate(@RequestBody PostbarListDto postbarListDto) {
+    @GetMapping("/queryNoVideoTopicBarListForDate")
+    public List<PostbarlistVo> queryNoVideoTopicBarListForDate(PostbarListDto postbarListDto) {
         List<PostbarlistVo> topiclist = postbarlistService.queryNoVideoTopicBarListForDate(postbarListDto.getId(), postbarListDto.getPbTopic());
         return topiclist;
     }
 
-    @PostMapping("/queryNoVideoTopicBarListForThumbNum")
-    public List<PostbarlistVo> queryNoVideoTopicBarListForThumbNum(@RequestBody PostbarListDto postbarListDto) {
+    @GetMapping("/queryNoVideoTopicBarListForThumbNum")
+    public List<PostbarlistVo> queryNoVideoTopicBarListForThumbNum(PostbarListDto postbarListDto) {
         List<PostbarlistVo> postbarlists = postbarlistService.queryNoVideoTopicBarListForThumbNum(postbarListDto.getPbThumbNum(), postbarListDto.getPbTopic());
         return postbarlists;
     }
 
-    @PostMapping("/queryNoVideoUserBarListForDate")
-    public List<PostbarlistVo> queryNoVideoUserBarListForDate(@RequestBody PostbarListDto postbarListDto) {
+    @GetMapping("/queryNoVideoUserBarListForDate")
+    public List<PostbarlistVo> queryNoVideoUserBarListForDate(PostbarListDto postbarListDto) {
         List<PostbarlistVo> topicBarListForDate = postbarlistService.queryNoVideoUserBarListForDate(postbarListDto.getId(), postbarListDto.getUserAccount());
         return topicBarListForDate;
-
     }
 
     @GetMapping("/queryUserBarLikeCount")
@@ -137,22 +135,22 @@ public class PostbarlistController {
         return postbarlists;
     }
 
-    @PostMapping("/queryVideoTopicBarListForDate")
-    public List<PostbarlistVo> queryVideoTopicBarListForDate(@RequestBody PostbarListDto postbarListDto) {
+    @GetMapping("/queryVideoTopicBarListForDate")
+    public List<PostbarlistVo> queryVideoTopicBarListForDate(PostbarListDto postbarListDto) {
         List<PostbarlistVo> postbarlists = postbarlistService.queryVideoTopicBarListForDate(postbarListDto.getId(), postbarListDto.getPbTopic());
         return postbarlists;
-
     }
-    @PostMapping("/queryVideoUserBarListForDate")
-    public List<PostbarlistVo> queryVideoUserBarListForDate(@RequestBody PostbarListDto postbarListDto){
+
+    @GetMapping("/queryVideoUserBarListForDate")
+    public List<PostbarlistVo> queryVideoUserBarListForDate(PostbarListDto postbarListDto){
         List<PostbarlistVo> postbarlists = postbarlistService.queryVideoUserBarListForDate(postbarListDto.getId(), postbarListDto.getUserAccount());
         return postbarlists;
     }
-
-    @GetMapping("querySearch")
-    public Map<String,Object> querySearch(@RequestParam("search")String search){
-        return postbarlistService.querySearch(search);
-    }
+//
+//    @GetMapping("querySearch")
+//    public Map<String,Object> querySearch(@RequestParam("search")String search){
+//        return postbarlistService.querySearch(search);
+//    }
 }
 
 

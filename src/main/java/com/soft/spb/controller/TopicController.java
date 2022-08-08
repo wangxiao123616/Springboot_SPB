@@ -4,7 +4,6 @@ package com.soft.spb.controller;
 import com.soft.spb.pojo.dto.TopicInfoDto;
 import com.soft.spb.pojo.entity.Topic;
 import com.soft.spb.service.TopicService;
-import com.soft.spb.service.impl.TopicServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
@@ -26,11 +25,11 @@ public class TopicController {
     @Autowired
     TopicService topicService;
 
-    @PostMapping("/queryRundomTopicFullList")
-    public List<Topic> queryRundomTopicFullList(@RequestBody Topic topic) {
-        List<Topic> topicList = topicService.queryRundomTopicFullList();
-        return topicList;
-    }
+    //    @PostMapping("/queryRundomTopicFullList")
+//    public List<Topic> queryRundomTopicFullList(@RequestBody Topic topic) {
+//        List<Topic> topicList = topicService.queryRundomTopicFullList();
+//        return topicList;
+//    }
 
     @GetMapping("/querySearchTopicFullList")
     public List<Topic> querySearchTopicFullList(@RequestParam("id") Long id, @Nullable @RequestParam("search") String topic) {
@@ -38,8 +37,8 @@ public class TopicController {
         return topicList;
     }
 
-    @PostMapping("/getTopicFull")
-    public Topic getTopicFull(@RequestBody TopicInfoDto topicinfo) {
+    @GetMapping("/getTopicFull")
+    public Topic getTopicFull(TopicInfoDto topicinfo) {
         Topic t = topicService.getTopicFull(topicinfo);
         return t;
     }
@@ -50,24 +49,24 @@ public class TopicController {
         return nameList;
     }
 
-    @PostMapping("/queryTopicFull")
-    public List<Topic> queryTopicFull(@RequestBody Topic topic) {
-        List<Topic> topicList = topicService.queryTopicFull(topic.getTopicName());
-        return topicList;
-    }
-
-    @PostMapping("/queryTopicNameList")
-    public List<String> queryTopicNameList() {
-        List<String> nameList = topicService.queryTopicNameList();
-        return nameList;
-    }
-
+//    @PostMapping("/queryTopicFull")
+//    public List<Topic> queryTopicFull(@RequestBody Topic topic) {
+//        List<Topic> topicList = topicService.queryTopicFull(topic.getTopicName());
+//        return topicList;
+//    }
+//
+//    @PostMapping("/queryTopicNameList")
+//    public List<String> queryTopicNameList() {
+//        List<String> nameList = topicService.queryTopicNameList();
+//        return nameList;
+//    }
+//
     @RequestMapping(value = "/queryHotTopicList", method = RequestMethod.GET)
     public List<Topic> queryHotTopicList() {
         return topicService.queryHotTopicList();
     }
 
-        @GetMapping("/querySearchTopicList")
+    @GetMapping("/querySearchTopicList")
     public List<Topic> querySearchTopicList(@RequestParam("search") String search) {
         return topicService.querySearchTopicList(search);
     }
