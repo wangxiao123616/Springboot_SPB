@@ -2,8 +2,10 @@ package com.soft.spb.pojo.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class UserSignVo {
+public class UserSignVo implements Serializable {
 
     private String userAccount;
 

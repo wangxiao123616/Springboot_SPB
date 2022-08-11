@@ -8,7 +8,9 @@ import com.soft.spb.pojo.vo.RandomUserVo;
 import com.soft.spb.service.FollowService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +23,8 @@ import java.util.List;
  * @author wyw
  * @since 2022-03-19
  */
-@Service
+@DubboService
+@Component
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
 public class FollowServiceImpl extends ServiceImpl<FollowMapper, Follow> implements FollowService {
 
@@ -40,7 +43,10 @@ public class FollowServiceImpl extends ServiceImpl<FollowMapper, Follow> impleme
             }
         }
         if (!isFollowed) {
-            followMapper.addFollow(follow);
+            int i = followMapper.addFollow(follow);
+            if (i == 1){
+                isFollowed = true;
+            }
         }
         return isFollowed;
     }
@@ -64,7 +70,6 @@ public class FollowServiceImpl extends ServiceImpl<FollowMapper, Follow> impleme
 
     @Override
     public Integer queryFollowAccount(Follow follow) {
-
         List<Follow> follows = followMapper.queryFollowAccount(follow.getFollowAccount());
         int account = follows.size();
         return account;

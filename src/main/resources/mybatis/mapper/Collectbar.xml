@@ -28,7 +28,7 @@
 
     <select id="queryCollectBarFullList"
             resultType="com.soft.spb.pojo.vo.PostbarlistVo">
-        select c.id,
+        select p.id,
                u.user_account,
                u.user_name,
                u.user_badge,

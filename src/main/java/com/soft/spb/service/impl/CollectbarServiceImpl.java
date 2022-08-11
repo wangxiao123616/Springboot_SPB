@@ -5,9 +5,10 @@ import com.soft.spb.mapper.CollectbarMapper;
 import com.soft.spb.pojo.entity.Collectbar;
 import com.soft.spb.pojo.vo.PostbarlistVo;
 import com.soft.spb.service.CollectbarService;
-import com.soft.spb.util.DateTool;
 import lombok.RequiredArgsConstructor;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,34 +21,30 @@ import java.util.List;
  * @author wyw
  * @since 2022-03-19
  */
-@Service
+@DubboService
+@Component
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
 public class CollectbarServiceImpl extends ServiceImpl<CollectbarMapper, Collectbar> implements CollectbarService {
 
     private final CollectbarMapper collectbarMapper;
 
     @Override
-
-    public Integer addCollectBar(Collectbar collectbar) {
+    public boolean addCollectBar(Collectbar collectbar) {
         int count = collectbarMapper.addCollectBar(collectbar);
-        return count;
+        return count > 0;
     }
 
     @Override
-    public Integer deleteCollectBar(Collectbar collectbar) {
+    public boolean deleteCollectBar(Collectbar collectbar) {
         int count = collectbarMapper.deleteCollectBar(collectbar);
-        return count;
+        return count > 0;
     }
 
     @Override
     public List<PostbarlistVo> queryCollectBarFullList(Long id, String userAccount) {
-        return collectbarMapper.queryCollectBarFullList(id, userAccount);
-    }
-
-    @Override
-    public List<String> queryCollectBarList(Collectbar collectbar) {
-        List<String> collectbars = collectbarMapper.queryCollectBarList(collectbar.getUserAccount());
-        return collectbars;
+        List<PostbarlistVo> postbarlistVos = collectbarMapper.queryCollectBarFullList(id, userAccount);
+        postbarlistVos.remove(null);
+        return postbarlistVos;
     }
 
     @Override

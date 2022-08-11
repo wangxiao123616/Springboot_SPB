@@ -66,5 +66,8 @@ public interface TopicMapper extends BaseMapper<Topic> {
 
     List<Topic> querySearchTopicList(String topicName);
 
+    int updateIncreaseAttention(int id);
+
+    int updateReduceAttention(int id);
 
 }

@@ -51,18 +51,10 @@ public class PostbarlistController {
 
     }
 
-
-//    @PostMapping("/deleteBar/{pbId}")
-//    public ResponseBody deleteBar(@PathVariable String pbId) {
-//        Boolean post = postbarlistService.deleteBar(pbId);
-//        return ResponseBody.builder()
-//                .code(200)
-//                .msg("删除成功")
-//                .data("")
-//                .build();
-//
-//
-//    }
+    @PostMapping("/deleteBar")
+    public boolean deleteBar(@RequestParam("pbId") String pbId) {
+        return postbarlistService.deleteBar(pbId);
+    }
 //
 //    @PostMapping("/queryBarDetatilForPbid")
 //

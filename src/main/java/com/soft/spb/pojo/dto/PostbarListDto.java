@@ -2,8 +2,10 @@ package com.soft.spb.pojo.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class PostbarListDto {
+public class PostbarListDto implements Serializable {
 
     private Long id;
     private String pbTopic;

@@ -28,10 +28,6 @@ public class AttentiontopicController {
 
     @PostMapping("/addAttentionTopic")
     public Boolean addAttentionTopic(@RequestBody Attentiontopic attentiontopic) {
-
-        LocalDateTime localDateTime = LocalDateTime.now();
-        attentiontopic.setTopicDate(localDateTime);
-
         return attentiontopicService.addAttentionTopic(attentiontopic);
     }
 

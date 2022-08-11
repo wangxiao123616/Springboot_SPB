@@ -2,10 +2,11 @@ package com.soft.spb.pojo.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
-public class AttentiontopicVo {
+public class AttentiontopicVo implements Serializable {
     private Integer attid;
 
     private String topicName;

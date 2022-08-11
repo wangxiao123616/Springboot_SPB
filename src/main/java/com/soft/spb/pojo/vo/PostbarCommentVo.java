@@ -2,10 +2,11 @@ package com.soft.spb.pojo.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
-public class PostbarCommentVo {
+public class PostbarCommentVo implements Serializable {
     private String pbOneId;
 
     private String commentArt;

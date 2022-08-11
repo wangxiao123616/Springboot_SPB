@@ -16,15 +16,13 @@ import java.util.List;
  */
 public interface CollectbarService extends IService<Collectbar> {
     //2.6.1. 添加收藏帖子
-    Integer addCollectBar(Collectbar collectbar);
+    boolean addCollectBar(Collectbar collectbar);
 
     //2.6.2. 删除收藏帖子
-    Integer deleteCollectBar(Collectbar collectbar);
+    boolean deleteCollectBar(Collectbar collectbar);
 
     //2.6.3. 获取用户收藏帖子(Full)
     List<PostbarlistVo> queryCollectBarFullList(Long id, String userAccount);
-
-    List<String> queryCollectBarList(Collectbar collectbar);
 
     List<String> getCollectBarPresenter(String userAccount);
 }

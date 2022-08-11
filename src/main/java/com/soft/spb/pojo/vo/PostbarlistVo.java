@@ -2,9 +2,10 @@ package com.soft.spb.pojo.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 @Data
-public class PostbarlistVo {
+public class PostbarlistVo implements Serializable {
 
     private Long id;
 

@@ -27,20 +27,18 @@ public class CollectbarController {
 
     @Autowired
     CollectbarService collectbarService;
-//
-//    @PostMapping("/addCollectBar")
-//    public Integer addCollectBar(@RequestBody Collectbar collectbar) {
-//        int count = collectbarService.addCollectBar(collectbar);
-//        return count;
-//    }
-//
-//    @PostMapping("/deleteCollectBar")
-//    public Integer deleteCollectBar(@RequestBody Collectbar collectbar) {
-//        int count = collectbarService.deleteCollectBar(collectbar);
-//        return count;
-//
-//    }
-//
+
+    @PostMapping("/addCollectBar")
+    public boolean addCollectBar(@RequestBody Collectbar collectbar) {
+        return collectbarService.addCollectBar(collectbar);
+    }
+
+    @PostMapping("/deleteCollectBar")
+    public boolean deleteCollectBar(@RequestBody Collectbar collectbar) {
+        return collectbarService.deleteCollectBar(collectbar);
+
+    }
+
     @GetMapping("/queryCollectBarFullList")
     public List<PostbarlistVo> queryCollectBarFullList(@RequestParam("id") Long id, @RequestParam("userAccount") String userAccount) {
         return collectbarService.queryCollectBarFullList(id, userAccount);

@@ -6,6 +6,7 @@ import com.soft.spb.pojo.entity.Users;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
@@ -14,7 +15,7 @@ import java.util.Collection;
  * @date 2022-08-06 13:29
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SUserDetails implements UserDetails {
+public class SUserDetails implements UserDetails, Serializable {
 
     private Users users;
 

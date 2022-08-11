@@ -57,7 +57,7 @@ public class UserTokenFilter extends OncePerRequestFilter {
             return;
         }
 
-        String redisKey = "login:" + userData;
+        String redisKey = "login:web:" + userData;
         SUserDetails s = redisUtil.getEasyObject(redisKey);
         if (Objects.isNull(s)){
             sendResponse(response);

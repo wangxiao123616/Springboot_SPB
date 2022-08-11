@@ -71,6 +71,11 @@
             <artifactId>commons-pool2</artifactId>
 <!--            <version>2.7.0</version>-->
         </dependency>
+        <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>0.4.16</version>
+        </dependency>
 
         <dependency>
             <groupId>com.aliyun.oss</groupId>
@@ -97,22 +102,89 @@
             <version>2.3.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+            <version>3.0.7</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.sgroschupf</groupId>
+            <artifactId>zkclient</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <!--新版会和SpringBoot的日志会冲突-->
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-framework</artifactId>
+            <version>5.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+            <version>5.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-x-discovery</artifactId>
+            <version>5.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+            <version>3.7.1</version>
+            <!--排除slf4j-log4j12-->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.0</version>
                 <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
+                    <archive>
+                        <!-- 生成的jar中，包含pom.xml和pom.properties这两个文件 -->
+                        <addMavenDescriptor>true</addMavenDescriptor>
+                    </archive>
+                    <excludes> <!-- 过滤掉不希望包含在jar中的文件 -->
+                        <exclude>**/*.properties</exclude>
+                        <exclude>**/*.yaml</exclude>
+                        <exclude>**/mybatis/**</exclude>
+                        <exclude>**/config/**</exclude>
+                        <exclude>**/controller/**</exclude>
+                        <exclude>**/core/**</exclude>
+                        <exclude>**/Filter/**</exclude>
+                        <exclude>**/Hanlder/**</exclude>
+                        <exclude>**/mapper/**</exclude>
+                        <exclude>**/Task/**</exclude>
+                        <exclude>**/util/**</exclude>
+                        <exclude>**/service/impl/**</exclude>
                     </excludes>
+                    <includes> <!-- 添加文件到jar中的文件 -->
+                        <include>**/service/**</include>
+                        <include>**/pojo/**</include>
+                    </includes>
                 </configuration>
             </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--                <configuration>-->
+<!--                    <excludes>-->
+<!--                        <exclude>-->
+<!--                            <groupId>org.projectlombok</groupId>-->
+<!--                            <artifactId>lombok</artifactId>-->
+<!--                        </exclude>-->
+<!--                    </excludes>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 

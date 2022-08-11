@@ -11,10 +11,12 @@ import com.soft.spb.service.*;
 import com.soft.spb.util.AliOssUtil;
 import com.soft.spb.util.SqlProcess;
 import lombok.RequiredArgsConstructor;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,7 +33,8 @@ import java.util.Map;
  * @since 2022-03-19
  */
 
-@Service
+@DubboService
+@Component
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 

@@ -12,7 +12,7 @@ import com.soft.spb.pojo.entity.AppVersion;
  * @since 2022-03-19
  */
 
-public interface AppVersionService extends IService<AppVersion> {
+public interface AppVersionService{
      AppVersion getAppVersion(Integer versionCode);
 
 

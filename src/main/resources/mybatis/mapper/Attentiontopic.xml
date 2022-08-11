@@ -15,7 +15,7 @@
     <sql id="Base_Column_List">
         id, user_account, topic_id, topic_name, topic_date
     </sql>
-    <select id="getAttentionTopPresenter" resultType="java.lang.Integer">
+    <select id="getAttentionTopPresenter" resultType="java.lang.String">
         SELECT topic_id FROM attentiontopic WHERE user_account = #{userAccount}
     </select>
 
@@ -34,6 +34,7 @@
         WHERE a.user_account = #{userAccount} and t.topic_name like concat('%',(#{search}),'%') and a.id <![CDATA[ > ]]> #{id}
         ORDER BY topic_date DESC
     </select>
+    <select id="queryTopicName" resultType="java.lang.String"></select>
 
 
     <insert id="addAttentionTopic">

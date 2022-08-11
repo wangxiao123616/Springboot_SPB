@@ -17,6 +17,14 @@
         id
         , topic_name, topic_barnum, topic_attentionnum, topic_slogan, topic_image
     </sql>
+    <update id="updateIncreaseAttention">
+        UPDATE topic
+            set topic_attentionnum = topic_attentionnum + 1 where id = #{id}
+    </update>
+    <update id="updateReduceAttention">
+        UPDATE topic
+            set topic_attentionnum = topic_attentionnum - 1 where id = #{id}
+    </update>
 
     <select id="queryRundomTopicFullList" resultType="com.soft.spb.pojo.entity.Topic">
         SELECT id, topic_name, topic_barnum, topic_attentionnum, topic_slogan, topic_image

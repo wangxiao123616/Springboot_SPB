@@ -22,3 +22,11 @@ mybatis-plus:
   mapper-locations: classpath:mybatis/mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
+
+dubbo:
+  application:
+    name: web-server
+  registry:
+    address: zookeeper://127.0.0.1:2181
+  scan:
+    base-packages: com.soft.spb.service

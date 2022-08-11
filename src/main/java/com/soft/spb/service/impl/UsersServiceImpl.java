@@ -15,6 +15,7 @@ import com.soft.spb.pojo.entity.Users;
 import com.soft.spb.service.StudentsService;
 import com.soft.spb.service.UserService;
 import com.soft.spb.service.UsersService;
+import com.soft.spb.util.FileUpload;
 import com.soft.spb.util.MD5Util;
 import com.soft.spb.util.RedisUtil;
 import io.jsonwebtoken.Jwts;
@@ -30,6 +31,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,6 +61,9 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
 
     private final PasswordEncoder pas;
 
+    private static final String[] PATH = {"/HeadImage/", "/BackgroundImage/", "/PostBarImage/"
+            , "/APostBarImage/", "/Voice/", "/Video/", "/Diary/", "/Other/"};
+
     @Override
     public Map<String, Object> login(UserDto userDto) throws ServiceException {
         UsernamePasswordAuthenticationToken utor = new UsernamePasswordAuthenticationToken(userDto.getUserAccount(),
@@ -76,14 +81,14 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
         String token = Jwts.builder()
                 .setClaims(claims)
                 .signWith(SignatureAlgorithm.HS256, secret).compact();
-        redisUtil.setEasyObject("login:" + userDto.getUserAccount(), s);
+        redisUtil.setEasyObject("login:web:" + userDto.getUserAccount(), s);
 
         return userService.getUserInfoToken(userDto.getUserAccount(), token);
     }
 
     @Override
     public boolean logout(UserDto userDto) throws ServiceException {
-        return redisUtil.deleteObject("login:" + userDto.getUserAccount());
+        return redisUtil.deleteObject("login:web:" + userDto.getUserAccount());
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -118,6 +123,10 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                 throw new ServiceException(ResultCode.SYSTEM_ERROR);
             }
+            if (!createFolder(userDto.getUserAccount())){
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+                throw new ServiceException(ResultCode.SYSTEM_ERROR);
+            }
             return userService.getUserInfo(userDto.getUserAccount());
         }catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -138,7 +147,7 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
             int update = usersMapper.update(null, Wrappers.<Users>lambdaUpdate().eq(Users::getUserAccount, updatePwd.getUserAccount())
                     .set(Users::getUserPassword, pas.encode(updatePwd.getUserPwd())));
             if (update == 1) {
-                redisUtil.deleteObject("login:" + updatePwd.getUserAccount());
+                redisUtil.deleteObject("login:web:" + updatePwd.getUserAccount());
                 return true;
             } else {
                 throw new ServiceException(ResultCode.USER_XIU_USER_CODE);
@@ -146,6 +155,20 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
         } else {
             throw new ServiceException(ResultCode.USER_PASSWORD_ERROR);
         }
+    }
+
+    private boolean createFolder(String account) {
+        boolean key = true;
+        for (String s : PATH) {
+            File path = new File(FileUpload.PREFIX + account + s);
+            if (!path.exists()) {
+                key = path.mkdirs();
+            }
+            if (!key) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }

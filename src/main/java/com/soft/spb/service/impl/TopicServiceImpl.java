@@ -6,7 +6,9 @@ import com.soft.spb.mapper.TopicMapper;
 import com.soft.spb.service.TopicService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +21,8 @@ import java.util.List;
  * @author wyw
  * @since 2022-03-19
  */
-@Service
+@DubboService
+@Component
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
 public class TopicServiceImpl extends ServiceImpl<TopicMapper, Topic> implements TopicService {
 

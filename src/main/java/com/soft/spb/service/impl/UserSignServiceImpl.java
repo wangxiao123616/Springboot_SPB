@@ -8,7 +8,9 @@ import com.soft.spb.service.UserSignService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.soft.spb.util.SqlProcess;
 import lombok.RequiredArgsConstructor;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -23,7 +25,8 @@ import java.util.List;
  * @author wyw
  * @since 2022-03-19
  */
-@Service
+@DubboService
+@Component
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
 public class UserSignServiceImpl extends ServiceImpl<UserSignMapper, UserSign> implements UserSignService {
 
