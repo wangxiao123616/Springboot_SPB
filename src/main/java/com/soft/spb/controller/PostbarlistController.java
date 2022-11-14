@@ -55,24 +55,7 @@ public class PostbarlistController {
     public boolean deleteBar(@RequestParam("pbId") String pbId) {
         return postbarlistService.deleteBar(pbId);
     }
-//
-//    @PostMapping("/queryBarDetatilForPbid")
-//
-//    public ResponseBody queryBarDetatilForPbid(@RequestBody Postbarlist postbarlist) {
-//        List<Postbarlist> detatilForPbid = postbarlistService.queryBarDetatilForPbid(postbarlist);
-//        if (detatilForPbid.size() == 0) {
-//            return ResponseBody.builder()
-//                    .code(200)
-//                    .msg("")
-//                    .build();
-//        } else {
-//            return ResponseBody.builder()
-//                    .code(200)
-//                    .msg("成功")
-//                    .data(detatilForPbid.get(0))
-//                    .build();
-//        }
-//    }
+
 
     @GetMapping("/queryNoVideoBarListForDate")
     public List<PostbarlistVo> queryNoVideoBarListForDate(@RequestParam("id") Long id) {
@@ -138,11 +121,6 @@ public class PostbarlistController {
         List<PostbarlistVo> postbarlists = postbarlistService.queryVideoUserBarListForDate(postbarListDto.getId(), postbarListDto.getUserAccount());
         return postbarlists;
     }
-//
-//    @GetMapping("querySearch")
-//    public Map<String,Object> querySearch(@RequestParam("search")String search){
-//        return postbarlistService.querySearch(search);
-//    }
 }
 
 

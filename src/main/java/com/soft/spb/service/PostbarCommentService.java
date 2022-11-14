@@ -21,7 +21,4 @@ public interface PostbarCommentService extends IService<PostbarComment> {
 
     List<PostbarCommentVo> queryCommentList(String pbOneId);
 
-    List<PostbarComment> queryCommentOne(String pbOneId,Integer commentId);
-
-
 }

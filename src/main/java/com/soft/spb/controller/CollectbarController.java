@@ -43,12 +43,4 @@ public class CollectbarController {
     public List<PostbarlistVo> queryCollectBarFullList(@RequestParam("id") Long id, @RequestParam("userAccount") String userAccount) {
         return collectbarService.queryCollectBarFullList(id, userAccount);
     }
-//
-//    @PostMapping("/queryCollectBarList")
-//    public List<String> queryCollectBarList(@RequestBody Collectbar collectbar) {
-//
-//        List<String> collectbars = collectbarService.queryCollectBarList(collectbar);
-//
-//        return collectbars;
-//    }
 }

@@ -22,7 +22,7 @@ public class FileUpload {
 
     private static final String JPG_SUFFIX = ".jpg";
 
-    public static final String PREFIX = "D:/php/php/PHPTutorial/WWW/spb/UserImageServer/";
+    public static final String PREFIX = "E:/SystemDocument/spb/UserImageServer";
 
     public static final String PREFIX_LOCAL = "upload/UserImageServer/";
 

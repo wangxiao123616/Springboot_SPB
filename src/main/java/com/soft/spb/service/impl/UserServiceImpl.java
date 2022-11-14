@@ -50,48 +50,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private final LikepbService likepbService;
 
     @Override
-    public int deleteUserIp(String userAccount) {
-
-        return userMapper.deleteUserIp(userAccount);
-    }
-
-    @Override
-    public List<Course> querySchoolTable() {
-
-        return userMapper.querySchoolTable();
-    }
-
-    @Override
     public List<UserVo> querySearchUser(String search) {
         return userMapper.querySearchUser(search);
-    }
-
-    @Override
-    public int updateUserBadgeImage(String userBadge, String userAccount) {
-        int count = userMapper.updateUserBadgeImage(userBadge, userAccount);
-        return count;
-    }
-
-    @Override
-    public Integer updateUserBgImage(MultipartFile[] userBgImage, String userAccount) {
-        List<String> stringList = AliOssUtil.upload(userBgImage);
-        String bgImage = stringList.get(0);
-        String substring = bgImage.substring(51);
-        User user = new User();
-        user.setUserBgImage(substring);
-        int count = userMapper.updateUserBgImage(substring, userAccount);
-        return count;
-    }
-
-    @Override
-    public Integer updateUserHeadImage(MultipartFile[] userHeadImage, String userAccount) {
-        List<String> headList = AliOssUtil.upload(userHeadImage);
-        String headString = headList.get(0);
-        String substring = headString.substring(51);
-        User user = new User();
-        user.setUserHeadImage(substring);
-        int count = userMapper.updateUserHeadImage(substring, userAccount);
-        return count;
     }
 
     @Override
@@ -161,27 +121,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return this.getUserInfo(s.getUsername());
     }
 
-
-    @Override
-    public int updateUserIp(User user) {
-        int count = userMapper.updateUserIp(user.getUserIp(), user.getUserAccount());
-        return count;
-    }
-
     @Override
     public Boolean updateUserPersonalInformation(User user) {
         return SqlProcess.transactionalProcess(userMapper.updateUserPersonalInformation(user));
-    }
-
-    @Override
-    public int updateUserPrivacy(User user) {
-        int count = userMapper.updateUserPrivacy(user);
-        return count;
-    }
-
-    @Override
-    public int updateUserToken(User user) {
-        int count = userMapper.updateUserToken(user);
-        return count;
     }
 }

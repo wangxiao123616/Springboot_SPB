@@ -32,27 +32,6 @@ public class UserSignController {
         return userSigns;
     }
 
-    //
-//    @PostMapping("/updateSignCoin")
-//    public Integer updateSignCoin(@RequestBody UserSign userSign) {
-//        int count = userSignService.updateSignCoin(userSign);
-//        return count;
-//
-//    }
-//      @PostMapping("/updateSignDay")
-//    public Integer updateSignDay(@RequestBody UserSign userSign){
-//          int count = userSignService.updateSignDay(userSign);
-//          return count;
-//
-//      }
-//
-//      @PostMapping("/updateSignDayAndRight")
-//    public Integer updateSignDayAndRight(@RequestBody UserSign userSign){
-//          Integer count = userSignService.updateSignDayAndRight(userSign);
-//          return count;
-//
-//      }
-//
     @PostMapping("/updateSignDayAndRightAndCoin")
     public Boolean updateSignDayAndRightAndCoin(@RequestBody UserSign userSign) {
         Boolean coin = userSignService.updateSignDayAndRightAndCoin(userSign);
@@ -64,15 +43,6 @@ public class UserSignController {
         return userSignService.updateSignLikeBadge(userSign);
     }
 
-    //
-//      @PostMapping("/updateSignRight")
-//    public Integer updateSignRight(@RequestBody UserSign userSign){
-//
-//          Integer count = userSignService.updateSignRight(userSign);
-//          return count;
-//
-//      }
-//
     @PostMapping("/updateSignStarBadge")
     public Integer updateSignStarBadge(@RequestBody UserSign userSign) {
         int count = userSignService.updateSignStarBadge(userSign);

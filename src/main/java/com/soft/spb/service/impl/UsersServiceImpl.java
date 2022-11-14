@@ -15,6 +15,7 @@ import com.soft.spb.pojo.entity.Users;
 import com.soft.spb.service.StudentsService;
 import com.soft.spb.service.UserService;
 import com.soft.spb.service.UsersService;
+import com.soft.spb.util.AesUtil;
 import com.soft.spb.util.FileUpload;
 import com.soft.spb.util.MD5Util;
 import com.soft.spb.util.RedisUtil;
@@ -66,12 +67,13 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
 
     @Override
     public Map<String, Object> login(UserDto userDto) throws ServiceException {
-        UsernamePasswordAuthenticationToken utor = new UsernamePasswordAuthenticationToken(userDto.getUserAccount(),
-                userDto.getPassword());
         Authentication authenticate;
         try {
+            String s = AesUtil.aesDecrypt(userDto.getPassword());
+            UsernamePasswordAuthenticationToken utor = new UsernamePasswordAuthenticationToken(userDto.getUserAccount(),
+                    s);
             authenticate = authenticationManager.authenticate(utor);
-        } catch (AuthenticationException e) {
+        } catch (Exception e) {
             throw new ServiceException(ResultCode.USER_PASSWORD_ERROR);
         }
         SUserDetails s = (SUserDetails) authenticate.getPrincipal();

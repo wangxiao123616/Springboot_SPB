@@ -84,10 +84,4 @@ public class PostbarCommentServiceImpl extends ServiceImpl<PostbarCommentMapper,
         List<PostbarCommentVo> postbarComments = postbarCommentMapper.queryCommentList(pbOneId);
         return postbarComments;
     }
-
-    @Override
-    public List<PostbarComment> queryCommentOne(String pbOneId, Integer commentId) {
-        List<PostbarComment> postbarComments = postbarCommentMapper.queryCommentOne(pbOneId, commentId);
-        return postbarComments;
-    }
 }

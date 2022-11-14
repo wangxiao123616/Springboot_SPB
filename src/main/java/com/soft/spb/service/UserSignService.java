@@ -19,17 +19,9 @@ public interface UserSignService extends IService<UserSign> {
 
     UserSign queryUserSign(String userAccount);
 
-    Integer updateSignCoin(UserSign userSign);
-
-    Integer updateSignDay(UserSign userSign);
-
-    Integer updateSignDayAndRight(UserSign userSign);
-
     Boolean updateSignDayAndRightAndCoin(UserSign userSign);
 
     Boolean updateSignLikeBadge(UserSign userSign);
-
-    Integer updateSignRight(UserSign userSign);
 
     int updateSignStarBadge(UserSign userSign);
 

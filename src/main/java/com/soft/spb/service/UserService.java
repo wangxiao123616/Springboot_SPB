@@ -19,18 +19,7 @@ import java.util.Map;
  */
 public interface UserService extends IService<User> {
 
-    int deleteUserIp(String userAccount);
-
-    List<Course> querySchoolTable();
-
-
     List<UserVo> querySearchUser(String search);
-
-    int updateUserBadgeImage(String userBadge,String userAccount);
-
-    Integer updateUserBgImage(MultipartFile[] userBgImage, String userAccount);
-
-    Integer updateUserHeadImage(MultipartFile[] userHeadImage,String userAccount);
 
     Map<String, Object> getUserInfoToken(String userAccount,String token);
 
@@ -38,12 +27,5 @@ public interface UserService extends IService<User> {
 
     Map<String, Object> getUserInfo();
 
-    int updateUserIp(User user);
-
     Boolean updateUserPersonalInformation(User user);
-
-    int updateUserPrivacy(User user);
-
-    int updateUserToken(User user);
-
 }

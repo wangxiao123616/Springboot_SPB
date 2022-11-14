@@ -47,26 +47,6 @@ public class UserSignServiceImpl extends ServiceImpl<UserSignMapper, UserSign> i
         return userSigns;
     }
 
-    @Override
-    public Integer updateSignCoin(UserSign userSign) {
-        int count = userSignMapper.updateSignCoin(userSign.getSignCoin(), userSign.getUserAccount());
-        return count;
-
-    }
-
-    @Override
-    public Integer updateSignDay(UserSign userSign) {
-
-        int count = userSignMapper.updateSignDay(userSign.getUserAccount());
-        return count;
-    }
-
-    @Override
-    public Integer updateSignDayAndRight(UserSign userSign) {
-        int count = userSignMapper.updateSignDayAndRight(userSign.getUserAccount());
-        return count;
-    }
-
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Boolean updateSignDayAndRightAndCoin(UserSign userSign) {
@@ -84,12 +64,6 @@ public class UserSignServiceImpl extends ServiceImpl<UserSignMapper, UserSign> i
     public Boolean updateSignLikeBadge(UserSign userSign) {
         int count = userSignMapper.updateSignLikeBadge(userSign.getSignLikeBadge(), userSign.getUserAccount());
         return SqlProcess.transactionalProcess(count);
-    }
-
-    @Override
-    public Integer updateSignRight(UserSign userSign) {
-        int count = userSignMapper.updateSignRight(userSign.getUserAccount());
-        return count;
     }
 
     @Override

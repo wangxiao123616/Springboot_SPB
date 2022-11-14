@@ -51,35 +51,11 @@ public class FollowController {
                 .build();
     }
 
-//    @PostMapping("/queryFollowCount")
-//    public Integer queryFollowAccount(@RequestBody Follow follow) {
-//        Integer integer = followService.queryFollowAccount(follow);
-//
-//        return integer;
-//    }
-//
-//    @PostMapping("/queryFollowList")
-//    public List<String> queryFollowList(@RequestBody Follow follow) {
-//        return followService.queryFollowList(follow);
-//    }
-
     @GetMapping("/queryFollowUserList")
     public List<FollowListVo> queryFollowUserList(FollowDto followDto) {
         return followService.queryFollowUserList(followDto);
     }
 
-//    @PostMapping("/queryFollowedCount")
-//    public Integer queryFollowedCount(@RequestBody Follow follow) {
-//        Integer count = followService.queryFollowedCount(follow);
-//        return count;
-//    }
-//
-//    @PostMapping("queryFollowedList")
-//    public List<String> queryFollowedList(@RequestBody Follow follow) {
-//        return followService.queryFollowedList(follow);
-//
-//    }
-//
     @GetMapping("/queryFollowedUserList")
     public List<FollowListVo> queryFollowedUserList(FollowDto followDto) {
         return followService.queryFollowedUserList(followDto);

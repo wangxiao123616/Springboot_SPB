@@ -20,7 +20,7 @@ public class WebConfigure implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/upload/**").addResourceLocations("file:D:/php/php/PHPTutorial/WWW/spb/");
+        registry.addResourceHandler("/upload/**").addResourceLocations("file:E:/SystemDocument/spb/UserImageServer");
     }
 
 

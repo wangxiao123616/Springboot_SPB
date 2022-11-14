@@ -48,14 +48,4 @@ public interface PostbarCommentMapper extends BaseMapper<PostbarComment> {
      */
     List<PostbarCommentVo> queryCommentList(String pbOneId);
 
-    /**
-     * 2.12.4. 获取通知评论
-     * @param pbOneId
-     * @param commentId
-     * @return
-     */
-    List<PostbarComment> queryCommentOne(String pbOneId,Integer commentId);
-
-
-
 }

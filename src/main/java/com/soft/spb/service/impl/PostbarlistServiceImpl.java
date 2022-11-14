@@ -94,12 +94,6 @@ public class PostbarlistServiceImpl extends ServiceImpl<PostbarlistMapper, Postb
     }
 
     @Override
-    public List<Postbarlist> queryBarDetatilForPbid(Postbarlist postbarlist) {
-        List<Postbarlist> detatil = postbarlistMapper.queryBarDetatilForPbid(postbarlist.getPbOneId());
-        return detatil;
-    }
-
-    @Override
     public List<PostbarlistVo> queryNoVideoBarListForDate(Long id) {
         List<PostbarlistVo> items = postbarlistMapper.queryNoVideoBarListForDate(id);
         return items;
@@ -173,22 +167,5 @@ public class PostbarlistServiceImpl extends ServiceImpl<PostbarlistMapper, Postb
     public List<PostbarlistVo> queryVideoUserBarListForDate(Long id, String userAccount) {
         List<PostbarlistVo> postbarlists = postbarlistMapper.queryVideoUserBarListForDate(id, userAccount);
         return postbarlists;
-    }
-
-    private final UserMapper userMapper;
-    private final TopicMapper topicMapper;
-
-    @Override
-    public Map<String, Object> querySearch(String search) {
-        List<UserVo> userVos = userMapper.querySearchUser(search);
-        List<Topic> topics = topicMapper.querySearchTopicList(search);
-        List<PostbarlistVo> postbarlistNoV = postbarlistMapper.queryNoVideoSearchBarListForDate(search);
-        List<PostbarlistVo> postbarlistV = postbarlistMapper.queryVideoSearchBarListForDate(search);
-        Map<String, Object> map = new HashMap<>();
-        map.put("userVos", userVos);
-        map.put("topics", topics);
-        map.put("postbarlistNoV", postbarlistNoV);
-        map.put("postbarlistV", postbarlistV);
-        return map;
     }
 }

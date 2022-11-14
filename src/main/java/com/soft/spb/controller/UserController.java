@@ -38,17 +38,6 @@ public class UserController {
         return userService.getUserInfo();
     }
 
-//    @PostMapping("/deleteUserIp")
-//    public Integer addCollectBar(@RequestBody User user) {
-//        int count = userService.deleteUserIp(user.getUserAccount());
-//        return count;
-//    }
-//
-//    @PostMapping("/querySchoolTable")
-//    public List<Course> querySchoolTable() {
-//        return userService.querySchoolTable();
-//    }
-//
 //    @PostMapping("/updateUserBadgeImage")
 //    public int updateUserBadgeImage(@RequestBody User user) {
 //        int count = userService.updateUserBadgeImage(user.getUserBadge(), user.getUserAccount());
@@ -67,30 +56,12 @@ public class UserController {
 //        Integer count = userService.updateUserHeadImage(userHeadImage, userAccount);
 //        return count;
 //    }
-//
-//    @PostMapping("/updateUserIp")
-//    public int updateUserIp(@RequestBody User user) {
-//        int count = userService.updateUserIp(user);
-//        return count;
-//    }
 
     @PostMapping("/updateUserPersonalInformation")
     public Boolean updateUserPersonalInformation(@RequestBody User user) {
         return userService.updateUserPersonalInformation(user);
     }
-//
-//    @PostMapping("/updateUserPrivacy")
-//    public Integer updateUserPrivacy(@RequestBody User user) {
-//        int count = userService.updateUserPrivacy(user);
-//        return count;
-//    }
-//
-//    @PostMapping("/updateUserToken")
-//    public Integer updateUserToken(@RequestBody User user) {
-//        int count = userService.updateUserToken(user);
-//        return count;
-//    }
-//
+
     @GetMapping("/querySearchUser")
     public List<UserVo> querySearchUser(@RequestParam("search") String search){
         return userService.querySearchUser(search);

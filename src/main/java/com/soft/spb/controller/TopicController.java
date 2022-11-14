@@ -25,12 +25,6 @@ public class TopicController {
     @Autowired
     TopicService topicService;
 
-    //    @PostMapping("/queryRundomTopicFullList")
-//    public List<Topic> queryRundomTopicFullList(@RequestBody Topic topic) {
-//        List<Topic> topicList = topicService.queryRundomTopicFullList();
-//        return topicList;
-//    }
-
     @GetMapping("/querySearchTopicFullList")
     public List<Topic> querySearchTopicFullList(@RequestParam("id") Long id, @Nullable @RequestParam("search") String topic) {
         List<Topic> topicList = topicService.querySearchTopicFullList(id, topic);
@@ -49,18 +43,6 @@ public class TopicController {
         return nameList;
     }
 
-//    @PostMapping("/queryTopicFull")
-//    public List<Topic> queryTopicFull(@RequestBody Topic topic) {
-//        List<Topic> topicList = topicService.queryTopicFull(topic.getTopicName());
-//        return topicList;
-//    }
-//
-//    @PostMapping("/queryTopicNameList")
-//    public List<String> queryTopicNameList() {
-//        List<String> nameList = topicService.queryTopicNameList();
-//        return nameList;
-//    }
-//
     @RequestMapping(value = "/queryHotTopicList", method = RequestMethod.GET)
     public List<Topic> queryHotTopicList() {
         return topicService.queryHotTopicList();

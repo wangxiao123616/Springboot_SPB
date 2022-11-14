@@ -29,14 +29,6 @@ public class TopicServiceImpl extends ServiceImpl<TopicMapper, Topic> implements
     private final TopicMapper topicMapper;
 
     @Override
-    public List<Topic> queryRundomTopicFullList() {
-        int min = (int) (Math.random() * 200) + 100;
-        int max = (int) (Math.random() * 500) + 500;
-        List<Topic> topicList = topicMapper.queryRundomTopicFullList(min, max);
-        return topicList;
-    }
-
-    @Override
     public List<Topic> querySearchTopicFullList(Long id, String topicName) {
         if (topicName == null) {
             topicName = "#";
@@ -56,18 +48,6 @@ public class TopicServiceImpl extends ServiceImpl<TopicMapper, Topic> implements
     @Override
     public List<String> querySearchTopicNameList(String topicName) {
         List<String> topicNameList = topicMapper.querySearchTopicNameList(topicName);
-        return topicNameList;
-    }
-
-    @Override
-    public List<Topic> queryTopicFull(String topicName) {
-        List<Topic> topicList = topicMapper.queryTopicFull(topicName);
-        return topicList;
-    }
-
-    @Override
-    public List<String> queryTopicNameList() {
-        List<String> topicNameList = topicMapper.queryTopicNameList();
         return topicNameList;
     }
 

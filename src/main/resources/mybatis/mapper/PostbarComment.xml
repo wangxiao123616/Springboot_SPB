@@ -48,26 +48,6 @@
         WHERE t.pb_one_id = #{pbOneId}
         ORDER BY t.comment_date ASC
     </select>
-    <select id="queryCommentOne" resultType="com.soft.spb.pojo.vo.PostbarCommentVo">
-        select c.pb_one_id,
-               c.comment_art,
-               c.comment_date,
-               c.comment_user,
-               u1.user_name,
-               u1.user_head_image as commentHeadImg,
-               c.comment_touser,
-               u2.user_name as userToname,
-               c.comment_id
-        from postbar_comment c
-                 LEFT JOIN `user` u1
-                           on c.comment_user = u1.user_account
-                 LEFT JOIN `user` u2
-                           on c.comment_touser = u2.user_account
-        where c.pb_one_id = #{pbOneId}
-          AND c.comment_id = #{commentId}
-
-
-    </select>
 
     <select id="queryMaxCommentId" resultType="java.lang.Integer">
         SELECT IFNULL(MAX(comment_id),0)

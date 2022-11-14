@@ -27,9 +27,6 @@ public interface PostbarlistService extends IService<Postbarlist> {
     //删除帖子,有Video,无Img和Voice
     Boolean deleteBar(String pbId);
 
-    //获取帖子详细信息
-    List<Postbarlist> queryBarDetatilForPbid(Postbarlist postbarlist);
-
     //根据时间获取帖子列表(无Video)
     List<PostbarlistVo> queryNoVideoBarListForDate(Long id);
 
@@ -65,7 +62,4 @@ public interface PostbarlistService extends IService<Postbarlist> {
 
     //2.4.15. 根据时间获取用户帖子列表(有Video)
     List<PostbarlistVo> queryVideoUserBarListForDate(Long id, String userAccount);
-
-
-    Map<String, Object> querySearch(String search);
 }

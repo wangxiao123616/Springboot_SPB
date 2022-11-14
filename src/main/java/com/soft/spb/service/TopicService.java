@@ -15,22 +15,12 @@ import java.util.List;
  * @since 2022-03-19
  */
 public interface TopicService extends IService<Topic> {
-    /**
-     * 2.14.1. 获取随机话题列表
-     *
-     * @return
-     */
-    List<Topic> queryRundomTopicFullList();
 
     List<Topic> querySearchTopicFullList(Long id, String topicName);
 
     Topic getTopicFull(TopicInfoDto topic);
 
     List<String> querySearchTopicNameList(String topicName);
-
-    List<Topic> queryTopicFull(String topicName);
-
-    List<String> queryTopicNameList();
 
     List<Topic> queryHotTopicList();
 

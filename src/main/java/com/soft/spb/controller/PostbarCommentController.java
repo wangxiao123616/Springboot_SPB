@@ -41,12 +41,4 @@ public class PostbarCommentController {
         List<PostbarCommentVo> postbarComments = postbarCommentService.queryCommentList(pbOneId);
         return postbarComments;
     }
-//
-//    @PostMapping("/queryCommentOne")
-//    public  List<PostbarComment> queryCommentOne(@RequestBody PostbarCommentDto postbarCommentDto){
-//        List<PostbarComment> postbarComments = postbarCommentService.queryCommentOne(postbarCommentDto.getPbOneId(),postbarCommentDto.getCommentId());
-//        return postbarComments;
-//
-//    }
-
 }
